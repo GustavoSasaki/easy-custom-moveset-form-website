@@ -197,7 +197,7 @@ export const translations = {
       inAirSpeed: "How much control you have while in the air. Higher values = more air control.",
       gravity: "How fast your character falls. Higher values = faster falling.",
       fallGravity: "Gravity applied specifically when falling downward.",
-      
+
       // Jumps
       jumpStrength: "Overall jump height multiplier. Affects all jump types.",
       doubleJumpStrength: "Height of the second jump in a combo.",
@@ -206,7 +206,7 @@ export const translations = {
       backFlipStrength: "Height of the backflip (A while crouching and moving backward).",
       sideFlipStrength: "Height of the sideflip (A while turning quickly).",
       disableDoubleJump: "Prevents the character from doing a second jump.",
-      
+            
       // Special Abilities
       glideDive: "Allows diving and gliding through the air like flying. Great for aerial characters.",
       glideDiveForwardVel: "Initial forward speed when starting the glide.",
@@ -226,18 +226,23 @@ export const translations = {
       inAirJump: "Number of extra jumps you can do while in the air (double jump, triple, etc).",
       waftFart: "Wario's charged fart attack that launches you upward.",
       longJumpTripleJump: "After an long jump, pressing A mkes you do a triple jump.",
-      groundPoundDive: "Dive forward during a ground pound.",
+      groundPoundDive: "Allows you to transition into a dive directly from a ground pound.",
       
       // Sonic Abilities
       peelOut: "Charge up speed while standing still, then release for a burst of speed.",
       sonicDash: "Charge and release a powerful forward dash.",
       dropDash: "Land from a jump while spinning to immediately gain speed.",
       
-      // Twirling
-      backFlipTwirling: "After a backflip start spin with slower descent.",
-      sideFlipTwirling: "After a sideflip start spin with slower descent.",
-      tripleJumpTwirling: "After a triple jump start spin with slower descent.",
-      
+      // Twirling (Added)
+      backFlipTwirling: "Initiates a slow-descent spin after a backflip.",
+      sideFlipTwirling: "Initiates a slow-descent spin after a sideflip.",
+      tripleJumpTwirling: "Initiates a slow-descent spin after a triple jump.",
+      twirlingGroundPound: "Perform a ground pound while twirling.",
+      twirlingDive: "Perform a dive while twirling.",
+      fastTwirling: "If press Z while twirling, increase downard movement",
+      twirlingGravity: "Adjusts how much gravity affects you while twirling.",
+      twirlingSpeed: "Horizontal speed while twirling.",
+
       // Damage & Resistance
       fireImmunity: "Character cannot be burned by fire or lava surface damage.",
       invincible: "Character takes no damage from any source.",
@@ -255,7 +260,7 @@ export const translations = {
       goombaDamage: "Damage multiplier from goombas.",
       flyingEnemyDamage: "Damage multiplier from flying enemies.",
       batDamage: "Damage multiplier from bats.",
-      
+
       // Other
       explodeOnDeath: "Character explodes when dying, damaging nearby enemies.",
       kickDive: "Perform a kick during a dive.",
@@ -281,6 +286,7 @@ export const translations = {
     footer: "Hecho para la comunidad de SM64 Coop. No afiliado con Nintendo.",
     
     // Form sections
+    movesetDescription: "Descripción del Moveset",
     characterConfig: "Config del Personaje",
     quickPresets: "Presets Rapidos",
     characterName: "Nombre del Personaje",
@@ -368,23 +374,20 @@ export const translations = {
     killPinkBobomb: "Matar Bob-omb Rosa",
     
     // Moveset description
-    movesetDescription: "Descripcion del Moveset",
     optional: "opcional",
-    noGameplayEffect: "Sem Efeito no Gameplay",
-    
-    // Advanced settings
-    advancedSettings: "Configuracion Avanzada",
-    
-    // Glide dive settings
-    forwardVelocity: "Velocidad Frontal",
-    slowdown: "Desaceleración de Velocidad",
-    angleSpeed: "Velocidad de Angulo",
-    minForwardSpeed: "Velocidad mínima de Avance antes de Detenerse",
-    maxTime: "Tiempo Máximo Antes de Parar",
+    noGameplayEffect: "Sin efecto en el juego",
+
+    // Advanced settings translations
+    advancedSettings: "Ajustes Avanzados",
+    forwardVelocity: "Velocidad de Avance",
+    slowdown: "Desaceleración",
+    angleSpeed: "Velocidad de Giro",
+    minForwardSpeed: "Velocidad Mínima para Parar",
+    maxTime: "Tiempo Máximo",
     yVelocity: "Velocidad Y",
-    renderWithWingCap: "Renderizar con Wing Cap",
-    disableSpin: "Desactivar Animación de Giro",
-    
+    renderWithWingCap: "Renderizar con Gorra Alada",
+    disableSpin: "Desactivar Giro",
+        
     // Ground pound jump settings
     strength: "Fuerza",
     groundPoundJumpDive: "Picada desde Salto de Golpe",
@@ -394,11 +397,11 @@ export const translations = {
     jumpForwardVelocity: "Velocidad Frontal del Salto",
     sameWallJump: "Salto en Misma Pared",
     
-    // Yoshi flutter settings
-    cooldown: "Tiempo de Espera",
-    strengthDescending: "Fuerza (Descendiendo)",
-    strengthAscending: "Fuerza (Ascendiendo)",
-    maxYVelocity: "Velocidad Y Maxima",
+    // Yoshi flutter
+    cooldown: "Enfriamiento",
+    strengthDescending: "Fuerza (Descenso)",
+    strengthAscending: "Fuerza (Ascenso)",
+    maxYVelocity: "Velocidad Y Máxima",
     reactivations: "Reactivaciones",
     speed: "Velocidad",
     
@@ -435,22 +438,25 @@ export const translations = {
     generatedConfig: "Config Generada",
     
     // Action buttons
-    downloadConfig: "Descargar Config",
-    
+    downloadConfig: "Descargar Configuración",
+
     // Instructions
-    howToUse: "Como Usar",
-    instruction1: "Configura tu personaje usando las opciones de arriba",
-    instruction2: "Descarga el archivo de configuracion Lua generado",
-    instruction3: "Coloca el archivo en tu carpeta de mods de SM64 Coop",
-    instruction4: "Activa el mod Easy Custom Moveset en el juego",
-    instruction5: "Selecciona tu personaje y juega!",
-    
-    // Language
+    howToUse: "Cómo Usar",
+    instruction0: "Completa el campo de nombre; debe ser el mismo que aparece en el menú de Selección de Personaje (Distingue mayúsculas de minúsculas)",
+    instruction1: "Configura el resto de las opciones para tu personaje",
+    instruction2: "Descarga el archivo de configuración Lua generado sin cambiarle el nombre",
+    instruction3: "Coloca el archivo en la carpeta mods/Easy-Custom-Movesets/moveset_configs",
+    instruction4: "Activa 'Character Select', 'Easy Custom Moveset' y el mod de tu personaje dentro del juego",
+    instruction5: "¡Selecciona tu personaje y a jugar!",
+
+    // Language & Visibility
     language: "Idioma",
+    showCode: "Mostrar Código",
+    hideCode: "Ocultar Código",
+    hideShowInstructions: "Ocultar Instrucciones de Instalación",
+    showInstruction: "Mostrar Instrucciones de Instalación",
     
-    // Code preview
-    showCode: "Mostrar Codigo",
-    hideCode: "Ocultar Codigo",
+
     
     // Tooltips
     tooltips: {
@@ -488,7 +494,31 @@ export const translations = {
       lavaDamage: "Multiplicador de dano por lava.",
       explodeOnDeath: "El personaje explota al morir, danando enemigos cercanos.",
       longJumpTripleJump: "Después de un salto largo, al presionar A se realiza un triple salto",
-    },
+      groundPoundDive: "Te permite realizar un picado directamente desde un golpe al suelo.",
+      sonicJump: "Un salto especializado que conserva mejor el impulso a altas velocidades.",
+      backFlipTwirling: "Inicia un giro de descenso lento después de una voltereta atrás.",
+      sideFlipTwirling: "Inicia un giro de descenso lento después de una voltereta lateral.",
+      tripleJumpTwirling: "Inicia un giro de descenso lento después de un triple salto.",
+      twirlingGroundPound: "Realiza un golpe al suelo mientras estás girando.",
+      twirlingDive: "Realiza un picado mientras estás girando.",
+      fastTwirling: "Aumenta la velocidad de rotación y respuesta al girar.",
+      twirlingGravity: "Ajusta la gravedad mientras giras. Menor valor = más flotabilidad.",
+      twirlingSpeed: "Multiplicador de velocidad horizontal durante el giro.",
+      burningDamage: "Multiplicador de daño recibido mientras el personaje está en llamas.",
+      badGasDamage: "Multiplicador de daño en áreas con gas tóxico.",
+      waterEnemyDamage: "Multiplicador de daño de enemigos acuáticos.",
+      piranhaPlantDamage: "Multiplicador de daño de Plantas Piraña.",
+      goombaDamage: "Multiplicador de daño de Goombas.",
+      flyingEnemyDamage: "Multiplicador de daño de enemigos voladores.",
+      batDamage: "Multiplicador de daño de murciélagos.",
+      kickDive: "Permite patear durante una animación de picado.",
+      diveKick: "Permite picar durante una animación de patada.",
+      diveGroundPound: "Permite realizar un golpe al suelo mientras buceas/picas.",
+      alwaysDiveFirst: "Asegura que presionar B en el aire resulte siempre en un picado.",
+      saultubeJumpAnimation: "Cambia las animaciones de salto por una voltereta rodante.",
+      killToad: "Permite atacar y eliminar a los NPCs Toad.",
+      killPinkBobomb: "Permite atacar y eliminar a los Bob-ombs rosas aliados.",
+    }
   },
   
   pt: {
@@ -508,7 +538,7 @@ export const translations = {
     quickPresets: "Presets Rapidos",
     characterName: "Nome do Personagem",
     enterCharacterName: "Digite o nome do personagem",
-    
+    movesetDescription: "Descrição do Moveset",
     // Categories
     movement: "Movimento",
     jumps: "Pulos",
@@ -524,7 +554,7 @@ export const translations = {
     inAirSpeed: "Velocidade no Ar",
     gravity: "Gravidade",
     fallGravity: "Gravidade ao Cair",
-    
+       
     // Jump stats
     jumpStrength: "Forca do Pulo",
     doubleJumpStrength: "Forca do Pulo Duplo",
@@ -591,32 +621,29 @@ export const translations = {
     killPinkBobomb: "Matar Bob-omb Rosa",
     
     // Moveset description
-    movesetDescription: "Descricao do Moveset",
     optional: "opcional",
-    noGameplayEffect: "ningún efecto en el juego",
-    
-    // Advanced settings
-    advancedSettings: "Configuracoes Avancadas",
-    
-    // Glide dive settings
+    noGameplayEffect: "Sem efeito no gameplay",
+
+    // Advanced settings translations
+    advancedSettings: "Configurações Avançadas",
     forwardVelocity: "Velocidade Frontal",
-    slowdown: "Desaceleracao de Velocidade",
-    angleSpeed: "Velocidade do Angulo",
-    minForwardSpeed: "Velocidade Minima Frontal Antes de Parar",
-    maxTime: "Tempo Máximo Antes de Parar",
+    slowdown: "Desaceleração",
+    angleSpeed: "Velocidade de Ângulo",
+    minForwardSpeed: "Velocidade Mínima para Parar",
+    maxTime: "Tempo Máximo",
     yVelocity: "Velocidade Y",
     renderWithWingCap: "Renderizar com Wing Cap",
-    disableSpin: "Desativar Animação de Giro",
-    
+    disableSpin: "Desativar Giro",
+
     // Ground pound jump settings
     strength: "Forca",
     groundPoundJumpDive: "Mergulho do Pulo de Socao",
-    
+
     // Wall slide settings
     maxGravity: "Gravidade Maxima",
     jumpForwardVelocity: "Velocidade Frontal do Pulo",
     sameWallJump: "Pulo na Mesma Parede",
-    
+
     // Yoshi flutter settings
     cooldown: "Tempo de Espera",
     strengthDescending: "Forca (Descendo)",
@@ -624,57 +651,58 @@ export const translations = {
     maxYVelocity: "Velocidade Y Maxima",
     reactivations: "Reativacoes",
     speed: "Velocidade",
-    
+
     // Mr L settings
     airSpeed: "Velocidade no Ar",
     playAnticipationAudio: "Reproduzir Audio de Anticipacao",
-    
+
     // Super side flip settings
     convertForwardVelocity: "Converter Velocidade Frontal",
     addForwardVelocity: "Adicionar Velocidade Frontal",
     kickStrength: "Forca do Chute",
     minVelocity: "Velocidade Minima",
-    
+
     // In air jump settings
     forwardVelMultiplier: "Multiplicador de Vel. Frontal",
     forwardVelSlowdown: "Desaceleracao de Vel. Frontal",
-    
+
     // Waft fart settings
     velocity: "Velocidade",
     perLevel: "Por Nivel",
-    
+
     // Peel out settings
     maxVelocity: "Velocidade Maxima",
     jumpResetVelocity: "Resetar Velocidade ao Pular",
-    
+
     // Sonic dash settings
     slowdownWater: "Desaceleracao (Agua)",
     slowdownLava: "Desaceleracao (Lava)",
-    
+
     // Drop dash settings
     chargeVelocity: "Velocidade de Carga",
-    
+
     // Generated config
     generatedConfig: "Config Gerada",
-    
+
     // Action buttons
-    downloadConfig: "Baixar Config",
+// Action buttons
+    downloadConfig: "Baixar Configuração",
     
     // Instructions
     howToUse: "Como Usar",
-    instruction1: "Configure seu personagem usando as opcoes acima",
-    instruction2: "Baixe o arquivo de configuracao Lua gerado",
-    instruction3: "Coloque o arquivo na pasta de mods do SM64 Coop",
-    instruction4: "Ative o mod Easy Custom Moveset no jogo",
+    instruction0: "Preencha o campo de nome; deve ser o mesmo que aparece no menu de Seleção de Personagem (Diferencia entre letras maiúsculas de minúsculas)",
+    instruction1: "Configure o restante das opções para o seu personagem",
+    instruction2: "Baixe o arquivo de configuração Lua gerado sem renomear o arquivo",
+    instruction3: "Coloque o arquivo na pasta mods/Easy-Custom-Movesets/moveset_configs",
+    instruction4: "Ative 'Character Select', 'Easy Custom Moveset' e o mod do seu personagem dentro do jogo",
     instruction5: "Selecione seu personagem e jogue!",
     
-    // Language
+    // Language & Visibility
     language: "Idioma",
-    
-    // Code preview
-    showCode: "Mostrar Codigo",
-    hideCode: "Ocultar Codigo",
-    
+    showCode: "Mostrar Código",
+    hideCode: "Esconder Código",
+    hideShowInstructions: "Esconder Instruções de Instalação",
+    showInstruction: "Mostrar Instruções de Instalação",
     // Tooltips
     tooltips: {
       walkingSpeed: "Quao rapido seu personagem anda. 100% e velocidade normal.",
@@ -711,7 +739,31 @@ export const translations = {
       lavaDamage: "Multiplicador de dano por lava.",
       explodeOnDeath: "O personagem explode ao morrer, danificando inimigos proximos.",
       longJumpTripleJump: "Depois de um long jump, apertando A é feito um triple jump",
-    },
+      groundPoundDive: "Permite transicionar para um mergulho diretamente de um socão no chão.",
+      sonicJump: "Um pulo especializado que preserva melhor o momento em alta velocidade.",
+      backFlipTwirling: "Inicia um giro de descida lenta após um mortal para trás.",
+      sideFlipTwirling: "Inicia um giro de descida lenta após um mortal lateral.",
+      tripleJumpTwirling: "Inicia um giro de descida lenta após um pulo triplo.",
+      twirlingGroundPound: "Realiza um socão no chão enquanto está girando.",
+      twirlingDive: "Realiza um mergulho enquanto está girando.",
+      fastTwirling: "Aumenta a velocidade de rotação e resposta de movimento ao girar.",
+      twirlingGravity: "Ajusta a gravidade enquanto gira. Menor = mais flutuante.",
+      twirlingSpeed: "Multiplicador de velocidade horizontal durante o giro.",
+      burningDamage: "Multiplicador de dano enquanto o personagem está pegando fogo.",
+      badGasDamage: "Multiplicador de dano em salas com gás tóxico.",
+      waterEnemyDamage: "Multiplicador de dano de inimigos aquáticos.",
+      piranhaPlantDamage: "Multiplicador de dano de Plantas Piranha.",
+      goombaDamage: "Multiplicador de dano de Goombas.",
+      flyingEnemyDamage: "Multiplicador de dano de inimigos voadores.",
+      batDamage: "Multiplicador de dano de morcegos.",
+      kickDive: "Permite realizar um chute durante a animação de mergulho.",
+      diveKick: "Permite realizar um mergulho durante a animação de chute.",
+      diveGroundPound: "Permite ativar um socão no chão durante o mergulho.",
+      alwaysDiveFirst: "Garante que apertar B no ar sempre resulte em mergulho em vez de chute.",
+      saultubeJumpAnimation: "Substitui animações de pulo por uma animação de rolamento.",
+      killToad: "Permite atacar e derrotar os NPCs Toad.",
+      killPinkBobomb: "Permite atacar e derrotar os Bob-ombs Rosa amigáveis.",
+    }
   },
 }
 

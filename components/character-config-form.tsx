@@ -1099,11 +1099,11 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
               <ToggleOption id="back_flip_twirling" label={t.backFlipTwirling} checked={config.back_flip_twirling_on} onCheckedChange={(v) => updateConfig("back_flip_twirling_on", v)} tooltip={t.tooltips?.backFlipTwirling} />
               <ToggleOption id="side_flip_twirling" label={t.sideFlipTwirling} checked={config.side_flip_twirling_on} onCheckedChange={(v) => updateConfig("side_flip_twirling_on", v)} tooltip={t.tooltips?.sideFlipTwirling} />
               <ToggleOption id="triple_jump_twirling" label={t.tripleJumpTwirling} checked={config.triple_jump_twirling_on} onCheckedChange={(v) => updateConfig("triple_jump_twirling_on", v)} tooltip={t.tooltips?.tripleJumpTwirling} />
-                  <ToggleOption id="twirling_gp" label={t.twirlingGroundPound} checked={config.twirling_ground_pound_on} onCheckedChange={(v) => updateConfig("twirling_ground_pound_on", v)} />
-                  <ToggleOption id="twirling_dive" label={t.twirlingDive} checked={config.twirling_dive_on} onCheckedChange={(v) => updateConfig("twirling_dive_on", v)} />
-                  <ToggleOption id="fast_twirling" label={t.fastTwirling} checked={config.fast_twirling_on} onCheckedChange={(v) => updateConfig("fast_twirling_on", v)} />
-                  <NumberInput label={t.twirlingGravity} value={config.twirling_gravity} onChange={(v) => updateConfig("twirling_gravity", v)} min={0} max={200} />
-                  <NumberInput label={t.twirlingSpeed} value={config.twirling_speed} onChange={(v) => updateConfig("twirling_speed", v)} min={0} max={200} />
+                  <ToggleOption id="twirling_gp" label={t.twirlingGroundPound} checked={config.twirling_ground_pound_on} onCheckedChange={(v) => updateConfig("twirling_ground_pound_on", v)} tooltip={t.tooltips?.twirlingGroundPound} />
+                  <ToggleOption id="twirling_dive" label={t.twirlingDive} checked={config.twirling_dive_on} onCheckedChange={(v) => updateConfig("twirling_dive_on", v)}  tooltip={t.tooltips?.twirlingDive}  />
+                  <ToggleOption id="fast_twirling" label={t.fastTwirling} checked={config.fast_twirling_on} onCheckedChange={(v) => updateConfig("fast_twirling_on", v)}  tooltip={t.tooltips?.fastTwirling}  />
+                  <NumberInput label={t.twirlingGravity} value={config.twirling_gravity} onChange={(v) => updateConfig("twirling_gravity", v)} min={0} max={200} tooltip={t.tooltips?.twirlingGravity}  />
+                  <NumberInput label={t.twirlingSpeed} value={config.twirling_speed} onChange={(v) => updateConfig("twirling_speed", v)} min={0} max={200}  tooltip={t.tooltips?.twirlingSpeed} />
             </CardContent>
           </Card>
 
