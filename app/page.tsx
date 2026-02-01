@@ -1,7 +1,27 @@
+"use client"
+
+import { useState } from "react"
 import { CharacterConfigForm } from "@/components/character-config-form"
-import { Gamepad2, Github } from "lucide-react"
+import { Gamepad2, Github, Globe } from "lucide-react"
+import { translations, type Language } from "@/lib/translations"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
+
+const languageNames: Record<Language, string> = {
+  en: "English",
+  es: "Espanol",
+  pt: "Portugues",
+}
 
 export default function Home() {
+  const [language, setLanguage] = useState<Language>("en")
+  const t = translations[language]
+
   return (
     <main className="min-h-screen">
       {/* Header */}
@@ -13,22 +33,44 @@ export default function Home() {
             </div>
             <div>
               <h1 className="text-lg font-bold uppercase tracking-wide sm:text-xl">
-                Easy Custom Moveset
+                {t.title}
               </h1>
               <p className="text-xs text-muted-foreground sm:text-sm">
-                SM64 Coop Config Generator
+                {t.subtitle}
               </p>
             </div>
           </div>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-border transition-colors hover:bg-secondary"
-            aria-label="View on GitHub"
-          >
-            <Github className="h-5 w-5" />
-          </a>
+          <div className="flex items-center gap-2">
+            {/* Language Selector */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-2 border-2 bg-transparent">
+                  <Globe className="h-4 w-4" />
+                  <span className="hidden sm:inline">{languageNames[language]}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => setLanguage("en")}>
+                  <span className="mr-2">🇺🇸</span> English
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLanguage("es")}>
+                  <span className="mr-2">🇪🇸</span> Espanol
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setLanguage("pt")}>
+                  <span className="mr-2">🇧🇷</span> Portugues
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-border transition-colors hover:bg-secondary"
+              aria-label="View on GitHub"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+          </div>
         </div>
       </header>
 
@@ -37,23 +79,22 @@ export default function Home() {
         {/* Hero Section */}
         <div className="mb-8 text-center">
           <h2 className="mb-2 text-2xl font-bold uppercase tracking-wide text-balance sm:text-3xl lg:text-4xl">
-            Create Your Custom Character
+            {t.heroTitle}
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground text-pretty">
-            Configure unique movesets for your SM64 Coop characters. Adjust abilities, 
-            damage multipliers, and resistances to create the perfect playstyle.
+            {t.heroDescription}
           </p>
         </div>
 
         {/* Config Form */}
-        <CharacterConfigForm />
+        <CharacterConfigForm translations={t} />
       </div>
 
       {/* Footer */}
       <footer className="mt-12 border-t-2 border-border bg-card py-6">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-muted-foreground">
-            Made for the SM64 Coop community. Not affiliated with Nintendo.
+            {t.footer}
           </p>
         </div>
       </footer>
