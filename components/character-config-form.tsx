@@ -850,7 +850,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.movement}</CardTitle>
             </CardHeader>
-            <CardContent className="grid gap-3 lg:grid-cols-2">
+            <CardContent className="space-y-3">
               <NumberInput label={t.walkingSpeed} value={config.walking_speed} onChange={(v) => updateConfig("walking_speed", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.walkingSpeed} />
               <NumberInput label={t.swimmingSpeed} value={config.swimming_speed} onChange={(v) => updateConfig("swimming_speed", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.swimmingSpeed} />
               <NumberInput label={t.inAirSpeed} value={config.in_air_speed} onChange={(v) => updateConfig("in_air_speed", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.inAirSpeed} />
@@ -864,14 +864,14 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.jumps}</CardTitle>
             </CardHeader>
-            <CardContent className="grid gap-3 lg:grid-cols-2">
+            <CardContent className="space-y-3">
               <NumberInput label={t.jumpStrength} value={config.jump_strength} onChange={(v) => updateConfig("jump_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.jumpStrength} />
               <NumberInput label={t.doubleJumpStrength} value={config.double_jump_strength} onChange={(v) => updateConfig("double_jump_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.doubleJumpStrength} />
               <NumberInput label={t.tripleJumpStrength} value={config.triple_jump_strength} onChange={(v) => updateConfig("triple_jump_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.tripleJumpStrength} />
               <NumberInput label={t.longJumpStrength} value={config.long_jump_strength} onChange={(v) => updateConfig("long_jump_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.longJumpStrength} />
               <NumberInput label={t.backFlipStrength} value={config.back_flip_strength} onChange={(v) => updateConfig("back_flip_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.backFlipStrength} />
               <NumberInput label={t.sideFlipStrength} value={config.side_flip_strength} onChange={(v) => updateConfig("side_flip_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.sideFlipStrength} />
-              <ToggleOption id="disable_double_jump" label={t.disableDoubleJump} checked={config.disable_double_jump} onCheckedChange={(v) => updateConfig("disable_double_jump", v)} tooltip={t.tooltips?.disableDoubleJump} className="lg:col-span-2" />
+              <ToggleOption id="disable_double_jump" label={t.disableDoubleJump} checked={config.disable_double_jump} onCheckedChange={(v) => updateConfig("disable_double_jump", v)} tooltip={t.tooltips?.disableDoubleJump} />
             </CardContent>
           </Card>
 
@@ -880,7 +880,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.specialAbilities}</CardTitle>
             </CardHeader>
-            <CardContent className="grid gap-3 lg:grid-cols-2">
+            <CardContent className="space-y-3">
               {/* Glide Dive */}
               <AbilitySection title={t.glideDive} enabled={config.glide_dive_on} onEnabledChange={(v) => updateConfig("glide_dive_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.glideDive}>
                 <NumberInput label={t.forwardVelocity} value={config.glide_dive_forward_vel} onChange={(v) => updateConfig("glide_dive_forward_vel", v)} min={0} max={200} tooltip={t.tooltips?.glideDiveForwardVel} />
@@ -989,7 +989,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.sonicAbilities}</CardTitle>
             </CardHeader>
-            <CardContent className="grid gap-3 lg:grid-cols-2">
+            <CardContent className="space-y-3">
               {/* Peel Out */}
               <AbilitySection title={t.peelOut} enabled={config.peel_out_on} onEnabledChange={(v) => updateConfig("peel_out_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.peelOut}>
                 <NumberInput label={t.maxVelocity} value={config.peel_out_max_vel} onChange={(v) => updateConfig("peel_out_max_vel", v)} min={0} max={300} />
@@ -1025,10 +1025,10 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.twirling}</CardTitle>
             </CardHeader>
-            <CardContent className="grid gap-3 lg:grid-cols-2">
+            <CardContent className="space-y-3">
               <ToggleOption id="back_flip_twirling" label={t.backFlipTwirling} checked={config.back_flip_twirling_on} onCheckedChange={(v) => updateConfig("back_flip_twirling_on", v)} tooltip={t.tooltips?.backFlipTwirling} />
               <ToggleOption id="side_flip_twirling" label={t.sideFlipTwirling} checked={config.side_flip_twirling_on} onCheckedChange={(v) => updateConfig("side_flip_twirling_on", v)} tooltip={t.tooltips?.sideFlipTwirling} />
-              <ToggleOption id="triple_jump_twirling" label={t.tripleJumpTwirling} checked={config.triple_jump_twirling_on} onCheckedChange={(v) => updateConfig("triple_jump_twirling_on", v)} tooltip={t.tooltips?.tripleJumpTwirling} className="lg:col-span-2" />
+              <ToggleOption id="triple_jump_twirling" label={t.tripleJumpTwirling} checked={config.triple_jump_twirling_on} onCheckedChange={(v) => updateConfig("triple_jump_twirling_on", v)} tooltip={t.tooltips?.tripleJumpTwirling} />
               {(config.back_flip_twirling_on || config.side_flip_twirling_on || config.triple_jump_twirling_on) && (
                 <>
                   <ToggleOption id="twirling_gp" label={t.twirlingGroundPound} checked={config.twirling_ground_pound_on} onCheckedChange={(v) => updateConfig("twirling_ground_pound_on", v)} />
