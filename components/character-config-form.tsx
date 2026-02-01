@@ -382,12 +382,12 @@ function TooltipIcon({ tooltip }: { tooltip?: string }) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <button type="button" className="ml-1 inline-flex text-muted-foreground hover:text-foreground transition-colors">
-          <HelpCircle className="h-3.5 w-3.5" />
+        <button type="button" className="ml-1.5 inline-flex items-center justify-center rounded-full border border-muted-foreground/30 text-muted-foreground hover:text-foreground hover:border-foreground transition-colors p-1 min-w-[28px] min-h-[28px] lg:min-w-[22px] lg:min-h-[22px] lg:p-0.5">
+          <HelpCircle className="h-4 w-4 lg:h-3.5 lg:w-3.5" />
           <span className="sr-only">More info</span>
         </button>
       </TooltipTrigger>
-      <TooltipContent side="top" className="max-w-[250px]">
+      <TooltipContent side="top" className="max-w-[280px] text-sm">
         {tooltip}
       </TooltipContent>
     </Tooltip>
@@ -798,9 +798,9 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
 
   return (
     <TooltipProvider delayDuration={300}>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col lg:flex-row lg:gap-8">
         {/* Configuration Form */}
-        <div className="space-y-4">
+        <div className="flex-1 space-y-4 lg:max-w-2xl">
           <Card className="border-2 border-border">
             <CardHeader className="pb-4">
               <CardTitle className="text-xl font-bold uppercase tracking-wide">
@@ -850,7 +850,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.movement}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="grid gap-3 lg:grid-cols-2">
               <NumberInput label={t.walkingSpeed} value={config.walking_speed} onChange={(v) => updateConfig("walking_speed", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.walkingSpeed} />
               <NumberInput label={t.swimmingSpeed} value={config.swimming_speed} onChange={(v) => updateConfig("swimming_speed", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.swimmingSpeed} />
               <NumberInput label={t.inAirSpeed} value={config.in_air_speed} onChange={(v) => updateConfig("in_air_speed", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.inAirSpeed} />
@@ -864,14 +864,14 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.jumps}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="grid gap-3 lg:grid-cols-2">
               <NumberInput label={t.jumpStrength} value={config.jump_strength} onChange={(v) => updateConfig("jump_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.jumpStrength} />
               <NumberInput label={t.doubleJumpStrength} value={config.double_jump_strength} onChange={(v) => updateConfig("double_jump_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.doubleJumpStrength} />
               <NumberInput label={t.tripleJumpStrength} value={config.triple_jump_strength} onChange={(v) => updateConfig("triple_jump_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.tripleJumpStrength} />
               <NumberInput label={t.longJumpStrength} value={config.long_jump_strength} onChange={(v) => updateConfig("long_jump_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.longJumpStrength} />
               <NumberInput label={t.backFlipStrength} value={config.back_flip_strength} onChange={(v) => updateConfig("back_flip_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.backFlipStrength} />
               <NumberInput label={t.sideFlipStrength} value={config.side_flip_strength} onChange={(v) => updateConfig("side_flip_strength", v)} min={0} max={300} suffix="%" tooltip={t.tooltips?.sideFlipStrength} />
-              <ToggleOption id="disable_double_jump" label={t.disableDoubleJump} checked={config.disable_double_jump} onCheckedChange={(v) => updateConfig("disable_double_jump", v)} tooltip={t.tooltips?.disableDoubleJump} />
+              <ToggleOption id="disable_double_jump" label={t.disableDoubleJump} checked={config.disable_double_jump} onCheckedChange={(v) => updateConfig("disable_double_jump", v)} tooltip={t.tooltips?.disableDoubleJump} className="lg:col-span-2" />
             </CardContent>
           </Card>
 
@@ -880,7 +880,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.specialAbilities}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="grid gap-3 lg:grid-cols-2">
               {/* Glide Dive */}
               <AbilitySection title={t.glideDive} enabled={config.glide_dive_on} onEnabledChange={(v) => updateConfig("glide_dive_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.glideDive}>
                 <NumberInput label={t.forwardVelocity} value={config.glide_dive_forward_vel} onChange={(v) => updateConfig("glide_dive_forward_vel", v)} min={0} max={200} tooltip={t.tooltips?.glideDiveForwardVel} />
@@ -989,7 +989,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.sonicAbilities}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="grid gap-3 lg:grid-cols-2">
               {/* Peel Out */}
               <AbilitySection title={t.peelOut} enabled={config.peel_out_on} onEnabledChange={(v) => updateConfig("peel_out_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.peelOut}>
                 <NumberInput label={t.maxVelocity} value={config.peel_out_max_vel} onChange={(v) => updateConfig("peel_out_max_vel", v)} min={0} max={300} />
@@ -1025,10 +1025,10 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.twirling}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="grid gap-3 lg:grid-cols-2">
               <ToggleOption id="back_flip_twirling" label={t.backFlipTwirling} checked={config.back_flip_twirling_on} onCheckedChange={(v) => updateConfig("back_flip_twirling_on", v)} tooltip={t.tooltips?.backFlipTwirling} />
               <ToggleOption id="side_flip_twirling" label={t.sideFlipTwirling} checked={config.side_flip_twirling_on} onCheckedChange={(v) => updateConfig("side_flip_twirling_on", v)} tooltip={t.tooltips?.sideFlipTwirling} />
-              <ToggleOption id="triple_jump_twirling" label={t.tripleJumpTwirling} checked={config.triple_jump_twirling_on} onCheckedChange={(v) => updateConfig("triple_jump_twirling_on", v)} tooltip={t.tooltips?.tripleJumpTwirling} />
+              <ToggleOption id="triple_jump_twirling" label={t.tripleJumpTwirling} checked={config.triple_jump_twirling_on} onCheckedChange={(v) => updateConfig("triple_jump_twirling_on", v)} tooltip={t.tooltips?.tripleJumpTwirling} className="lg:col-span-2" />
               {(config.back_flip_twirling_on || config.side_flip_twirling_on || config.triple_jump_twirling_on) && (
                 <>
                   <ToggleOption id="twirling_gp" label={t.twirlingGroundPound} checked={config.twirling_ground_pound_on} onCheckedChange={(v) => updateConfig("twirling_ground_pound_on", v)} />
@@ -1046,7 +1046,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.damageResistance}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="grid gap-3 lg:grid-cols-2">
               <ToggleOption id="disable_burning" label={t.fireImmunity} checked={config.disable_burning} onCheckedChange={(v) => updateConfig("disable_burning", v)} tooltip={t.tooltips?.fireImmunity} />
               <ToggleOption id="disable_damage" label={t.invincible} checked={config.disable_damage} onCheckedChange={(v) => updateConfig("disable_damage", v)} tooltip={t.tooltips?.invincible} />
               <ToggleOption id="disable_breath_heal" label={t.disableBreathHeal} checked={config.disable_breath_heal} onCheckedChange={(v) => updateConfig("disable_breath_heal", v)} tooltip={t.tooltips?.disableBreathHeal} />
@@ -1071,7 +1071,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.otherOptions}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3">
+            <CardContent className="grid gap-3 lg:grid-cols-2">
               <ToggleOption id="explode_on_death" label={t.explodeOnDeath} checked={config.explode_on_death} onCheckedChange={(v) => updateConfig("explode_on_death", v)} tooltip={t.tooltips?.explodeOnDeath} />
               <ToggleOption id="kick_dive" label={t.kickDive} checked={config.kick_dive_on} onCheckedChange={(v) => updateConfig("kick_dive_on", v)} tooltip={t.tooltips?.kickDive} />
               <ToggleOption id="dive_kick" label={t.diveKick} checked={config.dive_kick_on} onCheckedChange={(v) => updateConfig("dive_kick_on", v)} tooltip={t.tooltips?.diveKick} />
@@ -1100,11 +1100,11 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
           </Card>
         </div>
 
-        {/* Code Preview & Actions - Sticky on mobile */}
-        <div className="sticky bottom-0 z-10 -mx-4 bg-background/95 backdrop-blur-sm p-4 border-t-2 border-border lg:relative lg:mx-0 lg:bg-transparent lg:backdrop-blur-none lg:p-0 lg:border-t-0">
-          <div className="space-y-3">
+        {/* Code Preview & Actions - Sticky on mobile, Sidebar on desktop */}
+        <div className="sticky bottom-0 z-10 -mx-4 bg-background/95 backdrop-blur-sm p-4 border-t-2 border-border lg:relative lg:mx-0 lg:bg-transparent lg:backdrop-blur-none lg:p-0 lg:border-t-0 lg:w-96 lg:flex-shrink-0">
+          <div className="lg:sticky lg:top-4 space-y-3">
             {/* Action Buttons */}
-            <div className="flex flex-col gap-2 sm:flex-row">
+            <div className="flex flex-col gap-2 sm:flex-row lg:flex-col">
               <Button onClick={handleDownload} className="flex-1 border-2 border-primary font-bold uppercase tracking-wide">
                 <Download className="mr-2 h-4 w-4" />
                 {t.downloadConfig}
@@ -1115,32 +1115,32 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
               </Button>
             </div>
 
-            {/* Toggle Code Preview */}
+            {/* Toggle Code Preview - Mobile only */}
             <Button
               variant="ghost"
               onClick={() => setShowCode(!showCode)}
-              className="w-full text-sm text-muted-foreground"
+              className="w-full text-sm text-muted-foreground lg:hidden"
             >
               <ChevronDown className={cn("mr-2 h-4 w-4 transition-transform", showCode && "rotate-180")} />
               {showCode ? t.hideCode || "Hide Code" : t.showCode || "Show Code"}
             </Button>
 
-            {/* Code Preview */}
-            {showCode && (
+            {/* Code Preview - Always visible on desktop, toggleable on mobile */}
+            <div className={cn("lg:block", showCode ? "block" : "hidden")}>
               <Card className="border-2 border-border">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-base font-bold uppercase tracking-wide">{t.generatedConfig}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <pre className="overflow-x-auto rounded-lg bg-foreground p-4 text-xs text-background">
+                  <pre className="overflow-x-auto rounded-lg bg-foreground p-4 text-xs text-background max-h-[60vh] lg:max-h-[50vh]">
                     <code>{generateLuaCode()}</code>
                   </pre>
                 </CardContent>
               </Card>
-            )}
+            </div>
 
-            {/* Instructions */}
-            <Card className="border-2 border-border">
+            {/* Instructions - Desktop only */}
+            <Card className="hidden lg:block border-2 border-border">
               <CardHeader className="pb-2">
                 <CardTitle className="text-base font-bold uppercase tracking-wide">{t.howToUse}</CardTitle>
               </CardHeader>
