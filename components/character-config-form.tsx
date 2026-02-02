@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react"
-
+import { logEvent } from "./../app/actions/logEvent";
 import { useState, useCallback } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -11,7 +11,7 @@ import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
-import { Download,  Sparkles, ChevronDown, HelpCircle } from "lucide-react"
+import { Download,  Sparkles, ChevronDown, HelpCircle, Check, Share2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { translations } from "@/lib/translations"
 
@@ -562,6 +562,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
   const [config, setConfig] = useState<CharacterConfig>(defaultConfig)
   const [showCode, setShowCode] = useState(false)
   const [showInstructions, setShowInstructions] = useState(false)
+  const [shareCommunity, setShareCommunity] = useState(true)
 
   const updateConfig = useCallback(<K extends keyof CharacterConfig>(
     key: K,
@@ -817,7 +818,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     addIfNotDefault("kill_toad", false)
     addIfNotDefault("kill_pink_bomb_on", false)
 
-    lines.push(`    moveset_description = "${movesetDesc},"`)
+    lines.push(`    moveset_description = "${movesetDesc}",`)
     lines.push(`    fromInitialTable = false`)
     lines.push("}")
 
@@ -835,6 +836,9 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     a.click()
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
+    if(shareCommunity) {
+      logEvent(luaCode)
+    }
   }, [generateLuaCode, config.name])
 
   const applyPreset = useCallback((preset: (typeof presets)[number]) => {
@@ -1145,18 +1149,35 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
         <div className="sticky bottom-0 z-10 -mx-4 bg-background/95 backdrop-blur-sm p-4 border-t-2 border-border lg:relative lg:mx-0 lg:bg-transparent lg:backdrop-blur-none lg:p-0 lg:border-t-0 lg:w-96 lg:flex-shrink-0">
           <div className="lg:sticky lg:top-4 space-y-3">
             {/* Action Buttons */}
-            <div className="flex flex-col gap-2 sm:flex-row lg:flex-col">
-              <Button onClick={handleDownload} className="flex-1 border-2 border-primary font-bold uppercase tracking-wide">
+            <div className="flex gap-2 flex-col">
+              <Button onClick={handleDownload} className="flex-1 border-2 border-primary font-bold uppercase tracking-wide text-lg lg:h-20">
                 <Download className="mr-2 h-4 w-4" />
                 {t.downloadConfig}
               </Button>
+              <Button 
+                variant="outline"  
+                onClick={() => setShareCommunity(!shareCommunity)}
+                className="flex-1 border-2 bg-transparent font-bold uppercase tracking-wide gap-3 text-muted-foreground border-muted-foreground"
+              >
+                <div className={`
+                  flex items-center justify-center w-5 h-5 rounded border-2 transition-all duration-200 border-muted-foreground
+                  ${shareCommunity 
+                    ? "bg-primary border-primary text-white" 
+                    : "bg-transparent border-current"}
+                `}>
+                  {shareCommunity && <Check className="w-4 h-4 stroke-[3] border-muted-foreground" />}
+                </div>
+                
+                {/* Using translations from your previous prompt */}
+                {t.shareWithCommunity || "Share With Community"}
+            </Button>
             </div>
 
             {/* Toggle Code Preview - Mobile only */}
             <Button
               variant="ghost"
               onClick={() => setShowCode(!showCode)}
-              className="w-full text-sm text-muted-foreground lg:hidden"
+              className="w-full text-sm text-muted-foreground  hidden"
             >
               <ChevronDown className={cn("mr-2 h-4 w-4 transition-transform", showCode && "rotate-180")} />
               {showCode ? t.hideCode || "Hide Code" : t.showCode || "Show Code"}

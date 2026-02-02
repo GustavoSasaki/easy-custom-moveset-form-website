@@ -178,6 +178,7 @@ export const translations = {
     instruction3: "Place the file in  mods/Easy-Custom-Movesets/moveset_configs folder",
     instruction4: "Enable Chracter Select, Easy Custom Moveset and your Character mod in-game",
     instruction5: "Select your character and play!",
+    shareWithCommunity: "Share With Community",
     
     // Language
     language: "Language",
@@ -448,6 +449,7 @@ export const translations = {
     instruction3: "Coloca el archivo en la carpeta mods/Easy-Custom-Movesets/moveset_configs",
     instruction4: "Activa 'Character Select', 'Easy Custom Moveset' y el mod de tu personaje dentro del juego",
     instruction5: "¡Selecciona tu personaje y a jugar!",
+    shareWithCommunity:"Comparte con la comunidad",
 
     // Language & Visibility
     language: "Idioma",
@@ -696,6 +698,7 @@ export const translations = {
     instruction3: "Coloque o arquivo na pasta mods/Easy-Custom-Movesets/moveset_configs",
     instruction4: "Ative 'Character Select', 'Easy Custom Moveset' e o mod do seu personagem dentro do jogo",
     instruction5: "Selecione seu personagem e jogue!",
+    shareWithCommunity: "Compartilhe com a comunidade",
     
     // Language & Visibility
     language: "Idioma",
