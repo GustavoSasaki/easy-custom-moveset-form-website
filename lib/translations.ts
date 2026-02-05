@@ -16,7 +16,7 @@ export const translations = {
     // Form sections
     characterConfig: "Character Config",
     quickPresets: "Quick Presets",
-    characterName: "Character Name (Case Sensitive)",
+    characterName: "Character Name",
     enterCharacterName: "Enter character name",
     
     // Categories
@@ -172,7 +172,7 @@ export const translations = {
     
     // Instructions
     howToUse: "How to Use",
-    instruction0: "Fill the name field, it should be the same as in Chracter Select menu (Case Sensitive)",
+    instruction0: "Fill the name field, it should be the same as in Chracter Select menu",
     instruction1: "Configure the rest of the options for your character",
     instruction2: "Download the generated Lua config file without renaming the file",
     instruction3: "Place the file in  mods/Easy-Custom-Movesets/moveset_configs folder",
@@ -443,7 +443,7 @@ export const translations = {
 
     // Instructions
     howToUse: "Cómo Usar",
-    instruction0: "Completa el campo de nombre; debe ser el mismo que aparece en el menú de Selección de Personaje (Distingue mayúsculas de minúsculas)",
+    instruction0: "Completa el campo de nombre; debe ser el mismo que aparece en el menú de Selección de Personaje",
     instruction1: "Configura el resto de las opciones para tu personaje",
     instruction2: "Descarga el archivo de configuración Lua generado sin cambiarle el nombre",
     instruction3: "Coloca el archivo en la carpeta mods/Easy-Custom-Movesets/moveset_configs",
@@ -692,7 +692,7 @@ export const translations = {
     
     // Instructions
     howToUse: "Como Usar",
-    instruction0: "Preencha o campo de nome; deve ser o mesmo que aparece no menu de Seleção de Personagem (Diferencia entre letras maiúsculas de minúsculas)",
+    instruction0: "Preencha o campo de nome; deve ser o mesmo que aparece no menu de Seleção de Personagem",
     instruction1: "Configure o restante das opções para o seu personagem",
     instruction2: "Baixe o arquivo de configuração Lua gerado sem renomear o arquivo",
     instruction3: "Coloque o arquivo na pasta mods/Easy-Custom-Movesets/moveset_configs",

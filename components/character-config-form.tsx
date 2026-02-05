@@ -183,7 +183,7 @@ interface CharacterConfig {
 }
 
 const defaultConfig: CharacterConfig = {
-  name: "MyCharacter",
+  name: "",
   swimming_speed: 100,
   gravity: 100,
   fall_gravity: 100,
@@ -563,14 +563,12 @@ const presets: { name: string; config: Partial<CharacterConfig> }[] = [
   {
     name: "Default (Mario)",
     config: {
-      name: "Mario",
       moveset_description: "Default moveset",
     },
   },
   {
     name: "Charizard",
     config: {
-      name: "Charizard",
       glide_dive_on: true,
       water_damage_multiplier: 250,
       disable_burning: true,
@@ -585,7 +583,6 @@ const presets: { name: string; config: Partial<CharacterConfig> }[] = [
   {
     name: "Luigi",
     config: {
-      name: "Luigi",
       mr_l_jump_on: true,
       mr_l_jump_strength: 93,
       mr_l_gravity: 140,
@@ -597,7 +594,6 @@ const presets: { name: string; config: Partial<CharacterConfig> }[] = [
   {
     name: "Sonic",
     config: {
-      name: "Sonic",
       peel_out_on: true,
       charge_sonic_dash_on: true,
       long_jump_velocity_multiplier: 200,
@@ -615,7 +611,6 @@ const presets: { name: string; config: Partial<CharacterConfig> }[] = [
   {
     name: "King Penguin",
     config: {
-      name: "King Penguin",
       water_damage_multiplier: 0,
       snow_water_damage_multiplier: 0,
       swimming_speed: 300,
@@ -632,7 +627,6 @@ const presets: { name: string; config: Partial<CharacterConfig> }[] = [
   {
     name: 'Ninji',
     config: {
-      name: 'Ninji',
       super_side_flip_on: true,
       wall_slide_on: true,
       wall_slide_max_gravity: 0,
@@ -648,7 +642,6 @@ const presets: { name: string; config: Partial<CharacterConfig> }[] = [
     {
     name: 'Connie',
     config: {
-      name: 'Connie',
       in_air_jump:3,
       in_air_jump_strength: 25,
       jump_strength: 85,
@@ -804,6 +797,9 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     key: K,
     value: CharacterConfig[K]
   ) => {
+    if(key === "name"){
+      value = value.toLowerCase()
+    }
     setConfig((prev) => ({ ...prev, [key]: value }))
   }, [])
 
@@ -1067,7 +1063,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     const url = URL.createObjectURL(blob)
     const a = document.createElement("a")
     a.href = url
-    a.download = `${config.name.replace(/\s+/g, "_")}_ecm_moveset.lua`
+    a.download = `${config.name.toLowerCase().replace(/\s+/g, "_")}_ecm_moveset.lua`
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -1076,10 +1072,16 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
       logEvent(luaCode)
     }
   }, [generateLuaCode, config.name])
-
-  const applyPreset = useCallback((preset: (typeof presets)[number]) => {
-    setConfig({ ...defaultConfig, ...preset.config })
-  }, [])
+  const applyPreset = useCallback(
+    (preset: (typeof presets)[number]) => {
+      setConfig({
+        ...defaultConfig,
+        ...preset.config,
+        name: config.name, // current name
+      })
+    },
+    [config.name]
+  )
 
   const handleRandomize = useCallback(() => {
     const randomized = { ...config };
@@ -1169,10 +1171,12 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                 </Label>
                 <Input
                   id="name"
+                  required={true}
                   value={config.name}
                   onChange={(e) => updateConfig("name", e.target.value)}
                   placeholder={t.enterCharacterName}
                   className="border-2 font-medium"
+                  
                 />
               </div>
             </CardContent>
