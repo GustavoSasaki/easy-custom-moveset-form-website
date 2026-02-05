@@ -323,6 +323,242 @@ const defaultConfig: CharacterConfig = {
   moveset_description: "",
 }
 
+const CONFIG_METADATA: Partial<Record<keyof CharacterConfig, { min?: number; max?: number; step?: number; options?: string[] }>> = {
+  // --- Movement (Percentages) ---
+  swimming_speed: { min: 0, max: 250, step: 1 },
+  gravity: { min: 20, max: 250, step: 1 },
+  fall_gravity: { min: 20, max: 250, step: 1 },
+  airborne_deceleration_speed: { min: 0, max: 200, step: 1 },
+  walking_speed: { min: 10, max: 250, step: 1 },
+  in_air_speed: { min: 10, max: 250, step: 1 },
+  hold_walking_speed: { min: 10, max: 200, step: 1 },
+  crawling_speed: { min: 0, max: 150, step: 1 },
+  grounded_slowing_speed: { min: 0, max: 200, step: 1 },
+
+  // --- Jumps ---
+  jump_strength: { min: 50, max: 200, step: 1 },
+  single_jump_strength: { min: 50, max: 200, step: 1 },
+  double_jump_strength: { min: 50, max: 200, step: 1 },
+  triple_jump_strength: { min: 50, max: 250, step: 1 },
+  back_flip_strength: { min: 50, max: 200, step: 1 },
+  side_flip_strength: { min: 50, max: 200, step: 1 },
+  long_jump_strength: { min: 50, max: 200, step: 1 },
+  kick_jump_strength: { min: 50, max: 200, step: 1 },
+
+  // --- Dive & Ground Pound ---
+  dive_y_vel: { min: -20, max: 40, step: 1 },
+  dive_velocity: { min: 50, max: 250, step: 1 },
+  dive_max_velocity: { min: 50, max: 250, step: 1 },
+  ground_pound_dive_y_vel: { min: -20, max: 40, step: 1 },
+  ground_pound_dive_forward_vel: { min: 0, max: 200, step: 1 },
+  long_jump_velocity_multiplier: { min: 50, max: 200, step: 1 },
+  long_jump_max_velocity: { min: 50, max: 250, step: 1 },
+
+  // --- Mr. L ---
+  mr_l_jump_strength: { min: 50, max: 200, step: 1 },
+  mr_l_gravity: { min: 50, max: 250, step: 1 },
+  mr_l_air_speed: { min: 20, max: 150, step: 1 },
+
+  // --- Twirling ---
+  triple_jump_twirling_when: { options: ["fall", "jump", "always"] },
+  twirling_gravity: { min: 10, max: 150, step: 1 },
+  fast_twirling_gravity: { min: 10, max: 150, step: 1 },
+  twirling_speed: { min: 50, max: 250, step: 1 },
+
+  // --- Ground Pound Config ---
+  ground_pound_antecipation_speed_up: { options: ["zero", "low", "high"] },
+  ground_pound_gravity: { min: 50, max: 300, step: 1 },
+  ground_pound_max_y_vel: { min: 50, max: 250, step: 1 },
+  ground_pound_shake: { min: 0, max: 250, step: 1 },
+  ground_pound_jump_strength: { min: 20, max: 150, step: 1 },
+  ground_pound_jump_forward_vel: { min: 0, max: 50, step: 1 },
+
+  // --- Waft (Wario) ---
+  waft_fart_velocity: { min: 50, max: 250, step: 1 },
+  waft_fart_strength: { min: 50, max: 200, step: 1 },
+  waft_fart_per_level: { min: 1, max: 5, step: 1 },
+
+  // --- Glide Dive ---
+  glide_dive_forward_vel: { min: 10, max: 150, step: 1 },
+  glide_dive_slowdown: { min: 0, max: 1, step: 0.05 },
+  glide_dive_angle_speed: { min: 10, max: 200, step: 1 },
+  glide_dive_min_forward_speed: { min: 0, max: 1500, step: 10 },
+  glide_dive_max_time: { min: 10, max: 1500, step: 10 },
+  glide_dive_y_vel: { min: -20, max: 10, step: 1 },
+
+  // --- Wall Slide ---
+  wall_slide_gravity: { min: 0.1, max: 2.0, step: 0.05 },
+  wall_slide_max_gravity: { min: 0.1, max: 1.5, step: 0.05 },
+  wall_slide_jump_forward_vel: { min: 0, max: 100, step: 1 },
+  wall_slide_jump_strength: { min: 20, max: 150, step: 1 },
+
+  // --- Air Jump ---
+  in_air_jump: { min: 0, max: 5, step: 1 },
+  in_air_jump_strength: { min: 10, max: 150, step: 1 },
+  in_air_jump_forward_vel_multiplier: { min: 0, max: 1.5, step: 0.05 },
+  in_air_jump_forward_vel_slowdown: { min: 0, max: 1.0, step: 0.05 },
+  in_air_jump_forward_vel: { min: 0, max: 100, step: 1 },
+
+  // --- Super Side Flip ---
+  super_side_flip_strength: { min: 20, max: 200, step: 1 },
+  super_side_flip_convert_foward_vel: { min: 0, max: 200, step: 1 },
+  super_side_flip_add_foward_vel: { min: 0, max: 100, step: 1 },
+  super_side_flip_kick_strength: { min: 50, max: 300, step: 1 },
+  super_side_flip_gravity: { min: 10, max: 200, step: 1 },
+  super_side_flip_max_gravity: { min: 10, max: 200, step: 1 },
+  super_side_flip_min_velocity: { min: 0, max: 100, step: 1 },
+
+  // --- Yoshi Flutter ---
+  yoshi_flutter_angle_speed: { min: 10, max: 200, step: 1 },
+  yoshi_flutter_cooldown: { min: 0, max: 60, step: 1 },
+  yoshi_flutter_stength_descending: { min: 0, max: 50, step: 1 },
+  yoshi_flutter_stength_ascending: { min: 0, max: 50, step: 1 },
+  yoshi_flutter_max_y_vel: { min: 5, max: 100, step: 1 },
+  yoshi_flutter_reactivations: { min: 0, max: 10, step: 1 },
+  yoshi_flutter_speed: { min: 0.1, max: 5.0, step: 0.1 },
+  yoshi_flutter_max_time: { min: 5, max: 120, step: 1 },
+
+  // --- Sonic Mechanics ---
+  peel_out_max_vel: { min: 50, max: 250, step: 1 },
+  peel_out_slowdown: { min: 0, max: 2, step: 0.05 },
+  sonic_jump_strength: { min: 10, max: 150, step: 1 },
+  sonic_jump_add_forward_vel: { min: 0, max: 100, step: 1 },
+  sonic_dash_max_vel: { min: 50, max: 300, step: 1 },
+  sonic_dash_slowdown: { min: 0, max: 2, step: 0.05 },
+  sonic_dash_slowdown_water: { min: 0, max: 2, step: 0.05 },
+  sonic_dash_slowdown_lava: { min: 0, max: 5, step: 0.05 },
+  sonic_dash_angle_speed: { min: 10, max: 200, step: 1 },
+  drop_dash_charge_vel: { min: 10, max: 200, step: 1 },
+  drop_dash_gravity: { min: 10, max: 200, step: 1 },
+
+  // --- Damage & Resistance ---
+  bad_gas_damage_multiplier: { min: 0, max: 500, step: 10 },
+  water_damage_multiplier: { min: 0, max: 500, step: 10 },
+  snow_water_damage_multiplier: { min: 0, max: 500, step: 10 },
+  burning_damage_multiplier: { min: 0, max: 500, step: 10 },
+  lava_damage_multiplier: { min: 0, max: 1000, step: 10 },
+  knockback_resistance: { min: 0, max: 200, step: 1 },
+  coin_heal_multiplier: { min: 0, max: 500, step: 10 },
+};
+
+const CONFIG_METADATA_NOT_CAOTIC: Partial<Record<keyof CharacterConfig, { min?: number; max?: number; step?: number; options?: string[] }>> = {
+  // --- Movement (Percentages) ---
+  swimming_speed: { min: 0, max: 250, step: 1 },
+  gravity: { min: 50, max: 150, step: 1 },
+  fall_gravity: { min: 50, max: 150, step: 1 },
+  airborne_deceleration_speed: { min: 0, max: 200, step: 1 },
+  walking_speed: { min: 50, max: 200, step: 1 },
+  in_air_speed: { min: 50, max: 200, step: 1 },
+  hold_walking_speed: { min: 50, max: 200, step: 1 },
+  crawling_speed: { min: 50, max: 200, step: 1 },
+  grounded_slowing_speed: { min: 50, max: 200, step: 1 },
+
+  // --- Jumps ---
+  jump_strength: { min: 50, max: 200, step: 1 },
+  single_jump_strength: { min: 50, max: 200, step: 1 },
+  double_jump_strength: { min: 50, max: 200, step: 1 },
+  triple_jump_strength: { min: 50, max: 200, step: 1 },
+  back_flip_strength: { min: 50, max: 200, step: 1 },
+  side_flip_strength: { min: 50, max: 200, step: 1 },
+  long_jump_strength: { min: 50, max: 200, step: 1 },
+  kick_jump_strength: { min: 50, max: 200, step: 1 },
+
+  // --- Dive & Ground Pound ---
+  dive_y_vel: { min: -20, max: 40, step: 1 },
+  dive_velocity: { min: 50, max: 200, step: 1 },
+  dive_max_velocity: { min: 50, max: 200, step: 1 },
+  ground_pound_dive_y_vel: { min: -20, max: 40, step: 1 },
+  ground_pound_dive_forward_vel: { min: 0, max: 200, step: 1 },
+  long_jump_velocity_multiplier: { min: 50, max: 200, step: 1 },
+  long_jump_max_velocity: { min: 50, max: 200, step: 1 },
+
+  // --- Mr. L ---
+  mr_l_jump_strength: { min: 50, max: 200, step: 1 },
+  mr_l_gravity: { min: 50, max: 200, step: 1 },
+  mr_l_air_speed: { min: 20, max: 200, step: 1 },
+
+  // --- Twirling ---
+  triple_jump_twirling_when: { options: ["fall", "jump", "always"] },
+  twirling_gravity: { min: 50, max: 200, step: 1 },
+  fast_twirling_gravity: { min: 50, max: 200, step: 1 },
+  twirling_speed: { min: 50, max: 200, step: 1 },
+
+  // --- Ground Pound Config ---
+  ground_pound_antecipation_speed_up: { options: ["zero", "low", "high"] },
+  ground_pound_gravity: { min: 50, max: 200, step: 1 },
+  ground_pound_max_y_vel: { min: 50, max: 200, step: 1 },
+  ground_pound_shake: { min: 0, max: 200, step: 1 },
+  ground_pound_jump_strength: { min: 50, max: 200, step: 1 },
+  ground_pound_jump_forward_vel: { min: 0, max: 50, step: 1 },
+
+  // --- Waft (Wario) ---
+  waft_fart_velocity: { min: 50, max: 200, step: 1 },
+  waft_fart_strength: { min: 50, max: 200, step: 1 },
+  waft_fart_per_level: { min: 1, max: 5, step: 1 },
+
+  // --- Glide Dive ---
+  glide_dive_forward_vel: { min: 50, max: 200, step: 1 },
+  glide_dive_slowdown: { min: 0, max: 1, step: 0.05 },
+  glide_dive_angle_speed: { min: 10, max: 200, step: 1 },
+  glide_dive_min_forward_speed: { min: 100, max: 1500, step: 10 },
+  glide_dive_max_time: { min: 10, max: 1500, step: 10 },
+  glide_dive_y_vel: { min: -20, max: 10, step: 1 },
+
+  // --- Wall Slide ---
+  wall_slide_gravity: { min: 0.1, max: 2.0, step: 0.05 },
+  wall_slide_max_gravity: { min: 0.1, max: 1.5, step: 0.05 },
+  wall_slide_jump_forward_vel: { min: 0, max: 100, step: 1 },
+  wall_slide_jump_strength: { min: 20, max: 150, step: 1 },
+
+  // --- Air Jump ---
+  in_air_jump: { min: 0, max: 5, step: 1 },
+  in_air_jump_strength: { min: 10, max: 200, step: 1 },
+  in_air_jump_forward_vel_multiplier: { min: 0, max: 1.5, step: 0.05 },
+  in_air_jump_forward_vel_slowdown: { min: 0, max: 1.0, step: 0.05 },
+  in_air_jump_forward_vel: { min: 0, max: 100, step: 1 },
+
+  // --- Super Side Flip ---
+  super_side_flip_strength: { min: 20, max: 200, step: 1 },
+  super_side_flip_convert_foward_vel: { min: 0, max: 200, step: 1 },
+  super_side_flip_add_foward_vel: { min: 0, max: 100, step: 1 },
+  super_side_flip_kick_strength: { min: 50, max: 300, step: 1 },
+  super_side_flip_gravity: { min: 10, max: 200, step: 1 },
+  super_side_flip_max_gravity: { min: 10, max: 200, step: 1 },
+  super_side_flip_min_velocity: { min: 0, max: 100, step: 1 },
+
+  // --- Yoshi Flutter ---
+  yoshi_flutter_angle_speed: { min: 10, max: 200, step: 1 },
+  yoshi_flutter_cooldown: { min: 0, max: 60, step: 1 },
+  yoshi_flutter_stength_descending: { min: 0, max: 50, step: 1 },
+  yoshi_flutter_stength_ascending: { min: 0, max: 50, step: 1 },
+  yoshi_flutter_max_y_vel: { min: 5, max: 100, step: 1 },
+  yoshi_flutter_reactivations: { min: 0, max: 10, step: 1 },
+  yoshi_flutter_speed: { min: 0.1, max: 5.0, step: 0.1 },
+  yoshi_flutter_max_time: { min: 5, max: 120, step: 1 },
+
+  // --- Sonic Mechanics ---
+  peel_out_max_vel: { min: 50, max: 200, step: 1 },
+  peel_out_slowdown: { min: 0, max: 2, step: 0.05 },
+  sonic_jump_strength: { min: 10, max: 200, step: 1 },
+  sonic_jump_add_forward_vel: { min: 0, max: 100, step: 1 },
+  sonic_dash_max_vel: { min: 50, max: 300, step: 1 },
+  sonic_dash_slowdown: { min: 0, max: 2, step: 0.05 },
+  sonic_dash_slowdown_water: { min: 0, max: 2, step: 0.05 },
+  sonic_dash_slowdown_lava: { min: 0, max: 5, step: 0.05 },
+  sonic_dash_angle_speed: { min: 10, max: 200, step: 1 },
+  drop_dash_charge_vel: { min: 10, max: 200, step: 1 },
+  drop_dash_gravity: { min: 10, max: 200, step: 1 },
+
+  // --- Damage & Resistance ---
+  bad_gas_damage_multiplier: { min: 0, max: 250, step: 10 },
+  water_damage_multiplier: { min: 0, max: 250, step: 10 },
+  snow_water_damage_multiplier: { min: 0, max: 250, step: 10 },
+  burning_damage_multiplier: { min: 0, max: 250, step: 10 },
+  lava_damage_multiplier: { min: 0, max: 250, step: 10 },
+  knockback_resistance: { min: 0, max: 200, step: 1 },
+  coin_heal_multiplier: { min: 0, max: 500, step: 10 },
+};
+
 const presets: { name: string; config: Partial<CharacterConfig> }[] = [
   {
     name: "Default (Mario)",
@@ -845,6 +1081,45 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     setConfig({ ...defaultConfig, ...preset.config })
   }, [])
 
+  const handleRandomize = useCallback(() => {
+    const randomized = { ...config };
+  
+    (Object.keys(defaultConfig) as Array<keyof CharacterConfig>).forEach((key) => {
+      // 1. Skip non-configurable metadata
+      if (key === 'name' || key === 'moveset_description') return;
+  
+      const meta = CONFIG_METADATA_NOT_CAOTIC[key];
+      const defaultValue = defaultConfig[key];
+  
+      // 2. Handle Enums/Strings (twirling_when, ground_pound_speed_up)
+      if (meta && 'options' in meta && meta.options) {
+        const randomIndex = Math.floor(Math.random() * meta.options.length);
+        // We cast to any here because TypeScript can be picky with dynamic key mapping
+        randomized[key] = meta.options[randomIndex] as any;
+      } 
+      
+      // 3. Handle Numbers (in_air_jump, gravity, etc.)
+      else if (typeof defaultValue === 'number') {
+        const min = meta?.min ?? 0;
+        const max = meta?.max ?? 200;
+        const step = meta?.step ?? 1;
+        
+        const raw = Math.random() * (max - min) + min;
+        const stepped = Math.round(raw / step) * step;
+        
+        // Fixed to 2 decimals to avoid floating point weirdness in the generated Lua
+        randomized[key] = Number(stepped.toFixed(2));
+      } 
+      
+      // 4. Handle Booleans
+      else if (typeof defaultValue === 'boolean') {
+        randomized[key] = Math.random() > 0.5;
+      }
+    });
+  
+    setConfig(randomized);
+  }, [config, setConfig]);
+
   return (
     <TooltipProvider delayDuration={300}>
       <div className="flex flex-col lg:flex-row lg:gap-8  justify-center">
@@ -875,6 +1150,15 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                       {preset.name}
                     </Button>
                   ))}
+                  <Button
+  variant="outline"
+  size="sm"
+  onClick={handleRandomize}
+  className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-500/50 hover:from-purple-500/20 hover:to-pink-500/20"
+>
+  <Sparkles className="mr-2 h-4 w-4 text-purple-500" />
+  Randomize
+</Button>
                 </div>
               </div>
 
