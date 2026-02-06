@@ -11,9 +11,10 @@ import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
-import { Download,  Sparkles, ChevronDown, HelpCircle, Check, Share2 } from "lucide-react"
+import { Download, Sparkles, ChevronDown, HelpCircle, Check, Share2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { translations } from "@/lib/translations"
+import { ImportLuaButton } from "./ImportLuaButton";
 
 type Translations = typeof translations.en
 
@@ -639,10 +640,10 @@ const presets: { name: string; config: Partial<CharacterConfig> }[] = [
       moveset_description: "nimble with wall slide",
     },
   },
-    {
+  {
     name: 'Connie',
     config: {
-      in_air_jump:3,
+      in_air_jump: 3,
       in_air_jump_strength: 25,
       jump_strength: 85,
       walking_speed: 120,
@@ -660,15 +661,28 @@ function TooltipIcon({ tooltip }: { tooltip?: string }) {
   if (!tooltip) return null
 
   return (
-    <Tooltip>
+    <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
-        <button type="button" className="ml-1.5 inline-flex items-center justify-center rounded-full border border-muted-foreground/30 text-muted-foreground hover:text-foreground hover:border-foreground transition-colors p-1 min-w-[28px] min-h-[28px] lg:min-w-[22px] lg:min-h-[22px] lg:p-0.5">
-          <HelpCircle className="h-4 w-4 lg:h-3.5 lg:w-3.5" />
-          <span className="sr-only">More info</span>
+        <button 
+          type="button" // Critical: prevents form submission
+          className="ml-1 inline-flex items-center cursor-help text-muted-foreground hover:text-primary transition-colors outline-none"
+          // On mobile, prevent ghost clicks but allow Radix to handle the toggle
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }} 
+        >
+          <HelpCircle className="h-3.5 w-3.5" />
+          <span className="sr-only">Info</span>
         </button>
       </TooltipTrigger>
-      <TooltipContent side="top" className="max-w-[280px] text-sm">
-        {tooltip}
+      <TooltipContent 
+        side="top" 
+        align="center" 
+        className="max-w-[250px]" // Prevents tooltip from overflowing mobile screens
+      >
+        {/* Changed tooltipText to tooltip */}
+        <p>{tooltip}</p> 
       </TooltipContent>
     </Tooltip>
   )
@@ -797,32 +811,14 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     key: K,
     value: CharacterConfig[K]
   ) => {
-    if(key === "name"){
+    if (key === "name") {
       value = value.toLowerCase()
     }
     setConfig((prev) => ({ ...prev, [key]: value }))
   }, [])
 
-  const generateMovesetDescription = useCallback(() => {
-    const moves: string[] = []
-    if (config.glide_dive_on) moves.push("glide dive")
-    if (config.ground_pound_jump_on) moves.push("ground pound jump")
-    if (config.wall_slide_on) moves.push("wall slide")
-    if (config.yoshi_flutter_on) moves.push("yoshi flutter")
-    if (config.mr_l_jump_on) moves.push("mr l jump")
-    if (config.peel_out_on) moves.push("peel out")
-    if (config.charge_sonic_dash_on) moves.push("sonic dash")
-    if (config.drop_dash_on) moves.push("drop dash")
-    if (config.sonic_jump_on) moves.push("sonic jump")
-    if (config.super_side_flip_on) moves.push("super side flip")
-    if (config.waft_fart_on) moves.push("waft fart")
-    if (config.in_air_jump > 0) moves.push(`${config.in_air_jump} air jump(s)`)
-    if (config.back_flip_twirling_on || config.side_flip_twirling_on || config.triple_jump_twirling_on) moves.push("twirling")
-    return moves.join(", ") || "default moveset"
-  }, [config])
-
   const generateLuaCode = useCallback(() => {
-    const movesetDesc = config.moveset_description || generateMovesetDescription()
+    const movesetDesc = config.moveset_description
     const lines: string[] = ["return {", `    name = '${config.name}',`]
 
     // Helper to add non-default values
@@ -899,7 +895,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     addIfNotDefault("fast_twirling_gravity", 100)
     addIfNotDefault("twirling_speed", 100)
     addIfNotDefault("disable_twirling_land", false)
-  
+
 
     // Ground Pound
     addIfNotDefault("ground_pound_antecipation_speed_up", "zero")
@@ -1055,7 +1051,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     lines.push("}")
 
     return lines.join("\n")
-  }, [config, generateMovesetDescription])
+  }, [config])
 
   const handleDownload = useCallback(() => {
     const luaCode = generateLuaCode()
@@ -1068,7 +1064,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     a.click()
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
-    if(shareCommunity) {
+    if (shareCommunity) {
       logEvent(luaCode)
     }
   }, [generateLuaCode, config.name])
@@ -1085,42 +1081,70 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
 
   const handleRandomize = useCallback(() => {
     const randomized = { ...config };
-  
+
     (Object.keys(defaultConfig) as Array<keyof CharacterConfig>).forEach((key) => {
       // 1. Skip non-configurable metadata
       if (key === 'name' || key === 'moveset_description') return;
-  
+
       const meta = CONFIG_METADATA_NOT_CAOTIC[key];
       const defaultValue = defaultConfig[key];
-  
+
       // 2. Handle Enums/Strings (twirling_when, ground_pound_speed_up)
       if (meta && 'options' in meta && meta.options) {
         const randomIndex = Math.floor(Math.random() * meta.options.length);
         // We cast to any here because TypeScript can be picky with dynamic key mapping
         randomized[key] = meta.options[randomIndex] as any;
-      } 
-      
+      }
+
       // 3. Handle Numbers (in_air_jump, gravity, etc.)
       else if (typeof defaultValue === 'number') {
         const min = meta?.min ?? 0;
         const max = meta?.max ?? 200;
         const step = meta?.step ?? 1;
-        
+
         const raw = Math.random() * (max - min) + min;
         const stepped = Math.round(raw / step) * step;
-        
+
         // Fixed to 2 decimals to avoid floating point weirdness in the generated Lua
         randomized[key] = Number(stepped.toFixed(2));
-      } 
-      
+      }
+
       // 4. Handle Booleans
       else if (typeof defaultValue === 'boolean') {
         randomized[key] = Math.random() > 0.5;
       }
     });
-  
+
     setConfig(randomized);
   }, [config, setConfig]);
+
+const handleImportLua = (content: string) => {
+  // Now 'content' is the actual text of the file
+  const newConfig = { ...defaultConfig };
+  
+  const pattern = /(\w+)\s*=\s*([^,{}]+)/g;
+  let match;
+
+  while ((match = pattern.exec(content)) !== null) {
+    const key = match[1].trim() as keyof CharacterConfig;
+    let val: any = match[2].trim();
+
+    // Cleaning quotes and converting types
+    if (val === "true") val = true;
+    else if (val === "false") val = false;
+    else if (val.startsWith("'") || val.startsWith('"')) {
+      val = val.substring(1, val.length - 1);
+    } else if (!isNaN(Number(val))) {
+      val = Number(val);
+    }
+
+    if (key in newConfig) {
+      (newConfig as any)[key] = val;
+    }
+  }
+
+  setConfig(newConfig);
+};
 
   return (
     <TooltipProvider delayDuration={300}>
@@ -1153,14 +1177,14 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                     </Button>
                   ))}
                   <Button
-  variant="outline"
-  size="sm"
-  onClick={handleRandomize}
-  className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-500/50 hover:from-purple-500/20 hover:to-pink-500/20"
->
-  <Sparkles className="mr-2 h-4 w-4 text-purple-500" />
-  Randomize
-</Button>
+                    variant="outline"
+                    size="sm"
+                    onClick={handleRandomize}
+                    className="bg-gradient-to-r from-purple-500/10 to-pink-500/10 border-purple-500/50 hover:from-purple-500/20 hover:to-pink-500/20"
+                  >
+                    <Sparkles className="mr-2 h-4 w-4 text-purple-500" />
+                    Randomize
+                  </Button>
                 </div>
               </div>
 
@@ -1176,7 +1200,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                   onChange={(e) => updateConfig("name", e.target.value)}
                   placeholder={t.enterCharacterName}
                   className="border-2 font-medium"
-                  
+
                 />
               </div>
             </CardContent>
@@ -1382,8 +1406,8 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             </CardContent>
           </Card>
 
-                    {/* Twirling */}
-                    <Card className="border-2 border-border">
+          {/* Twirling */}
+          <Card className="border-2 border-border">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.twirling}</CardTitle>
             </CardHeader>
@@ -1391,11 +1415,11 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
               <ToggleOption id="back_flip_twirling" label={t.backFlipTwirling} checked={config.back_flip_twirling_on} onCheckedChange={(v) => updateConfig("back_flip_twirling_on", v)} tooltip={t.tooltips?.backFlipTwirling} />
               <ToggleOption id="side_flip_twirling" label={t.sideFlipTwirling} checked={config.side_flip_twirling_on} onCheckedChange={(v) => updateConfig("side_flip_twirling_on", v)} tooltip={t.tooltips?.sideFlipTwirling} />
               <ToggleOption id="triple_jump_twirling" label={t.tripleJumpTwirling} checked={config.triple_jump_twirling_on} onCheckedChange={(v) => updateConfig("triple_jump_twirling_on", v)} tooltip={t.tooltips?.tripleJumpTwirling} />
-                  <ToggleOption id="twirling_gp" label={t.twirlingGroundPound} checked={config.twirling_ground_pound_on} onCheckedChange={(v) => updateConfig("twirling_ground_pound_on", v)} tooltip={t.tooltips?.twirlingGroundPound} />
-                  <ToggleOption id="twirling_dive" label={t.twirlingDive} checked={config.twirling_dive_on} onCheckedChange={(v) => updateConfig("twirling_dive_on", v)}  tooltip={t.tooltips?.twirlingDive}  />
-                  <ToggleOption id="fast_twirling" label={t.fastTwirling} checked={config.fast_twirling_on} onCheckedChange={(v) => updateConfig("fast_twirling_on", v)}  tooltip={t.tooltips?.fastTwirling}  />
-                  <NumberInput label={t.twirlingGravity} value={config.twirling_gravity} onChange={(v) => updateConfig("twirling_gravity", v)} min={0} max={200} tooltip={t.tooltips?.twirlingGravity}  />
-                  <NumberInput label={t.twirlingSpeed} value={config.twirling_speed} onChange={(v) => updateConfig("twirling_speed", v)} min={0} max={200}  tooltip={t.tooltips?.twirlingSpeed} />
+              <ToggleOption id="twirling_gp" label={t.twirlingGroundPound} checked={config.twirling_ground_pound_on} onCheckedChange={(v) => updateConfig("twirling_ground_pound_on", v)} tooltip={t.tooltips?.twirlingGroundPound} />
+              <ToggleOption id="twirling_dive" label={t.twirlingDive} checked={config.twirling_dive_on} onCheckedChange={(v) => updateConfig("twirling_dive_on", v)} tooltip={t.tooltips?.twirlingDive} />
+              <ToggleOption id="fast_twirling" label={t.fastTwirling} checked={config.fast_twirling_on} onCheckedChange={(v) => updateConfig("fast_twirling_on", v)} tooltip={t.tooltips?.fastTwirling} />
+              <NumberInput label={t.twirlingGravity} value={config.twirling_gravity} onChange={(v) => updateConfig("twirling_gravity", v)} min={0} max={200} tooltip={t.tooltips?.twirlingGravity} />
+              <NumberInput label={t.twirlingSpeed} value={config.twirling_speed} onChange={(v) => updateConfig("twirling_speed", v)} min={0} max={200} tooltip={t.tooltips?.twirlingSpeed} />
             </CardContent>
           </Card>
 
@@ -1438,27 +1462,33 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
           <div className="lg:sticky lg:top-4 space-y-3">
             {/* Action Buttons */}
             <div className="flex gap-2 flex-col">
+
+
               <Button onClick={handleDownload} className="flex-1 border-2 border-primary font-bold uppercase tracking-wide text-lg lg:h-20">
                 <Download className="mr-2 h-4 w-4" />
                 {t.downloadConfig}
               </Button>
-              <Button 
-                variant="outline"  
-                onClick={() => setShareCommunity(!shareCommunity)}
-                className="flex-1 border-2 bg-transparent font-bold uppercase tracking-wide gap-3 text-muted-foreground border-muted-foreground"
-              >
-                <div className={`
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setShareCommunity(!shareCommunity)}
+                  className=" md:px-6 flex-1 border-2 bg-transparent font-bold uppercase tracking-wide md:gap-3 text-muted-foreground border-muted-foreground"
+                >
+                  <div className={`
                   flex items-center justify-center w-5 h-5 rounded border-2 transition-all duration-200 border-muted-foreground
-                  ${shareCommunity 
-                    ? "bg-primary border-primary text-white" 
-                    : "bg-transparent border-current"}
+                  ${shareCommunity
+                      ? "bg-primary border-primary text-white"
+                      : "bg-transparent border-current"}
                 `}>
-                  {shareCommunity && <Check className="w-4 h-4 stroke-[3] border-muted-foreground" />}
-                </div>
-                
-                {/* Using translations from your previous prompt */}
-                {t.shareWithCommunity || "Share With Community"}
-            </Button>
+                    {shareCommunity && <Check className="w-4 h-4 stroke-[3] border-muted-foreground" />}
+                  </div>
+
+                  {/* Using translations from your previous prompt */}
+                  {t.shareWithCommunity || "Community Share"}
+                </Button>
+
+                <ImportLuaButton onFileRead={handleImportLua} label={t.importFile} />
+              </div>
             </div>
 
             {/* Toggle Code Preview - Mobile only */}
@@ -1497,22 +1527,22 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
             </Button>
 
             <div className={cn("lg:block", showInstructions ? "block" : "hidden")}>
-            <Card className=" border-2 border-border">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-base font-bold uppercase tracking-wide">{t.howToUse}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ol className="list-inside list-decimal space-y-1 text-sm text-muted-foreground">
-                  <li>{t.instruction0}</li>
-                  <li>{t.instruction1}</li>
-                  <li>{t.instruction2}</li>
-                  <li>{t.instruction3}</li>
-                  <li>{t.instruction4}</li>
-                  <li>{t.instruction5}</li>
-                </ol>
-              </CardContent>
-            </Card>
-          </div>
+              <Card className=" border-2 border-border">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-base font-bold uppercase tracking-wide">{t.howToUse}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ol className="list-inside list-decimal space-y-1 text-sm text-muted-foreground">
+                    <li>{t.instruction0}</li>
+                    <li>{t.instruction1}</li>
+                    <li>{t.instruction2}</li>
+                    <li>{t.instruction3}</li>
+                    <li>{t.instruction4}</li>
+                    <li>{t.instruction5}</li>
+                  </ol>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>
