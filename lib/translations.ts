@@ -222,10 +222,12 @@ gpShake: "GP Shake Intensity",
 tripleJumpTwirlingWhen: "Triple Jump Twirling Threshold",
 disableTwirlingLand: "Disable Twirling Land",
 special_triple_jump_animation_speedup:"Special Triple Animation Speed up",
+ground_pound_dive_change_direction_on: "Ground Pound Dive Control Direction",
     
     // Tooltips - Add your descriptions here
     tooltips: {
       special_triple_jump_animation_speedup: "How much faster the animation plays",
+      ground_pound_dive_change_direction_on: "Permits change angle after ground pound dive",
       // Movement
       walkingSpeed: "How fast your character walks on the ground. 100% is normal speed.",
       swimmingSpeed: "How fast your character swims in water. 100% is normal speed.",
@@ -534,11 +536,13 @@ triple_jump_animation: "Animation used for triple jumps. Default, special, or sp
     hideShowInstructions: "Ocultar Instrucciones de Instalación",
     showInstruction: "Mostrar Instrucciones de Instalación",
     special_triple_jump_animation_speedup: "Aceleración de Animación del Triple Salto Especial",
+    ground_pound_dive_change_direction_on: "Control de dirección del clavado tras culatazo",
     
 
     
     // Tooltips
     tooltips: {
+      ground_pound_dive_change_direction_on:"Qué tan rápido se reproduce la animación",
       special_triple_jump_animation_speedup: "Qué tan rápido se reproduce la animación",
 "dive_y_vel": "La fuerza inicial hacia arriba o abajo al comenzar un picado.",
     "dive_velocity": "Multiplicador de empuje horizontal base para el picado.",
@@ -811,8 +815,10 @@ disable_special_triple_jump_bounce: "Evita el rebote después de un triple salto
     hideShowInstructions: "Esconder Instruções de Instalação",
     showInstruction: "Mostrar Instruções de Instalação",
     special_triple_jump_animation_speedup: "Acelerar Animação do Salto Triplo Especial",
+    ground_pound_dive_change_direction_on:"Controle de direção do mergulho após ground pound",
     // Tooltips
     tooltips: {
+      ground_pound_dive_change_direction_on:"Permite mudar o ângulo após o mergulho depois do ground pound",
       special_triple_jump_animation_speedup: "O quanto mais rápida a animação é reproduzida",
       "dive_y_vel": "A força inicial para cima/baixo ao iniciar um mergulho.",
     "dive_velocity": "Multiplicador base de impulso horizontal para o mergulho.",

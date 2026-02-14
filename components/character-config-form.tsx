@@ -573,6 +573,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
       lines.push(`    ground_pound_dive_on = true,`)
       addIfNotDefault("ground_pound_dive_y_vel")
       addIfNotDefault("ground_pound_dive_forward_vel")
+      addIfNotDefault("ground_pound_dive_change_direction_on")
     }
 
     // Long Jump
@@ -1462,6 +1463,12 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                 <NumberInput label={t.forwardVelocity} value={config.ground_pound_dive_forward_vel} 
                 onChange={(v) => updateConfig("ground_pound_dive_forward_vel", v)} 
                 configKey="ground_pound_dive_forward_vel" />
+
+
+<ToggleOption id="ground_pound_dive_change_direction_on" label={t.ground_pound_dive_change_direction_on} 
+checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => updateConfig("ground_pound_dive_change_direction_on", v)}
+ tooltip={t.tooltips?.ground_pound_dive_change_direction_on} />
+
               </AbilitySection>
             </CardContent>
           </Card>

@@ -169,6 +169,7 @@ export interface CharacterConfig {
   single_jump_animation: string; 
   triple_jump_animation: string;
   special_triple_jump_animation_speedup: number;
+  ground_pound_dive_change_direction_on: boolean;
   // Moveset
   moveset_description: string
 }
@@ -358,7 +359,8 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   long_jump_triple_jump_on: { default: false },
   long_jump_triple_jump_strength: { default: 100 },
   long_jump_triple_jump_add_forward_vel: { default: 0 },
-  special_triple_jump_animation_speedup: { default: 0, min: 0, max: 100, step:5, isNew: true }
+  special_triple_jump_animation_speedup: { default: 0, min: 0, max: 100, step:5, isNew: true },
+  ground_pound_dive_change_direction_on: {default: false, isNew: true}
 };
 
 
