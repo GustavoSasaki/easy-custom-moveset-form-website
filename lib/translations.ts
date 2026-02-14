@@ -2,6 +2,19 @@ export type Language = "en" | "es" | "pt"
 
 export const translations = {
   en: {
+    animation: "Animation",
+      single_jump_animation: "Single Jump Animation",
+  triple_jump_animation: "Triple Jump Animation",
+  dive_angle_speed: "Dive Angle Speed",
+  all_jumps_angle_speed: "Jumps Angle Speed",
+  basic_jump_angle_speed: "Basic Jump Angle Speed",
+  special_jump_angle_speed: "Special Jump Angle Speed",
+  special_triple_jump_on: "Enable Special Triple Jump",
+  disable_special_triple_jump_bounce: "Disable Triple Jump Bounce",
+  "dive_y_vel": "Dive Vertical Velocity",
+  "dive_velocity": "Dive Power",
+  "dive_max_velocity": "Dive Speed Limit",
+
     // Header
     title: "Easy Custom Moveset",
     subtitle: "Moveset Generator",
@@ -25,6 +38,7 @@ export const translations = {
     specialAbilities: "Special Abilities",
     sonicAbilities: "Sonic Abilities",
     twirling: "Twirling",
+    dive: "Dive",
     damageResistance: "Damage & Resistance",
     otherOptions: "Other Options",
     
@@ -190,9 +204,28 @@ export const translations = {
 
     hideShowInstructions: "Hide How to Install",
     showInstruction: "Show How to Install",
+    // Movement stats section
+holdWalkingSpeed: "Hold Walking Speed",
+crawlingSpeed: "Crawling Speed",
+groundedSlowingSpeed: "Grounded Slowing",
+airborneDecelerationSpeed: "Airborne Deceleration",
+
+// Jump/Special section
+kickJumpStrength: "Kick Jump Strength",
+diveYVel: "Dive Y Velocity",
+longJumpVelMultiplier: "Long Jump Multiplier",
+longJumpMaxVel: "Long Jump Max Speed",
+gpAnticipation: "GP Anticipation Speed",
+gpGravity: "GP Gravity",
+gpMaxYVel: "GP Max Fall Speed",
+gpShake: "GP Shake Intensity",
+tripleJumpTwirlingWhen: "Triple Jump Twirling Threshold",
+disableTwirlingLand: "Disable Twirling Land",
+special_triple_jump_animation_speedup:"Special Triple Animation Speed up",
     
     // Tooltips - Add your descriptions here
     tooltips: {
+      special_triple_jump_animation_speedup: "How much faster the animation plays",
       // Movement
       walkingSpeed: "How fast your character walks on the ground. 100% is normal speed.",
       swimmingSpeed: "How fast your character swims in water. 100% is normal speed.",
@@ -272,10 +305,50 @@ export const translations = {
       saultubeJumpAnimation: "When doing single/double/triple jump uses saultube animation",
       killToad: "Allows your character to harm Toad NPCs.",
       killPinkBobomb: "Allows your character to harm friendly pink Bob-ombs.",
-    },
+      holdWalkingSpeed: "Speed when holding the 'Walk' button (usually slow walk).",
+  crawlingSpeed: "Speed while crawling on the ground.",
+  groundedSlowingSpeed: "How quickly you lose speed while sliding or stopping on ground.",
+  airborneDecelerationSpeed: "Speed loss while in the air without input.",
+  kickJumpStrength: "Height of the jump performed after a kick.",
+  diveYVel: "Vertical boost given when starting a dive.",
+  longJumpVelMultiplier: "Multiplies forward speed when starting a long jump.",
+  longJumpMaxVel: "Caps the maximum speed allowed during a long jump.",
+  gpAnticipation: "The speed of the animation before the character slams down.",
+  gpGravity: "How hard gravity pulls you during a ground pound.",
+  gpMaxYVel: "Maximum falling speed during a ground pound.",
+  gpShake: "The intensity of the screen shake upon landing.",
+  tripleJumpTwirlingWhen: "At what height/point the twirl activates during a triple jump.",
+  disableTwirlingLand: "If enabled, you won't do the 'spinning land' animation after twirling.",
+    
+  "dive_y_vel": "The initial upward/downward force when starting a dive.",
+    "dive_velocity": "Base horizontal thrust multiplier for the dive.",
+    "dive_max_velocity": "The maximum speed allowed during a dive state.",
+
+dive_angle_speed: "How fast the character can rotate/change direction while diving.",
+all_jumps_angle_speed: "Rotation speed applied to all jumps.",
+basic_jump_angle_speed: "Rotation speed specifically for the basic jump.",
+special_jump_angle_speed: "Rotation speed specifically for special jumps.",
+special_triple_jump_on: "Enable or disable the special triple jump feature.",
+disable_special_triple_jump_bounce: "Prevents bouncing off surfaces after a special triple jump.",
+single_jump_animation: "Animation used for single jumps. Default or special style.",
+triple_jump_animation: "Animation used for triple jumps. Default, special, or special_v2 style.",
+},
   },
   
   es: {
+    animation: "Animación",
+      single_jump_animation: "Animación de Salto Simple",
+  triple_jump_animation: "Animación de Triple Salto",
+  dive_angle_speed: "Velocidad de Giro en Picada",
+  all_jumps_angle_speed: "Velocidad de Giro en los Saltos",
+  basic_jump_angle_speed: "Velocidad de Giro Salto Básico",
+  special_jump_angle_speed: "Velocidad de Giro Salto Especial",
+  special_triple_jump_on: "Habilitar Triple Salto Especial",
+  disable_special_triple_jump_bounce: "Desactivar Rebote de Triple Salto",
+"dive_y_vel": "Velocidad Vertical de Picado",
+  "dive_velocity": "Potencia de Picado",
+  "dive_max_velocity": "Límite de Velocidad de Picado",
+
     // Header
     title: "Easy Custom Moveset",
     subtitle: "Generador de Movesets",
@@ -300,6 +373,7 @@ export const translations = {
     specialAbilities: "Habilidades Especiales",
     sonicAbilities: "Habilidades de Sonic",
     twirling: "Giros",
+    dive: "Zambullida",
     damageResistance: "Dano y Resistencia",
     otherOptions: "Otras Opciones",
     
@@ -459,11 +533,18 @@ export const translations = {
     hideCode: "Ocultar Código",
     hideShowInstructions: "Ocultar Instrucciones de Instalación",
     showInstruction: "Mostrar Instrucciones de Instalación",
+    special_triple_jump_animation_speedup: "Aceleración de Animación del Triple Salto Especial",
     
 
     
     // Tooltips
     tooltips: {
+      special_triple_jump_animation_speedup: "Qué tan rápido se reproduce la animación",
+"dive_y_vel": "La fuerza inicial hacia arriba o abajo al comenzar un picado.",
+    "dive_velocity": "Multiplicador de empuje horizontal base para el picado.",
+    "dive_max_velocity": "La velocidad máxima permitida durante el estado de picado.",
+    "single_jump_animation": "Cambia el estilo visual de tu primer salto.",
+    "triple_jump_animation": "Cambia el estilo visual de tu tercer salto consecutivo.",
       walkingSpeed: "Que tan rapido camina tu personaje. 100% es velocidad normal.",
       swimmingSpeed: "Que tan rapido nada tu personaje. 100% es velocidad normal.",
       inAirSpeed: "Cuanto control tienes en el aire. Valores altos = mas control.",
@@ -522,10 +603,29 @@ export const translations = {
       saultubeJumpAnimation: "Cambia las animaciones de salto por una voltereta rodante.",
       killToad: "Permite atacar y eliminar a los NPCs Toad.",
       killPinkBobomb: "Permite atacar y eliminar a los Bob-ombs rosas aliados.",
+dive_angle_speed: "Qué tan rápido puede girar el personaje mientras hace un picado.",
+all_jumps_angle_speed: "Velocidad de giro aplicada a todos los saltos.",
+basic_jump_angle_speed: "Velocidad de giro para el salto básico.",
+special_jump_angle_speed: "Velocidad de giro para saltos especiales.",
+special_triple_jump_on: "Habilita o deshabilita el triple salto especial.",
+disable_special_triple_jump_bounce: "Evita el rebote después de un triple salto especial.",
     }
   },
   
   pt: {
+    "dive_y_vel": "Velocidade Vertical do Mergulho",
+  "dive_velocity": "Poder do Mergulho",
+  "dive_max_velocity": "Limite de Velocidade do Mergulho",
+        animation: "Animação",
+      single_jump_animation: "Animação de Pulo Simples",
+  triple_jump_animation: "Animação de Pulo Triplo",
+  dive_angle_speed: "Velocidade de Giro do Mergulho",
+  all_jumps_angle_speed: "Velocidade de Giro dos Pulos",
+  basic_jump_angle_speed: "Velocidade de Giro do Pulo Básico",
+  special_jump_angle_speed: "Velocidade de Giro do Pulo Especial",
+  special_triple_jump_on: "Ativar Pulo Triplo Especial",
+  disable_special_triple_jump_bounce: "Desativar Rebate do Pulo Triplo",
+
     // Header
     title: "Easy Custom Moveset",
     subtitle: "Gerador de Moveset",
@@ -549,6 +649,7 @@ export const translations = {
     specialAbilities: "Habilidades Especiais",
     sonicAbilities: "Habilidades do Sonic",
     twirling: "Giros",
+    dive: "Mergulho",
     damageResistance: "Dano e Resistencia",
     otherOptions: "Outras Opcoes",
     
@@ -709,8 +810,13 @@ export const translations = {
     hideCode: "Esconder Código",
     hideShowInstructions: "Esconder Instruções de Instalação",
     showInstruction: "Mostrar Instruções de Instalação",
+    special_triple_jump_animation_speedup: "Acelerar Animação do Salto Triplo Especial",
     // Tooltips
     tooltips: {
+      special_triple_jump_animation_speedup: "O quanto mais rápida a animação é reproduzida",
+      "dive_y_vel": "A força inicial para cima/baixo ao iniciar um mergulho.",
+    "dive_velocity": "Multiplicador base de impulso horizontal para o mergulho.",
+    "dive_max_velocity": "A velocidade máxima permitida durante o estado de mergulho.",
       walkingSpeed: "Quao rapido seu personagem anda. 100% e velocidade normal.",
       swimmingSpeed: "Quao rapido seu personagem nada. 100% e velocidade normal.",
       inAirSpeed: "Quanto controle voce tem no ar. Valores altos = mais controle.",
@@ -769,6 +875,14 @@ export const translations = {
       saultubeJumpAnimation: "Substitui animações de pulo por uma animação de rolamento.",
       killToad: "Permite atacar e derrotar os NPCs Toad.",
       killPinkBobomb: "Permite atacar e derrotar os Bob-ombs Rosa amigáveis.",
+      dive_angle_speed: "Quão rápido o personagem pode girar/mudar direção durante o mergulho.",
+all_jumps_angle_speed: "Velocidade de rotação aplicada a todos os pulos.",
+basic_jump_angle_speed: "Velocidade de rotação especificamente para o salto básico.",
+special_jump_angle_speed: "Velocidade de rotação especificamente para pulos especiais.",
+special_triple_jump_on: "Ativa ou desativa o pulo triplo especial.",
+disable_special_triple_jump_bounce: "Impede o personagem de quicar após um pulo triplo especial.",
+single_jump_animation: "Animação usada para pulos simples. Padrão ou especial.",
+triple_jump_animation: "Animação usada para pulos triplos. Padrão, especial ou special_v2.",
     }
   },
 }

@@ -66,7 +66,7 @@ export default function Home() {
       </header>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 lg:py-8 pt-8">
         {/* Hero Section */}
         <div className="mb-8 text-center">
           <h2 className="mb-2 text-2xl font-bold uppercase tracking-wide text-balance sm:text-3xl lg:text-4xl">
