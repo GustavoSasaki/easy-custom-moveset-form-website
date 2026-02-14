@@ -17,6 +17,7 @@ import type { translations } from "@/lib/translations"
 import { ImportLuaButton } from "./ImportLuaButton";
 import { SegmentedOption } from "./SegmentedOption";
 import { CharacterConfig, CONFIG_METADATA, defaultConfig } from "@/lib/config_metadata";
+import posthog from "posthog-js";
 
 type Translations = typeof translations.en
 
@@ -798,6 +799,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
 
     if (shareCommunity) {
       logEvent(luaCode);
+      posthog.capture('download', { luaCode })
     }
   }, [generateLuaCode, config.name, shareCommunity]);
 
