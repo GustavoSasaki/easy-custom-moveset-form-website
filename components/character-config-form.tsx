@@ -419,6 +419,8 @@ function AbilitySection({
   defaultOpen = false,
   advancedSettingsLabel,
   tooltip,
+  isNew,
+  hasNewSetting
 }: {
   title: string
   enabled: boolean
@@ -426,7 +428,9 @@ function AbilitySection({
   children: React.ReactNode
   defaultOpen?: boolean
   advancedSettingsLabel: string
-  tooltip?: string
+  tooltip?: string,
+  isNew?: boolean,
+  hasNewSetting?: boolean
 }) {
   const [isOpen, setIsOpen] = useState(defaultOpen)
 
@@ -435,6 +439,16 @@ function AbilitySection({
       <div className="flex items-center justify-between bg-secondary/50 p-3">
         <div className="flex items-center">
           <Label className="text-sm font-bold cursor-pointer">{title}</Label>
+          {isNew && (
+  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
+                   bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
+    New
+  </span>)}
+  {hasNewSetting && (
+  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
+                   bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
+    New Setting
+  </span>)}
           <TooltipIcon tooltip={tooltip} />
         </div>
         <Switch checked={enabled} onCheckedChange={onEnabledChange} />
@@ -442,7 +456,15 @@ function AbilitySection({
       {enabled && (
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
           <CollapsibleTrigger className="flex w-full items-center justify-between border-t border-border bg-muted/30 px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-muted/50 transition-colors">
+            <div>
             {advancedSettingsLabel}
+            {hasNewSetting && (
+  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
+                   bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
+    New
+  </span>)}
+  </div>
+
             <ChevronDown className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")} />
           </CollapsibleTrigger>
           <CollapsibleContent>
@@ -1457,7 +1479,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
               </AbilitySection>
 
               {/* Ground Pound Dive */}
-              <AbilitySection title={t.groundPoundDive} enabled={config.ground_pound_dive_on} onEnabledChange={(v) => updateConfig("ground_pound_dive_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.groundPoundDive}>
+              <AbilitySection hasNewSetting title={t.groundPoundDive} enabled={config.ground_pound_dive_on} onEnabledChange={(v) => updateConfig("ground_pound_dive_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.groundPoundDive}>
                 <NumberInput label={t.yVelocity} 
                 value={config.ground_pound_dive_y_vel} 
                 onChange={(v) => updateConfig("ground_pound_dive_y_vel", v)} 
@@ -1467,7 +1489,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                 configKey="ground_pound_dive_forward_vel" />
 
 
-<ToggleOption id="ground_pound_dive_change_direction_on" label={t.ground_pound_dive_change_direction_on} 
+<ToggleOption id="ground_pound_dive_change_direction_on" label={t.ground_pound_dive_change_direction_on}  isNew
 checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => updateConfig("ground_pound_dive_change_direction_on", v)}
  tooltip={t.tooltips?.ground_pound_dive_change_direction_on} />
 
