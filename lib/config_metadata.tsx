@@ -145,6 +145,7 @@ export interface CharacterConfig {
   // Resistances
   disable_burning: boolean
   disable_damage: boolean
+  mushroom_allergy: boolean
   disable_breath_heal: boolean
   disable_fall_damage: boolean
   disable_coin_heal: boolean
@@ -333,6 +334,7 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   bat_damage_multiplier: { default: 100 },
   disable_burning: { default: false },
   disable_damage: { default: false },
+  mushroom_allergy: { default: false },
   disable_breath_heal: { default: false },
   disable_fall_damage: { default: false },
   disable_coin_heal: { default: false },

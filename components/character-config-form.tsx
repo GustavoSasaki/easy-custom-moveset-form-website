@@ -786,6 +786,8 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     addIfNotDefault("triple_jump_animation")
     addIfNotDefault("special_triple_jump_animation_speedup")
 
+    addIfNotDefault("mushroom_allergy")
+
 
     lines.push(`    moveset_description = "${movesetDesc}",`)
     lines.push(`    fromInitialTable = false`)
@@ -1783,6 +1785,7 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
               <ToggleOption id="explode_on_death" label={t.explodeOnDeath} checked={config.explode_on_death} onCheckedChange={(v) => updateConfig("explode_on_death", v)} tooltip={t.tooltips?.explodeOnDeath} />
               <ToggleOption id="kill_toad" label={t.killToad} checked={config.kill_toad} onCheckedChange={(v) => updateConfig("kill_toad", v)} tooltip={t.tooltips?.killToad} />
                                                           <ToggleOption id="kill_pink_bomb" label={t.killPinkBobomb} checked={config.kill_pink_bomb_on} onCheckedChange={(v) => updateConfig("kill_pink_bomb_on", v)} tooltip={t.tooltips?.killPinkBobomb} />
+    <ToggleOption isNew id="mushroom_allergy" label={t.mushroom_allergy} checked={config.mushroom_allergy} onCheckedChange={(v) => updateConfig("mushroom_allergy", v)} tooltip={t.tooltips?.mushroom_allergy} />
 
 
 

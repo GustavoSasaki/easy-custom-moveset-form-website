@@ -113,6 +113,7 @@ export const translations = {
     saultubeJumpAnimation: "Saultube Jump Animation",
     killToad: "Kill Toad",
     killPinkBobomb: "Kill Pink Bob-omb",
+    mushroom_allergy:"Mushroom Allergy",
     
     // Moveset description
     movesetDescription: "Moveset Description",
@@ -307,6 +308,7 @@ ground_pound_dive_change_direction_on: "Ground Pound Dive Control Direction",
       saultubeJumpAnimation: "When doing single/double/triple jump uses saultube animation",
       killToad: "Allows your character to harm Toad NPCs.",
       killPinkBobomb: "Allows your character to harm friendly pink Bob-ombs.",
+      mushroom_allergy:"Dies when touch 1 up mushroom",
       holdWalkingSpeed: "Speed when holding the 'Walk' button (usually slow walk).",
   crawlingSpeed: "Speed while crawling on the ground.",
   groundedSlowingSpeed: "How quickly you lose speed while sliding or stopping on ground.",
@@ -450,6 +452,7 @@ triple_jump_animation: "Animation used for triple jumps. Default, special, or sp
     saultubeJumpAnimation: "Animacion de Salto Saultube",
     killToad: "Matar a Toad",
     killPinkBobomb: "Matar Bob-omb Rosa",
+    mushroom_allergy:"alergia a los hongos",
     
     // Moveset description
     optional: "opcional",
@@ -607,6 +610,7 @@ triple_jump_animation: "Animation used for triple jumps. Default, special, or sp
       saultubeJumpAnimation: "Cambia las animaciones de salto por una voltereta rodante.",
       killToad: "Permite atacar y eliminar a los NPCs Toad.",
       killPinkBobomb: "Permite atacar y eliminar a los Bob-ombs rosas aliados.",
+      mushroom_allergy:"Muere al tocar 1 hongo",
 dive_angle_speed: "Qué tan rápido puede girar el personaje mientras hace un picado.",
 all_jumps_angle_speed: "Velocidad de giro aplicada a todos los saltos.",
 basic_jump_angle_speed: "Velocidad de giro para el salto básico.",
@@ -728,6 +732,7 @@ disable_special_triple_jump_bounce: "Evita el rebote después de un triple salto
     saultubeJumpAnimation: "Animacao de Pulo Saultube",
     killToad: "Matar Toad",
     killPinkBobomb: "Matar Bob-omb Rosa",
+    mushroom_allergy:"Alergia à Cogumelos",
     
     // Moveset description
     optional: "opcional",
@@ -881,6 +886,7 @@ disable_special_triple_jump_bounce: "Evita el rebote después de un triple salto
       saultubeJumpAnimation: "Substitui animações de pulo por uma animação de rolamento.",
       killToad: "Permite atacar e derrotar os NPCs Toad.",
       killPinkBobomb: "Permite atacar e derrotar os Bob-ombs Rosa amigáveis.",
+      mushroom_allergy: "Morre quando toca cogumelo",
       dive_angle_speed: "Quão rápido o personagem pode girar/mudar direção durante o mergulho.",
 all_jumps_angle_speed: "Velocidade de rotação aplicada a todos os pulos.",
 basic_jump_angle_speed: "Velocidade de rotação especificamente para o salto básico.",
