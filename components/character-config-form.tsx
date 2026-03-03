@@ -11,7 +11,7 @@ import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
-import { Download, Sparkles, ChevronDown, HelpCircle, Check } from "lucide-react"
+import { Download, Sparkles, ChevronDown, HelpCircle, Check, ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { translations } from "@/lib/translations"
 import { ImportLuaButton } from "./ImportLuaButton";
@@ -411,6 +411,23 @@ function ToggleOption({
   )
 }
 
+function CreditBadge({ name, url }: { name: string; url: string }) {
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(e) => e.stopPropagation()}
+      className="ml-1.5 inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-semibold
+                 bg-amber-500/10 text-amber-600 border border-amber-500/20 rounded-md
+                 hover:bg-amber-500/20 transition-colors"
+    >
+      by {name}
+      <ExternalLink className="h-2.5 w-2.5" />
+    </a>
+  )
+}
+
 function AbilitySection({
   title,
   enabled,
@@ -420,7 +437,8 @@ function AbilitySection({
   advancedSettingsLabel,
   tooltip,
   isNew,
-  hasNewSetting
+  hasNewSetting,
+  credit,
 }: {
   title: string
   enabled: boolean
@@ -428,9 +446,10 @@ function AbilitySection({
   children: React.ReactNode
   defaultOpen?: boolean
   advancedSettingsLabel: string
-  tooltip?: string,
-  isNew?: boolean,
+  tooltip?: string
+  isNew?: boolean
   hasNewSetting?: boolean
+  credit?: { name: string; url: string }
 }) {
   const [isOpen, setIsOpen] = useState(defaultOpen)
 
@@ -449,6 +468,7 @@ function AbilitySection({
                    bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
     New Setting
   </span>)}
+          {credit && <CreditBadge name={credit.name} url={credit.url} />}
           <TooltipIcon tooltip={tooltip} />
         </div>
         <Switch checked={enabled} onCheckedChange={onEnabledChange} />
@@ -791,6 +811,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     if (config.chaorrin_umbrella_glide_on) {
       lines.push(`    chaorrin_umbrella_glide_on = true,`)
       addIfNotDefault("chaorrin_umbrella_animation")
+      addIfNotDefault("chaorrin_umbrella_element")
       addIfNotDefault("chaorrin_umbrella_max_timer")
       addIfNotDefault("chaorrin_umbrella_vertical_speed")
       addIfNotDefault("chaorrin_umbrella_glide_forward_speed")
@@ -1229,6 +1250,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                 advancedSettingsLabel={t.advancedSettings}
                 tooltip={t.tooltips?.umbrellaGlide}
                 isNew
+                credit={{ name: "chaorrin", url: "https://mods.sm64coopdx.com/mods/big-the-cat-and-froggy.473/" }}
               >
                 <SegmentedOption
                   label={t.chaorrin_umbrella_animation ?? "Umbrella Animation"}
@@ -1236,8 +1258,17 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                   onChange={(val) => updateConfig("chaorrin_umbrella_animation", val)}
                   t={t}
                   isNew={CONFIG_METADATA.chaorrin_umbrella_animation.isNew}
-                  options={(CONFIG_METADATA.chaorrin_umbrella_animation.options ?? ["default"]).map((opt) => ({ value: opt, labelKey: opt, isNew: true }))}
+                  options={(CONFIG_METADATA.chaorrin_umbrella_animation.options ?? ["default"]).map((opt) => ({ value: opt, labelKey: opt }))}
                   tooltip={t.tooltips?.umbrellaAnimation}
+                />
+                <SegmentedOption
+                  label={t.chaorrin_umbrella_element ?? "Element"}
+                  value={config.chaorrin_umbrella_element}
+                  onChange={(val) => updateConfig("chaorrin_umbrella_element", val)}
+                  t={t}
+                  isNew={CONFIG_METADATA.chaorrin_umbrella_element.isNew}
+                  options={(CONFIG_METADATA.chaorrin_umbrella_element.options ?? ["none"]).map((opt) => ({ value: opt, labelKey: opt }))}
+                  tooltip={t.tooltips?.umbrellaElement}
                 />
                 <NumberInput
                   label={t.chaorrin_umbrella_max_timer ?? "Max Glide Time"}
