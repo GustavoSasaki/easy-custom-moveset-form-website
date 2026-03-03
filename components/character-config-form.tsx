@@ -1235,7 +1235,8 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                   value={config.chaorrin_umbrella_animation}
                   onChange={(val) => updateConfig("chaorrin_umbrella_animation", val)}
                   t={t}
-                  options={[{ value: "default", labelKey: "default" }]}
+                  isNew={CONFIG_METADATA.chaorrin_umbrella_animation.isNew}
+                  options={(CONFIG_METADATA.chaorrin_umbrella_animation.options ?? ["default"]).map((opt) => ({ value: opt, labelKey: opt, isNew: true }))}
                   tooltip={t.tooltips?.umbrellaAnimation}
                 />
                 <NumberInput
@@ -1265,6 +1266,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                   label={t.chaorrin_umbrella_caps_foward_speed ?? "Cap Forward Speed"}
                   checked={config.chaorrin_umbrella_caps_foward_speed}
                   onCheckedChange={(v) => updateConfig("chaorrin_umbrella_caps_foward_speed", v)}
+                  isNew={CONFIG_METADATA.chaorrin_umbrella_caps_foward_speed.isNew}
                   tooltip={t.tooltips?.umbrellaCapsForwardSpeed}
                 />
               </AbilitySection>
