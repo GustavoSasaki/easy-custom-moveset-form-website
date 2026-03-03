@@ -170,6 +170,13 @@ export interface CharacterConfig {
   triple_jump_animation: string;
   special_triple_jump_animation_speedup: number;
   ground_pound_dive_change_direction_on: boolean;
+  // Umbrella Glide
+  chaorrin_umbrella_glide_on: boolean
+  chaorrin_umbrella_animation: string
+  chaorrin_umbrella_max_timer: number
+  chaorrin_umbrella_vertical_speed: number
+  chaorrin_umbrella_glide_forward_speed: number
+  chaorrin_umbrella_caps_foward_speed: boolean
   // Moveset
   moveset_description: string
 }
@@ -360,7 +367,15 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   long_jump_triple_jump_strength: { default: 100 },
   long_jump_triple_jump_add_forward_vel: { default: 0 },
   special_triple_jump_animation_speedup: { default: 0, min: 0, max: 100, step:5, isNew: true },
-  ground_pound_dive_change_direction_on: {default: false, isNew: true}
+  ground_pound_dive_change_direction_on: {default: false, isNew: true},
+
+  // --- Umbrella Glide ---
+  chaorrin_umbrella_glide_on: { default: false, isNew: true },
+  chaorrin_umbrella_animation: { default: "default", options: ["default"], isNew: true },
+  chaorrin_umbrella_max_timer: { default: 999, min: 10, max: 999, step: 10, isNew: true },
+  chaorrin_umbrella_vertical_speed: { default: 2, min: 0, max: 20, step: 1, isNew: true },
+  chaorrin_umbrella_glide_forward_speed: { default: 100, min: 0, max: 500, step: 5, isNew: true },
+  chaorrin_umbrella_caps_foward_speed: { default: true, isNew: true },
 };
 
 

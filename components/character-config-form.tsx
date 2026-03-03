@@ -787,6 +787,16 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     addIfNotDefault("special_triple_jump_animation_speedup")
 
 
+    // Umbrella Glide
+    if (config.chaorrin_umbrella_glide_on) {
+      lines.push(`    chaorrin_umbrella_glide_on = true,`)
+      addIfNotDefault("chaorrin_umbrella_animation")
+      addIfNotDefault("chaorrin_umbrella_max_timer")
+      addIfNotDefault("chaorrin_umbrella_vertical_speed")
+      addIfNotDefault("chaorrin_umbrella_glide_forward_speed")
+      addIfNotDefault("chaorrin_umbrella_caps_foward_speed")
+    }
+
     lines.push(`    moveset_description = "${movesetDesc}",`)
     lines.push(`    fromInitialTable = false`)
     lines.push("}")
@@ -1209,6 +1219,54 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
 />
                 <ToggleOption id="glide_dive_wing_cap" label={t.renderWithWingCap} checked={config.glide_dive_render_with_wing_cap} onCheckedChange={(v) => updateConfig("glide_dive_render_with_wing_cap", v)} tooltip={t.tooltips?.glideDiveWingCap} />
                 <ToggleOption id="glide_dive_disable_spin" label={t.disableSpin} checked={config.glide_dive_disable_spin} onCheckedChange={(v) => updateConfig("glide_dive_disable_spin", v)} tooltip={t.tooltips?.glideDiveDisableSpin} />
+              </AbilitySection>
+
+              {/* Umbrella Glide */}
+              <AbilitySection
+                title={t.umbrellaGlide ?? "Umbrella Glide"}
+                enabled={config.chaorrin_umbrella_glide_on}
+                onEnabledChange={(v) => updateConfig("chaorrin_umbrella_glide_on", v)}
+                advancedSettingsLabel={t.advancedSettings}
+                tooltip={t.tooltips?.umbrellaGlide}
+                isNew
+              >
+                <SegmentedOption
+                  label={t.chaorrin_umbrella_animation ?? "Umbrella Animation"}
+                  value={config.chaorrin_umbrella_animation}
+                  onChange={(val) => updateConfig("chaorrin_umbrella_animation", val)}
+                  t={t}
+                  options={[{ value: "default", labelKey: "default" }]}
+                  tooltip={t.tooltips?.umbrellaAnimation}
+                />
+                <NumberInput
+                  label={t.chaorrin_umbrella_max_timer ?? "Max Glide Time"}
+                  value={config.chaorrin_umbrella_max_timer}
+                  onChange={(v) => updateConfig("chaorrin_umbrella_max_timer", v)}
+                  configKey="chaorrin_umbrella_max_timer"
+                  tooltip={t.tooltips?.umbrellaMaxTimer}
+                />
+                <NumberInput
+                  label={t.chaorrin_umbrella_vertical_speed ?? "Vertical Descent Speed"}
+                  value={config.chaorrin_umbrella_vertical_speed}
+                  onChange={(v) => updateConfig("chaorrin_umbrella_vertical_speed", v)}
+                  configKey="chaorrin_umbrella_vertical_speed"
+                  tooltip={t.tooltips?.umbrellaVerticalSpeed}
+                />
+                <NumberInput
+                  label={t.chaorrin_umbrella_glide_forward_speed ?? "Glide Forward Speed"}
+                  value={config.chaorrin_umbrella_glide_forward_speed}
+                  onChange={(v) => updateConfig("chaorrin_umbrella_glide_forward_speed", v)}
+                  configKey="chaorrin_umbrella_glide_forward_speed"
+                  suffix="%"
+                  tooltip={t.tooltips?.umbrellaForwardSpeed}
+                />
+                <ToggleOption
+                  id="umbrella_caps_forward_speed"
+                  label={t.chaorrin_umbrella_caps_foward_speed ?? "Cap Forward Speed"}
+                  checked={config.chaorrin_umbrella_caps_foward_speed}
+                  onCheckedChange={(v) => updateConfig("chaorrin_umbrella_caps_foward_speed", v)}
+                  tooltip={t.tooltips?.umbrellaCapsForwardSpeed}
+                />
               </AbilitySection>
 
               {/* Ground Pound Jump */}
