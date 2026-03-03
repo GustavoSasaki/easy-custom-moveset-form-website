@@ -11,7 +11,7 @@ import { Slider } from "@/components/ui/slider"
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
-import { Download, Sparkles, ChevronDown, HelpCircle, Check } from "lucide-react"
+import { Download, Sparkles, ChevronDown, HelpCircle, Check, ExternalLink } from "lucide-react"
 import { cn } from "@/lib/utils"
 import type { translations } from "@/lib/translations"
 import { ImportLuaButton } from "./ImportLuaButton";
@@ -148,7 +148,7 @@ const presets: { name: string; config: Partial<CharacterConfig> }[] = [
   {
     name: "Default (Mario)",
     config: {
-      moveset_description: "Default moveset",
+      moveset_description: "",
     },
   },
   {
@@ -411,6 +411,26 @@ function ToggleOption({
   )
 }
 
+
+
+
+function CreditBadge({ name, url }: { name: string; url: string }) {
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(e) => e.stopPropagation()}
+      className="ml-1 inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[13px] tracking-tighter 
+                 bg-amber-500/10 text-amber-700 border border-amber-500/20 rounded-md
+                 hover:bg-amber-500/20 transition-colors font-bold"
+    >
+      Made by {name}
+      <ExternalLink className="h-2.5 w-2.5" />
+    </a>
+  )
+}
+
 function AbilitySection({
   title,
   enabled,
@@ -420,7 +440,8 @@ function AbilitySection({
   advancedSettingsLabel,
   tooltip,
   isNew,
-  hasNewSetting
+  hasNewSetting,
+  credit,
 }: {
   title: string
   enabled: boolean
@@ -428,9 +449,10 @@ function AbilitySection({
   children: React.ReactNode
   defaultOpen?: boolean
   advancedSettingsLabel: string
-  tooltip?: string,
-  isNew?: boolean,
+  tooltip?: string
+  isNew?: boolean
   hasNewSetting?: boolean
+  credit?: { name: string; url: string }
 }) {
   const [isOpen, setIsOpen] = useState(defaultOpen)
 
@@ -449,6 +471,7 @@ function AbilitySection({
                    bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
     New Setting
   </span>)}
+          {credit && <CreditBadge name={credit.name} url={credit.url} />}
           <TooltipIcon tooltip={tooltip} />
         </div>
         <Switch checked={enabled} onCheckedChange={onEnabledChange} />
@@ -786,8 +809,16 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     addIfNotDefault("triple_jump_animation")
     addIfNotDefault("special_triple_jump_animation_speedup")
 
-    addIfNotDefault("mushroom_allergy")
 
+    // Umbrella Glide
+    if (config.chaorrin_umbrella_glide_on) {
+      lines.push(`    chaorrin_umbrella_glide_on = true,`)
+      addIfNotDefault("chaorrin_umbrella_animation")
+      addIfNotDefault("chaorrin_umbrella_max_timer")
+      addIfNotDefault("chaorrin_umbrella_vertical_speed")
+      addIfNotDefault("chaorrin_umbrella_glide_forward_speed")
+      addIfNotDefault("chaorrin_umbrella_caps_foward_speed")
+    }
 
     lines.push(`    moveset_description = "${movesetDesc}",`)
     lines.push(`    fromInitialTable = false`)
@@ -1092,7 +1123,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                 suffix="%" tooltip={t.tooltips?.sideFlipStrength} />
 
 
-                    <AdvancedCollapsible isNew label={t.advancedSettings || "Advanced Settings"} >
+                    <AdvancedCollapsible label={t.advancedSettings || "Advanced Settings"} >
       <>
                                         <NumberInput
   label={t.longJumpVelMultiplier}
@@ -1136,7 +1167,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                     checked={config.special_triple_jump_on} 
                     onCheckedChange={(v) => updateConfig("special_triple_jump_on", v)}
                      tooltip={t.tooltips?.special_triple_jump_on} 
-                     isNew
+                    
                      />
 
                                          <ToggleOption id="disable_special_triple_jump_bounce" 
@@ -1144,7 +1175,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                     checked={config.disable_special_triple_jump_bounce} 
                     onCheckedChange={(v) => updateConfig("disable_special_triple_jump_bounce", v)}
                      tooltip={t.tooltips?.disable_special_triple_jump_bounce}
-                     isNew 
+                     
                      />
 
 
@@ -1211,6 +1242,57 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
 />
                 <ToggleOption id="glide_dive_wing_cap" label={t.renderWithWingCap} checked={config.glide_dive_render_with_wing_cap} onCheckedChange={(v) => updateConfig("glide_dive_render_with_wing_cap", v)} tooltip={t.tooltips?.glideDiveWingCap} />
                 <ToggleOption id="glide_dive_disable_spin" label={t.disableSpin} checked={config.glide_dive_disable_spin} onCheckedChange={(v) => updateConfig("glide_dive_disable_spin", v)} tooltip={t.tooltips?.glideDiveDisableSpin} />
+              </AbilitySection>
+
+              {/* Umbrella Glide */}
+              <AbilitySection
+                title={t.umbrellaGlide ?? "Umbrella Glide"}
+                enabled={config.chaorrin_umbrella_glide_on}
+                onEnabledChange={(v) => updateConfig("chaorrin_umbrella_glide_on", v)}
+                advancedSettingsLabel={t.advancedSettings}
+                tooltip={t.tooltips?.umbrellaGlide}
+                isNew
+                credit={{ name: "chaorrin", url: "https://mods.sm64coopdx.com/mods/big-the-cat-and-froggy.473/" }}
+              >
+                <SegmentedOption
+                  label={t.chaorrin_umbrella_animation ?? "Umbrella Animation"}
+                  value={config.chaorrin_umbrella_animation}
+                  onChange={(val) => updateConfig("chaorrin_umbrella_animation", val)}
+                  t={t}
+                  isNew={CONFIG_METADATA.chaorrin_umbrella_animation.isNew}
+                  options={(CONFIG_METADATA.chaorrin_umbrella_animation.options ?? ["default"]).map((opt) => ({ value: opt, labelKey: opt }))}
+                  tooltip={t.tooltips?.umbrellaAnimation}
+                />
+                <NumberInput
+                  label={t.chaorrin_umbrella_max_timer ?? "Max Glide Time"}
+                  value={config.chaorrin_umbrella_max_timer}
+                  onChange={(v) => updateConfig("chaorrin_umbrella_max_timer", v)}
+                  configKey="chaorrin_umbrella_max_timer"
+                  tooltip={t.tooltips?.umbrellaMaxTimer}
+                />
+                <NumberInput
+                  label={t.chaorrin_umbrella_vertical_speed ?? "Vertical Descent Speed"}
+                  value={config.chaorrin_umbrella_vertical_speed}
+                  onChange={(v) => updateConfig("chaorrin_umbrella_vertical_speed", v)}
+                  configKey="chaorrin_umbrella_vertical_speed"
+                  tooltip={t.tooltips?.umbrellaVerticalSpeed}
+                />
+                <NumberInput
+                  label={t.chaorrin_umbrella_glide_forward_speed ?? "Glide Forward Speed"}
+                  value={config.chaorrin_umbrella_glide_forward_speed}
+                  onChange={(v) => updateConfig("chaorrin_umbrella_glide_forward_speed", v)}
+                  configKey="chaorrin_umbrella_glide_forward_speed"
+                  suffix="%"
+                  tooltip={t.tooltips?.umbrellaForwardSpeed}
+                />
+                <ToggleOption
+                  id="umbrella_caps_forward_speed"
+                  label={t.chaorrin_umbrella_caps_foward_speed ?? "Cap Forward Speed"}
+                  checked={config.chaorrin_umbrella_caps_foward_speed}
+                  onCheckedChange={(v) => updateConfig("chaorrin_umbrella_caps_foward_speed", v)}
+                  isNew={CONFIG_METADATA.chaorrin_umbrella_caps_foward_speed.isNew}
+                  tooltip={t.tooltips?.umbrellaCapsForwardSpeed}
+                />
               </AbilitySection>
 
               {/* Ground Pound Jump */}
@@ -1481,7 +1563,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
               </AbilitySection>
 
               {/* Ground Pound Dive */}
-              <AbilitySection hasNewSetting title={t.groundPoundDive} enabled={config.ground_pound_dive_on} onEnabledChange={(v) => updateConfig("ground_pound_dive_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.groundPoundDive}>
+              <AbilitySection title={t.groundPoundDive} enabled={config.ground_pound_dive_on} onEnabledChange={(v) => updateConfig("ground_pound_dive_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.groundPoundDive}>
                 <NumberInput label={t.yVelocity} 
                 value={config.ground_pound_dive_y_vel} 
                 onChange={(v) => updateConfig("ground_pound_dive_y_vel", v)} 
@@ -1491,7 +1573,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                 configKey="ground_pound_dive_forward_vel" />
 
 
-<ToggleOption id="ground_pound_dive_change_direction_on" label={t.ground_pound_dive_change_direction_on}  isNew
+<ToggleOption id="ground_pound_dive_change_direction_on" label={t.ground_pound_dive_change_direction_on}  
 checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => updateConfig("ground_pound_dive_change_direction_on", v)}
  tooltip={t.tooltips?.ground_pound_dive_change_direction_on} />
 
@@ -1805,11 +1887,11 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
   value={config.single_jump_animation}
   onChange={(val) => setConfig({ ...config, single_jump_animation: val })}
   t={t} // Pass the function down
-  isNew
+
   options={[
-    { value: "default", labelKey: "default", isNew: true },
-    { value: "special", labelKey: "special", isNew: true },
-    { value: "special_v2", labelKey: "special_V2", isNew: true },
+    { value: "default", labelKey: "default",  },
+    { value: "special", labelKey: "special",  },
+    { value: "special_v2", labelKey: "special_V2",  },
   ]}
   tooltip={t.tooltips.single_jump_animation}
 />
@@ -1820,16 +1902,15 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
   value={config.triple_jump_animation}
   onChange={(val) => setConfig({ ...config, triple_jump_animation: val })}
   t={t} // Pass the function down
-  isNew
   options={[
-    { value: "default", labelKey: "default", isNew: true },
-    { value: "special", labelKey: "special", isNew: true },
-    { value: "special_v2", labelKey: "special_V2", isNew: true },
+    { value: "default", labelKey: "default",},
+    { value: "special", labelKey: "special", },
+    { value: "special_v2", labelKey: "special_V2", },
   ]}
   tooltip={t.tooltips.triple_jump_animation}
 />
 
-<AdvancedCollapsible label={t.advancedSettings || "Advanced Settings"} isNew >
+<AdvancedCollapsible label={t.advancedSettings || "Advanced Settings"}  >
 <NumberInput
 label={t.special_triple_jump_animation_speedup}
 value={config.special_triple_jump_animation_speedup}

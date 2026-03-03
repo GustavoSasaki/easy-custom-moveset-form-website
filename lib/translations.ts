@@ -225,6 +225,14 @@ disableTwirlingLand: "Disable Twirling Land",
 special_triple_jump_animation_speedup:"Special Triple Animation Speed up",
 ground_pound_dive_change_direction_on: "Ground Pound Dive Control Direction",
     
+    // Umbrella Glide
+    umbrellaGlide: "Umbrella Glide",
+    chaorrin_umbrella_animation: "Umbrella Animation",
+    chaorrin_umbrella_max_timer: "Max Glide Time",
+    chaorrin_umbrella_vertical_speed: "Vertical Descent Speed",
+    chaorrin_umbrella_glide_forward_speed: "Glide Forward Speed",
+    chaorrin_umbrella_caps_foward_speed: "Cap Forward Speed",
+
     // Tooltips - Add your descriptions here
     tooltips: {
       special_triple_jump_animation_speedup: "How much faster the animation plays",
@@ -336,6 +344,13 @@ special_triple_jump_on: "Enable or disable the special triple jump feature.",
 disable_special_triple_jump_bounce: "Prevents bouncing off surfaces after a special triple jump.",
 single_jump_animation: "Animation used for single jumps. Default or special style.",
 triple_jump_animation: "Animation used for triple jumps. Default, special, or special_v2 style.",
+      umbrellaGlide: "Enables a slow descent glide using an umbrella. Hold the jump button in the air to activate.",
+      umbrellaAnimation: "The animation played while umbrella gliding.",
+      umbrellaElement: "Element applied to the umbrella glide attack. Affects what type of damage or effect enemies receive on contact.",
+      umbrellaMaxTimer: "Maximum time you can umbrella glide before touching the ground. Set to 999 for unlimited.",
+      umbrellaVerticalSpeed: "How fast you descend while umbrella gliding. Uses raw units.",
+      umbrellaForwardSpeed: "Horizontal speed while umbrella gliding. Uses toPercent multiplier.",
+      umbrellaCapsForwardSpeed: "When enabled, caps horizontal velocity to 20 during umbrella glide.",
 },
   },
   
@@ -540,8 +555,14 @@ triple_jump_animation: "Animation used for triple jumps. Default, special, or sp
     showInstruction: "Mostrar Instrucciones de Instalación",
     special_triple_jump_animation_speedup: "Aceleración de Animación del Triple Salto Especial",
     ground_pound_dive_change_direction_on: "Control de dirección del clavado tras culatazo",
-    
 
+    // Umbrella Glide
+    umbrellaGlide: "Planeo con Paraguas",
+    chaorrin_umbrella_animation: "Animación del Paraguas",
+    chaorrin_umbrella_max_timer: "Tiempo Máximo de Planeo",
+    chaorrin_umbrella_vertical_speed: "Velocidad de Descenso Vertical",
+    chaorrin_umbrella_glide_forward_speed: "Velocidad de Avance al Planear",
+    chaorrin_umbrella_caps_foward_speed: "Limitar Velocidad Frontal",
     
     // Tooltips
     tooltips: {
@@ -617,6 +638,12 @@ basic_jump_angle_speed: "Velocidad de giro para el salto básico.",
 special_jump_angle_speed: "Velocidad de giro para saltos especiales.",
 special_triple_jump_on: "Habilita o deshabilita el triple salto especial.",
 disable_special_triple_jump_bounce: "Evita el rebote después de un triple salto especial.",
+      umbrellaGlide: "Activa un planeo lento usando un paraguas. Mantén el botón de salto en el aire para activarlo.",
+      umbrellaAnimation: "La animación reproducida mientras planeas con el paraguas.",
+      umbrellaMaxTimer: "Tiempo máximo de planeo con paraguas. Pon 999 para ilimitado.",
+      umbrellaVerticalSpeed: "Qué tan rápido desciende al planear con el paraguas.",
+      umbrellaForwardSpeed: "Velocidad horizontal durante el planeo con paraguas.",
+      umbrellaCapsForwardSpeed: "Cuando está activado, limita la velocidad horizontal a 20 durante el planeo.",
     }
   },
   
@@ -821,6 +848,15 @@ disable_special_triple_jump_bounce: "Evita el rebote después de un triple salto
     showInstruction: "Mostrar Instruções de Instalação",
     special_triple_jump_animation_speedup: "Acelerar Animação do Salto Triplo Especial",
     ground_pound_dive_change_direction_on:"Controle de direção do mergulho após ground pound",
+
+    // Umbrella Glide
+    umbrellaGlide: "Planar com Guarda-chuva",
+    chaorrin_umbrella_animation: "Animação do Guarda-chuva",
+    chaorrin_umbrella_max_timer: "Tempo Máximo de Planagem",
+    chaorrin_umbrella_vertical_speed: "Velocidade de Descida Vertical",
+    chaorrin_umbrella_glide_forward_speed: "Velocidade de Avanço ao Planar",
+    chaorrin_umbrella_caps_foward_speed: "Limitar Velocidade Frontal",
+
     // Tooltips
     tooltips: {
       ground_pound_dive_change_direction_on:"Permite mudar o ângulo após o mergulho depois do ground pound",
@@ -895,6 +931,12 @@ special_triple_jump_on: "Ativa ou desativa o pulo triplo especial.",
 disable_special_triple_jump_bounce: "Impede o personagem de quicar após um pulo triplo especial.",
 single_jump_animation: "Animação usada para pulos simples. Padrão ou especial.",
 triple_jump_animation: "Animação usada para pulos triplos. Padrão, especial ou special_v2.",
+      umbrellaGlide: "Ativa uma planagem lenta usando um guarda-chuva. Segure o botão de pulo no ar para ativar.",
+      umbrellaAnimation: "A animação reproduzida durante a planagem com guarda-chuva.",
+      umbrellaMaxTimer: "Tempo máximo de planagem com guarda-chuva. Coloque 999 para ilimitado.",
+      umbrellaVerticalSpeed: "Quão rápido você desce durante a planagem com guarda-chuva.",
+      umbrellaForwardSpeed: "Velocidade horizontal durante a planagem com guarda-chuva.",
+      umbrellaCapsForwardSpeed: "Quando ativado, limita a velocidade horizontal a 20 durante a planagem.",
     }
   },
 }

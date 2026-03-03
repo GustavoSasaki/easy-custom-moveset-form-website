@@ -173,6 +173,13 @@ export interface CharacterConfig {
   ground_pound_dive_change_direction_on: boolean;
   // Moveset
   moveset_description: string
+  chaorrin_umbrella_glide_on: boolean
+  chaorrin_umbrella_animation: string
+  chaorrin_umbrella_max_timer:number
+  chaorrin_umbrella_vertical_speed:number
+  chaorrin_umbrella_glide_forward_speed:number
+  chaorrin_umbrella_caps_forward_speed:boolean
+  chaorrin_umbrella_caps_foward_speed: boolean
 }
 
 export type Configtype = { 
@@ -212,7 +219,7 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   dive_y_vel: { default: 0, min: -20, max: 40, step: 1 },
   dive_velocity: { default: 100, min: 50, max: 250, step: 1 },
   dive_max_velocity: { default: 100, min: 50, max: 250, step: 1 },
-  dive_angle_speed: { default: 0, min: 0, max: 100, step: 1, isNew: true },
+  dive_angle_speed: { default: 0, min: 0, max: 100, step: 1 },
   always_dive_first: { default: false },
   ground_pound_dive_on: { default: false },
   ground_pound_dive_y_vel: { default: 0, min: -20, max: 40, step: 1 },
@@ -351,18 +358,24 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   kill_toad: { default: false },
   kill_pink_bomb_on: { default: false },
   moveset_description: { default: "" },
-  all_jumps_angle_speed: { default: 0, min: 0, max: 100, step: 1, isNew: true },
-  basic_jump_angle_speed: { default: 0, min: 0, max: 100, step: 1, isNew: true },
-  special_jump_angle_speed: { default: 0, min: 0, max: 100, step: 1, isNew: true },
-  special_triple_jump_on: { default: false, options: ["true", "false"], isNew: true },
-  disable_special_triple_jump_bounce: { default: false, options: ["true", "false"], isNew: true },
-  single_jump_animation: { default: "default", options: ["default", "special"], isNew: true },
-  triple_jump_animation: { default: "default", options: ["default", "special", "special_v2"], isNew: true },
+  all_jumps_angle_speed: { default: 0, min: 0, max: 100, step: 1 },
+  basic_jump_angle_speed: { default: 0, min: 0, max: 100, step: 1 },
+  special_jump_angle_speed: { default: 0, min: 0, max: 100, step: 1 },
+  special_triple_jump_on: { default: false, options: ["true", "false"] },
+  disable_special_triple_jump_bounce: { default: false, options: ["true", "false"] },
+  single_jump_animation: { default: "default", options: ["default", "special"] },
+  triple_jump_animation: { default: "default", options: ["default", "special", "special_v2"] },
   long_jump_triple_jump_on: { default: false },
   long_jump_triple_jump_strength: { default: 100 },
   long_jump_triple_jump_add_forward_vel: { default: 0 },
-  special_triple_jump_animation_speedup: { default: 0, min: 0, max: 100, step:5, isNew: true },
-  ground_pound_dive_change_direction_on: {default: false, isNew: true}
+  special_triple_jump_animation_speedup: { default: 0, min: 0, max: 100, step:5 },
+  ground_pound_dive_change_direction_on: {default: false},
+  chaorrin_umbrella_glide_on: {default: false},
+  chaorrin_umbrella_animation: {default: "default",options: ["default", "hang ceiling", "pole grab","t pose"],isNew:true},
+  chaorrin_umbrella_max_timer: { default: 999, min: 10, max: 999, step: 10, isNew: true },
+  chaorrin_umbrella_vertical_speed: { default: 2, min: -40, max: 40, step: 1, isNew: true },
+  chaorrin_umbrella_glide_forward_speed: { default: 100, min: 0, max: 500, step: 5, isNew: true },
+  chaorrin_umbrella_caps_foward_speed: { default: true, isNew: true },
 };
 
 
