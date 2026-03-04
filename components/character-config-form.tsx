@@ -455,23 +455,25 @@ function AbilitySection({
 
   return (
     <div className="rounded-lg border-2 border-border overflow-hidden">
-      <div className="flex items-center justify-between bg-secondary/50 p-3">
-        <div className="flex items-center">
-          <Label className="text-sm font-bold cursor-pointer">{title}</Label>
+      <div className="flex items-center gap-2 bg-secondary/50 p-3">
+        <div className="flex flex-wrap items-center gap-x-1 gap-y-1 flex-1 min-w-0">
+          <Label className="text-sm font-bold cursor-pointer leading-tight">{title}</Label>
           {isNew && (
-  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
-                   bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
-    New
-  </span>)}
-  {hasNewSetting && (
-  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
-                   bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
-    New Setting
-  </span>)}
+            <span className="px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter
+                             bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
+              New
+            </span>
+          )}
+          {hasNewSetting && (
+            <span className="px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter
+                             bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
+              New Setting
+            </span>
+          )}
           {credit && <CreditBadge name={credit.name} url={credit.url} />}
           <TooltipIcon tooltip={tooltip} />
         </div>
-        <Switch checked={enabled} onCheckedChange={onEnabledChange} />
+        <Switch className="shrink-0" checked={enabled} onCheckedChange={onEnabledChange} />
       </div>
       {enabled && (
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
