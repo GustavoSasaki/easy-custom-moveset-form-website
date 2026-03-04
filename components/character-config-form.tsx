@@ -421,11 +421,28 @@ function CreditBadge({ name, url }: { name: string; url: string }) {
       target="_blank"
       rel="noopener noreferrer"
       onClick={(e) => e.stopPropagation()}
-      className="ml-1 inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[13px] tracking-tighter 
+      className="ml-1 inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[13px] md:text-[15px] tracking-tighter 
                  bg-amber-500/10 text-amber-700 border border-amber-500/20 rounded-md
                  hover:bg-amber-500/20 transition-colors font-bold"
     >
       Made by {name}
+      <ExternalLink className="h-2.5 w-2.5" />
+    </a>
+  )
+}
+
+function RequiredModBagde({ name, url }: { name: string; url: string }) {
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(e) => e.stopPropagation()}
+      className="ml-1 inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[13px] md:text-[15px] tracking-tighter 
+                 bg-amber-500/10 text-amber-700 border border-amber-500/20 rounded-md
+                 hover:bg-amber-500/20 transition-colors font-bold"
+    >
+      Requires {name} Mod
       <ExternalLink className="h-2.5 w-2.5" />
     </a>
   )
@@ -442,6 +459,7 @@ function AbilitySection({
   isNew,
   hasNewSetting,
   credit,
+  requiredMod
 }: {
   title: string
   enabled: boolean
@@ -453,28 +471,38 @@ function AbilitySection({
   isNew?: boolean
   hasNewSetting?: boolean
   credit?: { name: string; url: string }
+  requiredMod?: { name: string; url: string }
 }) {
   const [isOpen, setIsOpen] = useState(defaultOpen)
 
   return (
     <div className="rounded-lg border-2 border-border overflow-hidden">
-      <div className="flex items-center justify-between bg-secondary/50 p-3">
-        <div className="flex items-center">
-          <Label className="text-sm font-bold cursor-pointer">{title}</Label>
+      <div className="flex items-center gap-2 bg-secondary/50 p-3">
+        <div className="flex flex-wrap items-center gap-x-1 gap-y-1 flex-1 min-w-0">
+          <Label className="text-sm font-bold cursor-pointer leading-tight">{title}</Label>
           {isNew && (
-  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
-                   bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
-    New
-  </span>)}
-  {hasNewSetting && (
-  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
-                   bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
-    New Setting
-  </span>)}
-          {credit && <CreditBadge name={credit.name} url={credit.url} />}
+            <span className="px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter
+                             bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
+              New
+            </span>
+          )}
+          {hasNewSetting && (
+            <span className="px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter
+                             bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
+              New Setting
+            </span>
+          )}
+          
+          <div className={`${credit && requiredMod ? "hidden md:flex" : "flex"} gap-2`}>
+            {credit && <CreditBadge name={credit.name} url={credit.url} />}
+            {requiredMod && <RequiredModBagde name={requiredMod.name} url={requiredMod.url} />}
+          </div>
+
+            {credit && requiredMod  && <div className="md:hidden"><RequiredModBagde name={credit.name+"'s "+requiredMod.name} url={requiredMod.url} /></div>}
+          
           <TooltipIcon tooltip={tooltip} />
         </div>
-        <Switch checked={enabled} onCheckedChange={onEnabledChange} />
+        <Switch className="shrink-0" checked={enabled} onCheckedChange={onEnabledChange} />
       </div>
       {enabled && (
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -798,6 +826,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     addIfNotDefault("kill_toad")
     addIfNotDefault("kill_pink_bomb_on")
 
+    addIfNotDefault("mushroom_allergy")
 
     addIfNotDefault("dive_angle_speed")
     addIfNotDefault("all_jumps_angle_speed")
@@ -809,6 +838,17 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     addIfNotDefault("triple_jump_animation")
     addIfNotDefault("special_triple_jump_animation_speedup")
 
+
+    // Honey Queen Fly
+    if (config.honeyQueen_fly_on) {
+      lines.push(`    honeyQueen_fly_on = true,`)
+      addIfNotDefault("honeyQueen_fly_render_cap")
+      addIfNotDefault("honeyQueen_max_fly_timer")
+      addIfNotDefault("honeyQueen_render_hud")
+      addIfNotDefault("honeyQueen_fly_animation")
+      addIfNotDefault("honeyQueen_fly_forward_speed")
+      addIfNotDefault("honeyQueen_fly_strength")
+    }
 
     // Umbrella Glide
     if (config.chaorrin_umbrella_glide_on) {
@@ -1244,6 +1284,67 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                 <ToggleOption id="glide_dive_disable_spin" label={t.disableSpin} checked={config.glide_dive_disable_spin} onCheckedChange={(v) => updateConfig("glide_dive_disable_spin", v)} tooltip={t.tooltips?.glideDiveDisableSpin} />
               </AbilitySection>
 
+              {/* Honey Queen Fly */}
+              <AbilitySection
+                title={t.honeyQueenFly ?? "Honey Queen Fly"}
+                enabled={config.honeyQueen_fly_on}
+                onEnabledChange={(v) => updateConfig("honeyQueen_fly_on", v)}
+                advancedSettingsLabel={t.advancedSettings}
+                tooltip={t.tooltips?.honeyQueenFly}
+                isNew
+                credit={{ name: "Melziroff", url: "https://mods.sm64coopdx.com/mods/cs-honey-queen.392/" }}
+                requiredMod={{ name: "Honey Queen", url: "https://mods.sm64coopdx.com/mods/big-the-cat-and-froggy.473/" }}
+              >
+                <ToggleOption
+                  id="honeyQueen_fly_render_cap"
+                  label={t.honeyQueen_fly_render_cap ?? "Render Wing Cap"}
+                  checked={config.honeyQueen_fly_render_cap}
+                  onCheckedChange={(v) => updateConfig("honeyQueen_fly_render_cap", v)}
+                  isNew={CONFIG_METADATA.honeyQueen_fly_render_cap.isNew}
+                  tooltip={t.tooltips?.honeyQueenFlyRenderCap}
+                />
+                <ToggleOption
+                  id="honeyQueen_render_hud"
+                  label={t.honeyQueen_render_hud ?? "Render HUD"}
+                  checked={config.honeyQueen_render_hud}
+                  onCheckedChange={(v) => updateConfig("honeyQueen_render_hud", v)}
+                  isNew={CONFIG_METADATA.honeyQueen_render_hud.isNew}
+                  tooltip={t.tooltips?.honeyQueenRenderHud}
+                />
+                <NumberInput
+                  label={t.honeyQueen_max_fly_timer ?? "Max Fly Time"}
+                  value={config.honeyQueen_max_fly_timer}
+                  onChange={(v) => updateConfig("honeyQueen_max_fly_timer", v)}
+                  configKey="honeyQueen_max_fly_timer"
+                  tooltip={t.tooltips?.honeyQueenMaxFlyTimer}
+                />
+                <SegmentedOption
+                  label={t.honeyQueen_fly_animation ?? "Fly Animation"}
+                  value={config.honeyQueen_fly_animation}
+                  onChange={(val) => updateConfig("honeyQueen_fly_animation", val)}
+                  t={t}
+                  isNew={CONFIG_METADATA.honeyQueen_fly_animation.isNew}
+                  options={(CONFIG_METADATA.honeyQueen_fly_animation.options ?? ["default"]).map((opt) => ({ value: opt, labelKey: opt }))}
+                  tooltip={t.tooltips?.honeyQueenFlyAnimation}
+                />
+                <NumberInput
+                  label={t.honeyQueen_fly_forward_speed ?? "Forward Speed"}
+                  value={config.honeyQueen_fly_forward_speed}
+                  onChange={(v) => updateConfig("honeyQueen_fly_forward_speed", v)}
+                  configKey="honeyQueen_fly_forward_speed"
+                  suffix="%"
+                  tooltip={t.tooltips?.honeyQueenFlyForwardSpeed}
+                />
+                <NumberInput
+                  label={t.honeyQueen_fly_strength ?? "Fly Strength"}
+                  value={config.honeyQueen_fly_strength}
+                  onChange={(v) => updateConfig("honeyQueen_fly_strength", v)}
+                  configKey="honeyQueen_fly_strength"
+                  suffix="%"
+                  tooltip={t.tooltips?.honeyQueenFlyStrength}
+                />
+              </AbilitySection>
+
               {/* Umbrella Glide */}
               <AbilitySection
                 title={t.umbrellaGlide ?? "Umbrella Glide"}
@@ -1252,7 +1353,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
                 advancedSettingsLabel={t.advancedSettings}
                 tooltip={t.tooltips?.umbrellaGlide}
                 isNew
-                credit={{ name: "chaorrin", url: "https://mods.sm64coopdx.com/mods/big-the-cat-and-froggy.473/" }}
+                credit={{ name: "Chaorrin", url: "https://mods.sm64coopdx.com/mods/big-the-cat-and-froggy.473/" }}
               >
                 <SegmentedOption
                   label={t.chaorrin_umbrella_animation ?? "Umbrella Animation"}
