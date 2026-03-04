@@ -170,6 +170,14 @@ export interface CharacterConfig {
   triple_jump_animation: string;
   special_triple_jump_animation_speedup: number;
   ground_pound_dive_change_direction_on: boolean;
+  // Honey Queen Fly
+  honeyQueen_fly_on: boolean
+  honeyQueen_fly_render_cap: boolean
+  honeyQueen_max_fly_timer: number
+  honeyQueen_render_hud: boolean
+  honeyQueen_fly_animation: string
+  honeyQueen_fly_forward_speed: number
+  honeyQueen_fly_strength: number
   // Umbrella Glide
   chaorrin_umbrella_glide_on: boolean
   chaorrin_umbrella_animation: string
@@ -369,6 +377,15 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   long_jump_triple_jump_add_forward_vel: { default: 0 },
   special_triple_jump_animation_speedup: { default: 0, min: 0, max: 100, step:5, isNew: true },
   ground_pound_dive_change_direction_on: {default: false, isNew: true},
+
+  // --- Honey Queen Fly ---
+  honeyQueen_fly_on: { default: false, isNew: true },
+  honeyQueen_fly_render_cap: { default: true, isNew: true },
+  honeyQueen_max_fly_timer: { default: 80, min: 10, max: 999, step: 5, isNew: true },
+  honeyQueen_render_hud: { default: false, isNew: true },
+  honeyQueen_fly_animation: { default: "honeyqueen_fly_idle", options: ["honeyqueen_fly_idle"], isNew: true },
+  honeyQueen_fly_forward_speed: { default: 100, min: 0, max: 500, step: 5, isNew: true },
+  honeyQueen_fly_strength: { default: 100, min: 0, max: 500, step: 5, isNew: true },
 
   // --- Umbrella Glide ---
   chaorrin_umbrella_glide_on: { default: false, isNew: true },

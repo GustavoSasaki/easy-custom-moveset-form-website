@@ -807,6 +807,17 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     addIfNotDefault("special_triple_jump_animation_speedup")
 
 
+    // Honey Queen Fly
+    if (config.honeyQueen_fly_on) {
+      lines.push(`    honeyQueen_fly_on = true,`)
+      addIfNotDefault("honeyQueen_fly_render_cap")
+      addIfNotDefault("honeyQueen_max_fly_timer")
+      addIfNotDefault("honeyQueen_render_hud")
+      addIfNotDefault("honeyQueen_fly_animation")
+      addIfNotDefault("honeyQueen_fly_forward_speed")
+      addIfNotDefault("honeyQueen_fly_strength")
+    }
+
     // Umbrella Glide
     if (config.chaorrin_umbrella_glide_on) {
       lines.push(`    chaorrin_umbrella_glide_on = true,`)
@@ -1240,6 +1251,65 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
 />
                 <ToggleOption id="glide_dive_wing_cap" label={t.renderWithWingCap} checked={config.glide_dive_render_with_wing_cap} onCheckedChange={(v) => updateConfig("glide_dive_render_with_wing_cap", v)} tooltip={t.tooltips?.glideDiveWingCap} />
                 <ToggleOption id="glide_dive_disable_spin" label={t.disableSpin} checked={config.glide_dive_disable_spin} onCheckedChange={(v) => updateConfig("glide_dive_disable_spin", v)} tooltip={t.tooltips?.glideDiveDisableSpin} />
+              </AbilitySection>
+
+              {/* Honey Queen Fly */}
+              <AbilitySection
+                title={t.honeyQueenFly ?? "Honey Queen Fly"}
+                enabled={config.honeyQueen_fly_on}
+                onEnabledChange={(v) => updateConfig("honeyQueen_fly_on", v)}
+                advancedSettingsLabel={t.advancedSettings}
+                tooltip={t.tooltips?.honeyQueenFly}
+                isNew
+              >
+                <ToggleOption
+                  id="honeyQueen_fly_render_cap"
+                  label={t.honeyQueen_fly_render_cap ?? "Render Wing Cap"}
+                  checked={config.honeyQueen_fly_render_cap}
+                  onCheckedChange={(v) => updateConfig("honeyQueen_fly_render_cap", v)}
+                  isNew={CONFIG_METADATA.honeyQueen_fly_render_cap.isNew}
+                  tooltip={t.tooltips?.honeyQueenFlyRenderCap}
+                />
+                <ToggleOption
+                  id="honeyQueen_render_hud"
+                  label={t.honeyQueen_render_hud ?? "Render HUD"}
+                  checked={config.honeyQueen_render_hud}
+                  onCheckedChange={(v) => updateConfig("honeyQueen_render_hud", v)}
+                  isNew={CONFIG_METADATA.honeyQueen_render_hud.isNew}
+                  tooltip={t.tooltips?.honeyQueenRenderHud}
+                />
+                <NumberInput
+                  label={t.honeyQueen_max_fly_timer ?? "Max Fly Time"}
+                  value={config.honeyQueen_max_fly_timer}
+                  onChange={(v) => updateConfig("honeyQueen_max_fly_timer", v)}
+                  configKey="honeyQueen_max_fly_timer"
+                  tooltip={t.tooltips?.honeyQueenMaxFlyTimer}
+                />
+                <SegmentedOption
+                  label={t.honeyQueen_fly_animation ?? "Fly Animation"}
+                  value={config.honeyQueen_fly_animation}
+                  onChange={(val) => updateConfig("honeyQueen_fly_animation", val)}
+                  t={t}
+                  isNew={CONFIG_METADATA.honeyQueen_fly_animation.isNew}
+                  options={(CONFIG_METADATA.honeyQueen_fly_animation.options ?? ["honeyqueen_fly_idle"]).map((opt) => ({ value: opt, labelKey: opt }))}
+                  tooltip={t.tooltips?.honeyQueenFlyAnimation}
+                />
+                <NumberInput
+                  label={t.honeyQueen_fly_forward_speed ?? "Forward Speed"}
+                  value={config.honeyQueen_fly_forward_speed}
+                  onChange={(v) => updateConfig("honeyQueen_fly_forward_speed", v)}
+                  configKey="honeyQueen_fly_forward_speed"
+                  suffix="%"
+                  tooltip={t.tooltips?.honeyQueenFlyForwardSpeed}
+                />
+                <NumberInput
+                  label={t.honeyQueen_fly_strength ?? "Fly Strength"}
+                  value={config.honeyQueen_fly_strength}
+                  onChange={(v) => updateConfig("honeyQueen_fly_strength", v)}
+                  configKey="honeyQueen_fly_strength"
+                  suffix="%"
+                  tooltip={t.tooltips?.honeyQueenFlyStrength}
+                />
               </AbilitySection>
 
               {/* Umbrella Glide */}
