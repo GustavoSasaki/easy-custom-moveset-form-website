@@ -822,8 +822,7 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     addIfNotDefault("kick_dive_on")
     addIfNotDefault("dive_kick_on")
     addIfNotDefault("dive_ground_pound_on")
-    addIfNotDefault("saultube_jump_animation")
-    addIfNotDefault("kill_toad")
+addIfNotDefault("kill_toad")
     addIfNotDefault("kill_pink_bomb_on")
 
 addIfNotDefault("mushroom_allergy")
@@ -2042,8 +2041,6 @@ value={config.special_triple_jump_animation_speedup}
 onChange={(v) => updateConfig("special_triple_jump_animation_speedup", v)}
 configKey="special_triple_jump_animation_speedup"
 />
-<ToggleOption id="saultube_anim" label={t.saultubeJumpAnimation} checked={config.saultube_jump_animation} onCheckedChange={(v) => updateConfig("saultube_jump_animation", v)} tooltip={t.tooltips?.saultubeJumpAnimation} />
-            
   </AdvancedCollapsible>
 
 

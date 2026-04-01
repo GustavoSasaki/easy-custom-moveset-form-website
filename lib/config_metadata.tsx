@@ -157,7 +157,6 @@ export interface CharacterConfig {
   kick_dive_on: boolean
   dive_kick_on: boolean
   dive_ground_pound_on: boolean
-  saultube_jump_animation: boolean
   kill_toad: boolean
   kill_pink_bomb_on: boolean,
   dive_angle_speed: number
@@ -370,7 +369,6 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   kick_dive_on: { default: false },
   dive_kick_on: { default: false },
   dive_ground_pound_on: { default: false },
-  saultube_jump_animation: { default: false },
   kill_toad: { default: false },
   kill_pink_bomb_on: { default: false },
   moveset_description: { default: "" },
