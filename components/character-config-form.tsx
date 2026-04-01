@@ -597,7 +597,9 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
 
   const generateLuaCode = useCallback(() => {
     const movesetDesc = config.moveset_description
-    const lines: string[] = ["return {", `    name = '${config.name}',`]
+    // Sanitize character name by removing double quotes to prevent Lua errors
+    const sanitizedName = config.name.replace(/"/g, "")
+    const lines: string[] = ["return {", `    name = '${sanitizedName}',`]
 
     // Helper to add non-default values
     const addIfNotDefault = (key: keyof CharacterConfig) => {

@@ -287,13 +287,13 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   glide_dive_disable_spin: { default: false },
 
   // --- Wall Slide ---
-  wall_slide_on: { default: false },
+  wall_slide_on: { default: false, isNew: true },
   wall_slide_gravity: { default: 0.5, min: 0.1, max: 2.0, step: 0.05 },
   wall_slide_max_gravity: { default: 0.26, min: 0.1, max: 1.5, step: 0.05 },
   wall_slide_jump_forward_vel: { default: 20, min: 0, max: 100, step: 1 },
   wall_slide_jump_strength: { default: 75, min: 20, max: 150, step: 1 },
   wall_slide_same_wall: { default: false },
-  wall_slide_jump_type: { default: "ACT_JUMP", options: ["ACT_JUMP", "ACT_TRIPLE_JUMP", "ACT_DIVE"] },
+  wall_slide_jump_type: { default: "ACT_JUMP", options: ["ACT_JUMP", "ACT_TRIPLE_JUMP", "ACT_DIVE"], isNew: true },
 
   // --- Air Jump ---
   in_air_jump: { default: 0, min: 0, max: 5, step: 1 },
