@@ -863,7 +863,11 @@ addIfNotDefault("mushroom_allergy")
       addIfNotDefault("chaorrin_umbrella_caps_foward_speed")
     }
 
-    lines.push(`    moveset_description = "${movesetDesc}",`)
+    // Only add moveset_description if not empty, and filter out double quotes to prevent Lua errors
+    const sanitizedDesc = movesetDesc.replace(/"/g, "")
+    if (sanitizedDesc.trim() !== "") {
+      lines.push(`    moveset_description = "${sanitizedDesc}",`)
+    }
     lines.push(`    fromInitialTable = false`)
     lines.push("}")
 
