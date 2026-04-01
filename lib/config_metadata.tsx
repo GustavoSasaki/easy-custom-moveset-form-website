@@ -82,6 +82,7 @@ export interface CharacterConfig {
   wall_slide_jump_forward_vel: number
   wall_slide_jump_strength: number
   wall_slide_same_wall: boolean
+  wall_slide_jump_type: string
   // In Air Jump
   in_air_jump: number
   in_air_jump_strength: number
@@ -292,6 +293,7 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   wall_slide_jump_forward_vel: { default: 20, min: 0, max: 100, step: 1 },
   wall_slide_jump_strength: { default: 75, min: 20, max: 150, step: 1 },
   wall_slide_same_wall: { default: false },
+  wall_slide_jump_type: { default: "ACT_JUMP", options: ["ACT_JUMP", "ACT_TRIPLE_JUMP", "ACT_DIVE"] },
 
   // --- Air Jump ---
   in_air_jump: { default: 0, min: 0, max: 5, step: 1 },

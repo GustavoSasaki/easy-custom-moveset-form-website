@@ -720,6 +720,10 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
       addIfNotDefault("wall_slide_jump_forward_vel")
       addIfNotDefault("wall_slide_jump_strength")
       addIfNotDefault("wall_slide_same_wall")
+      // Export wall_slide_jump_type as the ACT_* constant (not as string)
+      if (config.wall_slide_jump_type !== "ACT_JUMP") {
+        lines.push(`    wall_slide_jump_type = ${config.wall_slide_jump_type},`)
+      }
     }
 
     // In Air Jump
@@ -971,6 +975,9 @@ addIfNotDefault("mushroom_allergy")
     const pattern = /(\w+)\s*=\s*([^,{}]+)/g;
     let match;
 
+    // ACT_* constants that should be kept as string identifiers
+    const actConstants = ["ACT_JUMP", "ACT_TRIPLE_JUMP", "ACT_DIVE"];
+
     while ((match = pattern.exec(content)) !== null) {
       const key = match[1].trim() as keyof CharacterConfig;
       let val: any = match[2].trim();
@@ -980,6 +987,9 @@ addIfNotDefault("mushroom_allergy")
       else if (val === "false") val = false;
       else if (val.startsWith("'") || val.startsWith('"')) {
         val = val.substring(1, val.length - 1);
+      } else if (actConstants.includes(val)) {
+        // Keep ACT_* constants as string identifiers
+        val = val;
       } else if (!isNaN(Number(val))) {
         val = Number(val);
       }
@@ -1443,6 +1453,18 @@ addIfNotDefault("mushroom_allergy")
   configKey="wall_slide_jump_strength"
 />
                 <ToggleOption id="wall_slide_same_wall" label={t.sameWallJump} checked={config.wall_slide_same_wall} onCheckedChange={(v) => updateConfig("wall_slide_same_wall", v)} />
+                <SegmentedOption
+                  label={t.wallSlideJumpType}
+                  value={config.wall_slide_jump_type}
+                  onChange={(val) => setConfig({ ...config, wall_slide_jump_type: val })}
+                  t={t}
+                  options={[
+                    { value: "ACT_JUMP", labelKey: "ACT_JUMP" },
+                    { value: "ACT_TRIPLE_JUMP", labelKey: "ACT_TRIPLE_JUMP" },
+                    { value: "ACT_DIVE", labelKey: "ACT_DIVE" },
+                  ]}
+                  tooltip={t.tooltips?.wallSlideJumpType}
+                />
               </AbilitySection>
 
               {/* Yoshi Flutter */}

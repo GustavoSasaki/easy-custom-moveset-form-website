@@ -143,9 +143,10 @@ export const translations = {
     // Wall slide settings
     maxGravity: "Max Gravity",
     jumpForwardVelocity: "Jump Forward Velocity",
-    sameWallJump: "Same Wall Jump",
-    
-    // Yoshi flutter settings
+sameWallJump: "Same Wall Jump",
+    wallSlideJumpType: "Jump Type",
+  
+  // Yoshi flutter settings
     cooldown: "Cooldown",
     strengthDescending: "Strength (Descending)",
     strengthAscending: "Strength (Ascending)",
@@ -369,8 +370,9 @@ triple_jump_animation: "Animation used for triple jumps. Default, special, or sp
       umbrellaVerticalSpeed: "How fast you descend while umbrella gliding. Uses raw units.",
       umbrellaForwardSpeed: "Horizontal speed while umbrella gliding. Uses toPercent multiplier.",
       umbrellaCapsForwardSpeed: "When enabled, caps horizontal velocity to 20 during umbrella glide.",
-      hideBarrel: "When pressing Z, the character hides inside a barrel (or substitute/box).",
+      hideBarrel: "When pressing Z, the character hides inside a barrel creating a platform.",
       hideBarrelType: "The type of object the character hides in: barrel, substitute doll, or box.",
+      wallSlideJumpType: "The action type performed when jumping off a wall slide.",
 },
   },
   
@@ -514,9 +516,10 @@ mushroom_allergy:"alergia a los hongos",
     // Wall slide settings
     maxGravity: "Gravedad Maxima",
     jumpForwardVelocity: "Velocidad Frontal del Salto",
-    sameWallJump: "Salto en Misma Pared",
-    
-    // Yoshi flutter
+sameWallJump: "Salto en Misma Pared",
+  wallSlideJumpType: "Tipo de Salto",
+  
+  // Yoshi flutter
     cooldown: "Enfriamiento",
     strengthDescending: "Fuerza (Descenso)",
     strengthAscending: "Fuerza (Ascenso)",
@@ -663,8 +666,9 @@ alwaysDiveFirst: "Asegura que presionar B en el aire resulte siempre en un picad
   killToad: "Permite atacar y eliminar a los NPCs Toad.",
       killPinkBobomb: "Permite atacar y eliminar a los Bob-ombs rosas aliados.",
       mushroom_allergy:"Muere al tocar 1 hongo",
-      hideBarrel: "Al presionar Z, el personaje se esconde dentro de un barril (o sustituto/caja).",
+      hideBarrel: "Al presionar Z, el personaje se esconde dentro de un barril creando una plataforma.",
       hideBarrelType: "El tipo de objeto en el que se esconde el personaje: barril, muneco sustituto o caja.",
+      wallSlideJumpType: "El tipo de accion realizada al saltar desde un deslizamiento en pared.",
 dive_angle_speed: "Qué tan rápido puede girar el personaje mientras hace un picado.",
 all_jumps_angle_speed: "Velocidad de giro aplicada a todos los saltos.",
 basic_jump_angle_speed: "Velocidad de giro para el salto básico.",
@@ -826,9 +830,10 @@ mushroom_allergy:"Alergia à Cogumelos",
     // Wall slide settings
     maxGravity: "Gravidade Maxima",
     jumpForwardVelocity: "Velocidade Frontal do Pulo",
-    sameWallJump: "Pulo na Mesma Parede",
-
-    // Yoshi flutter settings
+sameWallJump: "Pulo na Mesma Parede",
+  wallSlideJumpType: "Tipo de Pulo",
+  
+  // Yoshi flutter settings
     cooldown: "Tempo de Espera",
     strengthDescending: "Forca (Descendo)",
     strengthAscending: "Forca (Subindo)",
@@ -974,12 +979,13 @@ alwaysDiveFirst: "Garante que apertar B no ar sempre resulte em mergulho em vez 
   killToad: "Permite atacar e derrotar os NPCs Toad.",
       killPinkBobomb: "Permite atacar e derrotar os Bob-ombs Rosa amigáveis.",
       mushroom_allergy: "Morre quando toca cogumelo",
-      hideBarrel: "Ao pressionar Z, o personagem se esconde dentro de um barril (ou substituto/caixa).",
+      hideBarrel: "Ao pressionar Z, o personagem se esconde dentro de um barril criando uma plataforma.",
       hideBarrelType: "O tipo de objeto em que o personagem se esconde: barril, boneco substituto ou caixa.",
+      wallSlideJumpType: "O tipo de acao realizada ao pular de um deslizamento na parede.",
       dive_angle_speed: "Quão rápido o personagem pode girar/mudar direção durante o mergulho.",
 all_jumps_angle_speed: "Velocidade de rotação aplicada a todos os pulos.",
 basic_jump_angle_speed: "Velocidade de rotação especificamente para o salto básico.",
-special_jump_angle_speed: "Velocidade de rotação especificamente para pulos especiais.",
+special_jump_angle_speed: "Velocidade de rotaç��o especificamente para pulos especiais.",
 special_triple_jump_on: "Ativa ou desativa o pulo triplo especial.",
 disable_special_triple_jump_bounce: "Impede o personagem de quicar após um pulo triplo especial.",
 single_jump_animation: "Animação usada para pulos simples. Padrão ou especial.",
