@@ -1311,7 +1311,7 @@ addIfNotDefault("mushroom_allergy")
                 advancedSettingsLabel={t.advancedSettings}
                 tooltip={t.tooltips?.honeyQueenFly}
                 isNew
-                credit={{ name: "Melziroff", url: "https://mods.sm64coopdx.com/mods/cs-honey-queen.392/" }}
+                credit={{ name: "Melzinoff", url: "https://mods.sm64coopdx.com/mods/cs-honey-queen.392/" }}
                 requiredMod={{ name: "Honey Queen", url: "https://mods.sm64coopdx.com/mods/big-the-cat-and-froggy.473/" }}
               >
                 <ToggleOption
