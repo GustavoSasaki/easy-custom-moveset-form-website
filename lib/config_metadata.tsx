@@ -161,6 +161,9 @@ export interface CharacterConfig {
   kill_toad: boolean
   kill_pink_bomb_on: boolean,
   dive_angle_speed: number
+  // Hide Barrel
+  hide_barrel_on: boolean
+  hide_barrel_type: string
 
   all_jumps_angle_speed: number; 
   basic_jump_angle_speed: number; 
@@ -358,6 +361,10 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   coin_heal_multiplier: { default: 100, min: 0, max: 500, step: 10 },
   one_hit: { default: false },
   explode_on_death: { default: false },
+
+  // --- Hide Barrel ---
+  hide_barrel_on: { default: false, isNew: true },
+  hide_barrel_type: { default: "barrel", options: ["barrel", "substitute", "box"], isNew: true },
 
   // --- Misc / Logic Toggles ---
   kick_dive_on: { default: false },

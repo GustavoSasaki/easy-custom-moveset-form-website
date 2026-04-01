@@ -826,9 +826,13 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     addIfNotDefault("kill_toad")
     addIfNotDefault("kill_pink_bomb_on")
 
-    addIfNotDefault("mushroom_allergy")
-
-    addIfNotDefault("dive_angle_speed")
+addIfNotDefault("mushroom_allergy")
+  
+  // Hide Barrel
+  addIfNotDefault("hide_barrel_on")
+  addIfNotDefault("hide_barrel_type")
+  
+  addIfNotDefault("dive_angle_speed")
     addIfNotDefault("all_jumps_angle_speed")
     addIfNotDefault("basic_jump_angle_speed")
     addIfNotDefault("special_jump_angle_speed")
@@ -1970,8 +1974,28 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
                                                           <ToggleOption id="kill_pink_bomb" label={t.killPinkBobomb} checked={config.kill_pink_bomb_on} onCheckedChange={(v) => updateConfig("kill_pink_bomb_on", v)} tooltip={t.tooltips?.killPinkBobomb} />
     <ToggleOption isNew id="mushroom_allergy" label={t.mushroom_allergy} checked={config.mushroom_allergy} onCheckedChange={(v) => updateConfig("mushroom_allergy", v)} tooltip={t.tooltips?.mushroom_allergy} />
 
-
-
+              {/* Hide Barrel */}
+              <AbilitySection
+                title={t.hideBarrel}
+                enabled={config.hide_barrel_on}
+                onEnabledChange={(v) => updateConfig("hide_barrel_on", v)}
+                advancedSettingsLabel={t.advancedSettings}
+                tooltip={t.tooltips?.hideBarrel}
+                isNew
+              >
+                <SegmentedOption
+                  label={t.hide_barrel_type}
+                  value={config.hide_barrel_type}
+                  onChange={(val) => setConfig({ ...config, hide_barrel_type: val })}
+                  t={t}
+                  options={[
+                    { value: "barrel", labelKey: "barrel" },
+                    { value: "substitute", labelKey: "substitute" },
+                    { value: "box", labelKey: "box" },
+                  ]}
+                  tooltip={t.tooltips?.hideBarrelType}
+                />
+              </AbilitySection>
 
 
             </CardContent>

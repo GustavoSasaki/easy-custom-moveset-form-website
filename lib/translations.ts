@@ -115,6 +115,10 @@ export const translations = {
     killPinkBobomb: "Kill Pink Bob-omb",
     mushroom_allergy:"Mushroom Allergy",
     
+    // Hide Barrel
+    hideBarrel: "Hide in Barrel",
+    hide_barrel_type: "Barrel Type",
+    
     // Moveset description
     movesetDescription: "Moveset Description",
     optional: "optional",
@@ -367,6 +371,8 @@ triple_jump_animation: "Animation used for triple jumps. Default, special, or sp
       umbrellaVerticalSpeed: "How fast you descend while umbrella gliding. Uses raw units.",
       umbrellaForwardSpeed: "Horizontal speed while umbrella gliding. Uses toPercent multiplier.",
       umbrellaCapsForwardSpeed: "When enabled, caps horizontal velocity to 20 during umbrella glide.",
+      hideBarrel: "When pressing Z, the character hides inside a barrel (or substitute/box).",
+      hideBarrelType: "The type of object the character hides in: barrel, substitute doll, or box.",
 },
   },
   
@@ -483,10 +489,14 @@ triple_jump_animation: "Animation used for triple jumps. Default, special, or sp
     saultubeJumpAnimation: "Animacion de Salto Saultube",
     killToad: "Matar a Toad",
     killPinkBobomb: "Matar Bob-omb Rosa",
-    mushroom_allergy:"alergia a los hongos",
-    
-    // Moveset description
-    optional: "opcional",
+mushroom_allergy:"alergia a los hongos",
+  
+  // Hide Barrel
+  hideBarrel: "Esconderse en Barril",
+  hide_barrel_type: "Tipo de Barril",
+  
+  // Moveset description
+  optional: "opcional",
     noGameplayEffect: "Sin efecto en el juego",
 
     // Advanced settings translations
@@ -657,6 +667,8 @@ triple_jump_animation: "Animation used for triple jumps. Default, special, or sp
       killToad: "Permite atacar y eliminar a los NPCs Toad.",
       killPinkBobomb: "Permite atacar y eliminar a los Bob-ombs rosas aliados.",
       mushroom_allergy:"Muere al tocar 1 hongo",
+      hideBarrel: "Al presionar Z, el personaje se esconde dentro de un barril (o sustituto/caja).",
+      hideBarrelType: "El tipo de objeto en el que se esconde el personaje: barril, muneco sustituto o caja.",
 dive_angle_speed: "Qué tan rápido puede girar el personaje mientras hace un picado.",
 all_jumps_angle_speed: "Velocidad de giro aplicada a todos los saltos.",
 basic_jump_angle_speed: "Velocidad de giro para el salto básico.",
@@ -791,11 +803,15 @@ disable_special_triple_jump_bounce: "Evita el rebote después de un triple salto
     saultubeJumpAnimation: "Animacao de Pulo Saultube",
     killToad: "Matar Toad",
     killPinkBobomb: "Matar Bob-omb Rosa",
-    mushroom_allergy:"Alergia à Cogumelos",
-    
-    // Moveset description
-    optional: "opcional",
-    noGameplayEffect: "Sem efeito no gameplay",
+mushroom_allergy:"Alergia à Cogumelos",
+  
+  // Hide Barrel
+  hideBarrel: "Esconder no Barril",
+  hide_barrel_type: "Tipo de Barril",
+  
+  // Moveset description
+  optional: "opcional",
+  noGameplayEffect: "Sem efeito no gameplay",
 
     // Advanced settings translations
     advancedSettings: "Configurações Avançadas",
@@ -964,6 +980,8 @@ disable_special_triple_jump_bounce: "Evita el rebote después de un triple salto
       killToad: "Permite atacar e derrotar os NPCs Toad.",
       killPinkBobomb: "Permite atacar e derrotar os Bob-ombs Rosa amigáveis.",
       mushroom_allergy: "Morre quando toca cogumelo",
+      hideBarrel: "Ao pressionar Z, o personagem se esconde dentro de um barril (ou substituto/caixa).",
+      hideBarrelType: "O tipo de objeto em que o personagem se esconde: barril, boneco substituto ou caixa.",
       dive_angle_speed: "Quão rápido o personagem pode girar/mudar direção durante o mergulho.",
 all_jumps_angle_speed: "Velocidade de rotação aplicada a todos os pulos.",
 basic_jump_angle_speed: "Velocidade de rotação especificamente para o salto básico.",
