@@ -1312,7 +1312,7 @@ addIfNotDefault("mushroom_allergy")
                 tooltip={t.tooltips?.honeyQueenFly}
                 isNew
                 credit={{ name: "Melzinoff", url: "https://mods.sm64coopdx.com/mods/cs-honey-queen.392/" }}
-                requiredMod={{ name: "Honey Queen", url: "https://mods.sm64coopdx.com/mods/big-the-cat-and-froggy.473/" }}
+                requiredMod={{ name: "Honey Queen", url: "https://mods.sm64coopdx.com/mods/cs-honey-queen.392/" }}
               >
                 <ToggleOption
                   id="honeyQueen_fly_render_cap"
