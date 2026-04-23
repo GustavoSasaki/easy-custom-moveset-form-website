@@ -42,7 +42,7 @@ const CONFIG_METADATA_NOT_CAOTIC: Partial<Record<keyof CharacterConfig, { min?: 
   jump_strength: { min: 50, max: 200, step: 1 },
   single_jump_strength: { min: 50, max: 200, step: 1 },
   double_jump_strength: { min: 50, max: 200, step: 1 },
-  triple_jump_strength: { min: 50, max: 200, step: 1 ,},
+  triple_jump_strength: { min: 50, max: 200, step: 1, },
   back_flip_strength: { min: 50, max: 200, step: 1 },
   side_flip_strength: { min: 50, max: 200, step: 1 },
   long_jump_strength: { min: 50, max: 200, step: 1 },
@@ -290,8 +290,8 @@ function NumberInput({
   const metadata = CONFIG_METADATA[configKey]
   const min = metadata ? metadata?.min ?? 0 : 0
   const max = metadata ? metadata?.max ?? 999 : 999
-  const step = metadata ?metadata!.step ?? 1 : 1
-  const isNew = metadata ?metadata!.isNew ?? false : false
+  const step = metadata ? metadata!.step ?? 1 : 1
+  const isNew = metadata ? metadata!.isNew ?? false : false
 
   const [isEditing, setIsEditing] = React.useState(false)
   const [inputValue, setInputValue] = React.useState(value.toString())
@@ -321,21 +321,21 @@ function NumberInput({
   }
 
   return (
-<div className="space-y-2">
+    <div className="space-y-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1.5"> {/* Added gap */}
           <Label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
             {label}
           </Label>
-          
+
           {/* THE NEW BADGE */}
-{isNew && (
-  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
+          {isNew && (
+            <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
                    bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
-    New
-  </span>
-)}
-          
+              New
+            </span>
+          )}
+
           <TooltipIcon tooltip={tooltip} />
         </div>
 
@@ -496,14 +496,14 @@ function AbilitySection({
               New Setting
             </span>
           )}
-          
+
           <div className={`${credit && requiredMod ? "hidden md:flex" : "flex"} gap-2`}>
             {credit && <CreditBadge name={credit.name} url={credit.url} />}
             {requiredMod && <RequiredModBagde name={requiredMod.name} url={requiredMod.url} />}
           </div>
 
-            {credit && requiredMod  && <div className="md:hidden"><RequiredModBagde name={credit.name+"'s "+requiredMod.name} url={requiredMod.url} /></div>}
-          
+          {credit && requiredMod && <div className="md:hidden"><RequiredModBagde name={credit.name + "'s " + requiredMod.name} url={requiredMod.url} /></div>}
+
           <TooltipIcon tooltip={tooltip} />
         </div>
         <Switch className="shrink-0" checked={enabled} onCheckedChange={onEnabledChange} />
@@ -512,13 +512,13 @@ function AbilitySection({
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
           <CollapsibleTrigger className="flex w-full items-center justify-between border-t border-border bg-muted/30 px-3 py-2 text-xs font-medium text-muted-foreground hover:bg-muted/50 transition-colors">
             <div>
-            {advancedSettingsLabel}
-            {hasNewSetting && (
-  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
+              {advancedSettingsLabel}
+              {hasNewSetting && (
+                <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
                    bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
-    New
-  </span>)}
-  </div>
+                  New
+                </span>)}
+            </div>
 
             <ChevronDown className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")} />
           </CollapsibleTrigger>
@@ -559,7 +559,7 @@ export function AdvancedCollapsible({
       <CollapsibleTrigger className="group flex w-full items-center justify-between rounded-md border border-border bg-muted/30 px-3 py-2 text-xs font-bold uppercase text-muted-foreground hover:bg-muted/50 transition-colors">
         <div className="flex items-center gap-2">
           <span>{label}</span>
-          
+
           {/* That "Cool" Badge we built */}
           {isNew && (
             <span className="rounded bg-sky-500/10 px-1.5 py-0.5 text-[9px] font-black leading-none text-sky-500 ring-1 ring-inset ring-sky-500/20">
@@ -568,11 +568,11 @@ export function AdvancedCollapsible({
           )}
         </div>
 
-        <ChevronDown 
+        <ChevronDown
           className={cn(
-            "h-4 w-4 shrink-0 transition-transform duration-200", 
+            "h-4 w-4 shrink-0 transition-transform duration-200",
             isOpen && "rotate-180"
-          )} 
+          )}
         />
       </CollapsibleTrigger>
 
@@ -832,16 +832,16 @@ export function CharacterConfigForm({ translations: t }: { translations: Transla
     addIfNotDefault("kick_dive_on")
     addIfNotDefault("dive_kick_on")
     addIfNotDefault("dive_ground_pound_on")
-addIfNotDefault("kill_toad")
+    addIfNotDefault("kill_toad")
     addIfNotDefault("kill_pink_bomb_on")
 
-addIfNotDefault("mushroom_allergy")
-  
-  // Hide Barrel
-  addIfNotDefault("hide_barrel_on")
-  addIfNotDefault("hide_barrel_type")
-  
-  addIfNotDefault("dive_angle_speed")
+    addIfNotDefault("mushroom_allergy")
+
+    // Hide Barrel
+    addIfNotDefault("hide_barrel_on")
+    addIfNotDefault("hide_barrel_type")
+
+    addIfNotDefault("dive_angle_speed")
     addIfNotDefault("all_jumps_angle_speed")
     addIfNotDefault("basic_jump_angle_speed")
     addIfNotDefault("special_jump_angle_speed")
@@ -978,9 +978,9 @@ addIfNotDefault("mushroom_allergy")
 
       // 4. Handle Booleans
       else if (typeof defaultValue === 'boolean') {
-        if(key != "disable_double_jump"){
+        if (key != "disable_double_jump") {
           randomized[key] = Math.random() > 0.5;
-        }else {
+        } else {
           randomized[key] = Math.random() > 0.95;
         }
       }
@@ -1086,86 +1086,86 @@ addIfNotDefault("mushroom_allergy")
           </Card>
 
           {/* Movement Stats */}
-<Card className="border-2 border-border">
-  <CardHeader className="pb-2">
-    <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.movement}</CardTitle>
-  </CardHeader>
-  <CardContent className="space-y-3">
-    {/* --- Standard Stats (Always Visible) --- */}
-    <NumberInput 
-      label={t.walkingSpeed} 
-      value={config.walking_speed} 
-      onChange={(v) => updateConfig("walking_speed", v)} 
-      configKey={"walking_speed"} suffix="%" 
-      tooltip={t.tooltips?.walkingSpeed} 
-    />
-    <NumberInput 
-      label={t.inAirSpeed} 
-      value={config.in_air_speed} 
-      onChange={(v) => updateConfig("in_air_speed", v)} 
-      configKey={"in_air_speed"} suffix="%" 
-      tooltip={t.tooltips?.inAirSpeed} 
-    />
-    <NumberInput 
-      label={t.gravity} 
-      value={config.gravity} 
-      onChange={(v) => updateConfig("gravity", v)} 
-      configKey={"gravity"} suffix="%" 
-      tooltip={t.tooltips?.gravity} 
-    />
-    <NumberInput 
-      label={t.fallGravity} 
-      value={config.fall_gravity} 
-      onChange={(v) => updateConfig("fall_gravity", v)} 
-      configKey={"fall_gravity"} suffix="%" 
-      tooltip={t.tooltips?.fallGravity} 
-    />
+          <Card className="border-2 border-border">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.movement}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {/* --- Standard Stats (Always Visible) --- */}
+              <NumberInput
+                label={t.walkingSpeed}
+                value={config.walking_speed}
+                onChange={(v) => updateConfig("walking_speed", v)}
+                configKey={"walking_speed"} suffix="%"
+                tooltip={t.tooltips?.walkingSpeed}
+              />
+              <NumberInput
+                label={t.inAirSpeed}
+                value={config.in_air_speed}
+                onChange={(v) => updateConfig("in_air_speed", v)}
+                configKey={"in_air_speed"} suffix="%"
+                tooltip={t.tooltips?.inAirSpeed}
+              />
+              <NumberInput
+                label={t.gravity}
+                value={config.gravity}
+                onChange={(v) => updateConfig("gravity", v)}
+                configKey={"gravity"} suffix="%"
+                tooltip={t.tooltips?.gravity}
+              />
+              <NumberInput
+                label={t.fallGravity}
+                value={config.fall_gravity}
+                onChange={(v) => updateConfig("fall_gravity", v)}
+                configKey={"fall_gravity"} suffix="%"
+                tooltip={t.tooltips?.fallGravity}
+              />
 
-    {/* --- Advanced Settings (Collapsible) --- */}
-    <AdvancedCollapsible label={t.advancedSettings || "Advanced Settings"} >
+              {/* --- Advanced Settings (Collapsible) --- */}
+              <AdvancedCollapsible label={t.advancedSettings || "Advanced Settings"} >
 
-          <NumberInput 
-          label={t.swimmingSpeed} 
-          value={config.swimming_speed} 
-          onChange={(v) => updateConfig("swimming_speed", v)} 
-          configKey={"swimming_speed"} suffix="%" 
-          tooltip={t.tooltips?.swimmingSpeed} 
-        />
-        <NumberInput
-          label={t.holdWalkingSpeed}
-          value={config.hold_walking_speed}
-          onChange={(v) => updateConfig("hold_walking_speed", v)}
-          configKey={"hold_walking_speed"} suffix="%"
-          tooltip={t.tooltips?.holdWalkingSpeed}
-        />
-        <NumberInput
-          label={t.crawlingSpeed}
-          value={config.crawling_speed}
-          onChange={(v) => updateConfig("crawling_speed", v)}
-          configKey={"crawling_speed"}
-             suffix="%"
-          tooltip={t.tooltips?.crawlingSpeed}
-        />
-        <NumberInput
-          label={t.groundedSlowingSpeed}
-          value={config.grounded_slowing_speed}
-          onChange={(v) => updateConfig("grounded_slowing_speed", v)}
-                    configKey={"grounded_slowing_speed"}
-          suffix="%"
-          tooltip={t.tooltips?.groundedSlowingSpeed}
-        />
-        <NumberInput
-          label={t.airborneDecelerationSpeed}
-          value={config.airborne_deceleration_speed}
-          onChange={(v) => updateConfig("airborne_deceleration_speed", v)}
-          configKey={"airborne_deceleration_speed"}
-           suffix="%"
-          tooltip={t.tooltips?.airborneDecelerationSpeed}
-        />
+                <NumberInput
+                  label={t.swimmingSpeed}
+                  value={config.swimming_speed}
+                  onChange={(v) => updateConfig("swimming_speed", v)}
+                  configKey={"swimming_speed"} suffix="%"
+                  tooltip={t.tooltips?.swimmingSpeed}
+                />
+                <NumberInput
+                  label={t.holdWalkingSpeed}
+                  value={config.hold_walking_speed}
+                  onChange={(v) => updateConfig("hold_walking_speed", v)}
+                  configKey={"hold_walking_speed"} suffix="%"
+                  tooltip={t.tooltips?.holdWalkingSpeed}
+                />
+                <NumberInput
+                  label={t.crawlingSpeed}
+                  value={config.crawling_speed}
+                  onChange={(v) => updateConfig("crawling_speed", v)}
+                  configKey={"crawling_speed"}
+                  suffix="%"
+                  tooltip={t.tooltips?.crawlingSpeed}
+                />
+                <NumberInput
+                  label={t.groundedSlowingSpeed}
+                  value={config.grounded_slowing_speed}
+                  onChange={(v) => updateConfig("grounded_slowing_speed", v)}
+                  configKey={"grounded_slowing_speed"}
+                  suffix="%"
+                  tooltip={t.tooltips?.groundedSlowingSpeed}
+                />
+                <NumberInput
+                  label={t.airborneDecelerationSpeed}
+                  value={config.airborne_deceleration_speed}
+                  onChange={(v) => updateConfig("airborne_deceleration_speed", v)}
+                  configKey={"airborne_deceleration_speed"}
+                  suffix="%"
+                  tooltip={t.tooltips?.airborneDecelerationSpeed}
+                />
 
-    </AdvancedCollapsible>
-  </CardContent>
-</Card>
+              </AdvancedCollapsible>
+            </CardContent>
+          </Card>
 
           {/* Jump Stats */}
           <Card className="border-2 border-border">
@@ -1173,93 +1173,93 @@ addIfNotDefault("mushroom_allergy")
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.jumps}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <NumberInput label={t.jumpStrength} value={config.jump_strength} 
-              onChange={(v) => updateConfig("jump_strength", v)} 
-              configKey="jump_strength"
-               suffix="%" tooltip={t.tooltips?.jumpStrength} />
-              <NumberInput label={t.doubleJumpStrength} value={config.double_jump_strength} 
-              configKey="double_jump_strength"
-              onChange={(v) => updateConfig("double_jump_strength", v)}  suffix="%" tooltip={t.tooltips?.doubleJumpStrength} />
-              <NumberInput label={t.tripleJumpStrength} 
-                            configKey="triple_jump_strength"
-                            suffix="%" 
-              value={config.triple_jump_strength} onChange={(v) => updateConfig("triple_jump_strength", v)}
-               tooltip={t.tooltips?.tripleJumpStrength} />
+              <NumberInput label={t.jumpStrength} value={config.jump_strength}
+                onChange={(v) => updateConfig("jump_strength", v)}
+                configKey="jump_strength"
+                suffix="%" tooltip={t.tooltips?.jumpStrength} />
+              <NumberInput label={t.doubleJumpStrength} value={config.double_jump_strength}
+                configKey="double_jump_strength"
+                onChange={(v) => updateConfig("double_jump_strength", v)} suffix="%" tooltip={t.tooltips?.doubleJumpStrength} />
+              <NumberInput label={t.tripleJumpStrength}
+                configKey="triple_jump_strength"
+                suffix="%"
+                value={config.triple_jump_strength} onChange={(v) => updateConfig("triple_jump_strength", v)}
+                tooltip={t.tooltips?.tripleJumpStrength} />
               <NumberInput label={t.longJumpStrength} value={config.long_jump_strength}
-              onChange={(v) => updateConfig("long_jump_strength", v)} 
-              configKey="long_jump_strength" suffix="%" tooltip={t.tooltips?.longJumpStrength} />
-              <NumberInput label={t.backFlipStrength} value={config.back_flip_strength} onChange={(v) => updateConfig("back_flip_strength", v)} 
-              configKey="back_flip_strength"
-              suffix="%" tooltip={t.tooltips?.backFlipStrength} />
-              
-          {/* --- Advanced Settings (Collapsible) --- */}       
-              
-              
+                onChange={(v) => updateConfig("long_jump_strength", v)}
+                configKey="long_jump_strength" suffix="%" tooltip={t.tooltips?.longJumpStrength} />
+              <NumberInput label={t.backFlipStrength} value={config.back_flip_strength} onChange={(v) => updateConfig("back_flip_strength", v)}
+                configKey="back_flip_strength"
+                suffix="%" tooltip={t.tooltips?.backFlipStrength} />
+
+              {/* --- Advanced Settings (Collapsible) --- */}
+
+
               <NumberInput label={t.sideFlipStrength} value={config.side_flip_strength}
-               onChange={(v) => updateConfig("side_flip_strength", v)}
+                onChange={(v) => updateConfig("side_flip_strength", v)}
                 configKey="side_flip_strength"
                 suffix="%" tooltip={t.tooltips?.sideFlipStrength} />
 
 
-                    <AdvancedCollapsible label={t.advancedSettings || "Advanced Settings"} >
-      <>
-                                        <NumberInput
-  label={t.longJumpVelMultiplier}
-  value={config.long_jump_velocity_multiplier}
-  onChange={(v) => setConfig({ ...config, long_jump_velocity_multiplier: v })}
-   suffix="%"
-   configKey="long_jump_velocity_multiplier"
-  tooltip={t.tooltips.longJumpVelMultiplier}
-/>
+              <AdvancedCollapsible label={t.advancedSettings || "Advanced Settings"} >
+                <>
+                  <NumberInput
+                    label={t.longJumpVelMultiplier}
+                    value={config.long_jump_velocity_multiplier}
+                    onChange={(v) => setConfig({ ...config, long_jump_velocity_multiplier: v })}
+                    suffix="%"
+                    configKey="long_jump_velocity_multiplier"
+                    tooltip={t.tooltips.longJumpVelMultiplier}
+                  />
 
-                                  <NumberInput
-  label={t.all_jumps_angle_speed}
-  value={config.all_jumps_angle_speed}
-  onChange={(v) => setConfig({ ...config, all_jumps_angle_speed: v })}
-   suffix="%"
-   configKey="all_jumps_angle_speed"
-  tooltip={t.tooltips.all_jumps_angle_speed}
-/>
+                  <NumberInput
+                    label={t.all_jumps_angle_speed}
+                    value={config.all_jumps_angle_speed}
+                    onChange={(v) => setConfig({ ...config, all_jumps_angle_speed: v })}
+                    suffix="%"
+                    configKey="all_jumps_angle_speed"
+                    tooltip={t.tooltips.all_jumps_angle_speed}
+                  />
 
-                                  <NumberInput
-  label={t.basic_jump_angle_speed}
-  value={config.basic_jump_angle_speed}
-  onChange={(v) => setConfig({ ...config, basic_jump_angle_speed: v })}
-   suffix="%"
-   configKey="basic_jump_angle_speed"
-  tooltip={t.tooltips.basic_jump_angle_speed}
-/>
+                  <NumberInput
+                    label={t.basic_jump_angle_speed}
+                    value={config.basic_jump_angle_speed}
+                    onChange={(v) => setConfig({ ...config, basic_jump_angle_speed: v })}
+                    suffix="%"
+                    configKey="basic_jump_angle_speed"
+                    tooltip={t.tooltips.basic_jump_angle_speed}
+                  />
 
-                                  <NumberInput
-  label={t.special_jump_angle_speed}
-  value={config.special_jump_angle_speed}
-  onChange={(v) => setConfig({ ...config, special_jump_angle_speed: v })}
-   suffix="%"
-   configKey="special_jump_angle_speed"
-  tooltip={t.tooltips.special_jump_angle_speed}
-/>
+                  <NumberInput
+                    label={t.special_jump_angle_speed}
+                    value={config.special_jump_angle_speed}
+                    onChange={(v) => setConfig({ ...config, special_jump_angle_speed: v })}
+                    suffix="%"
+                    configKey="special_jump_angle_speed"
+                    tooltip={t.tooltips.special_jump_angle_speed}
+                  />
 
 
-                    <ToggleOption id="special_triple_jump_on" 
-                    label={t.special_triple_jump_on} 
-                    checked={config.special_triple_jump_on} 
+                  <ToggleOption id="special_triple_jump_on"
+                    label={t.special_triple_jump_on}
+                    checked={config.special_triple_jump_on}
                     onCheckedChange={(v) => updateConfig("special_triple_jump_on", v)}
-                     tooltip={t.tooltips?.special_triple_jump_on} 
-                    
-                     />
+                    tooltip={t.tooltips?.special_triple_jump_on}
 
-                                         <ToggleOption id="disable_special_triple_jump_bounce" 
-                    label={t.disable_special_triple_jump_bounce} 
-                    checked={config.disable_special_triple_jump_bounce} 
+                  />
+
+                  <ToggleOption id="disable_special_triple_jump_bounce"
+                    label={t.disable_special_triple_jump_bounce}
+                    checked={config.disable_special_triple_jump_bounce}
                     onCheckedChange={(v) => updateConfig("disable_special_triple_jump_bounce", v)}
-                     tooltip={t.tooltips?.disable_special_triple_jump_bounce}
-                     
-                     />
+                    tooltip={t.tooltips?.disable_special_triple_jump_bounce}
+
+                  />
 
 
-                    <ToggleOption id="disable_double_jump" label={t.disableDoubleJump} checked={config.disable_double_jump} onCheckedChange={(v) => updateConfig("disable_double_jump", v)} tooltip={t.tooltips?.disableDoubleJump} />
-      </>
-      </AdvancedCollapsible> 
+                  <ToggleOption id="disable_double_jump" label={t.disableDoubleJump} checked={config.disable_double_jump} onCheckedChange={(v) => updateConfig("disable_double_jump", v)} tooltip={t.tooltips?.disableDoubleJump} />
+                </>
+              </AdvancedCollapsible>
             </CardContent>
           </Card>
 
@@ -1271,53 +1271,53 @@ addIfNotDefault("mushroom_allergy")
             <CardContent className="space-y-3">
               {/* Glide Dive */}
               <AbilitySection title={t.glideDive} enabled={config.glide_dive_on} onEnabledChange={(v) => updateConfig("glide_dive_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.glideDive}>
-<NumberInput
-  label={t.forwardVelocity}
-  value={config.glide_dive_forward_vel}
-  onChange={(v) => updateConfig("glide_dive_forward_vel", v)}
-  configKey="glide_dive_forward_vel"
-  tooltip={t.tooltips?.glideDiveForwardVel}
-/>
+                <NumberInput
+                  label={t.forwardVelocity}
+                  value={config.glide_dive_forward_vel}
+                  onChange={(v) => updateConfig("glide_dive_forward_vel", v)}
+                  configKey="glide_dive_forward_vel"
+                  tooltip={t.tooltips?.glideDiveForwardVel}
+                />
 
-<NumberInput
-  label={t.slowdown}
-  value={config.glide_dive_slowdown}
-  onChange={(v) => updateConfig("glide_dive_slowdown", v)}
-  configKey="glide_dive_slowdown"
-  tooltip={t.tooltips?.glideDiveSlowdown}
-/>
+                <NumberInput
+                  label={t.slowdown}
+                  value={config.glide_dive_slowdown}
+                  onChange={(v) => updateConfig("glide_dive_slowdown", v)}
+                  configKey="glide_dive_slowdown"
+                  tooltip={t.tooltips?.glideDiveSlowdown}
+                />
 
-<NumberInput
-  label={t.angleSpeed}
-  value={config.glide_dive_angle_speed}
-  onChange={(v) => updateConfig("glide_dive_angle_speed", v)}
-  configKey="glide_dive_angle_speed"
-  tooltip={t.tooltips?.glideDiveAngleSpeed}
-/>
+                <NumberInput
+                  label={t.angleSpeed}
+                  value={config.glide_dive_angle_speed}
+                  onChange={(v) => updateConfig("glide_dive_angle_speed", v)}
+                  configKey="glide_dive_angle_speed"
+                  tooltip={t.tooltips?.glideDiveAngleSpeed}
+                />
 
-<NumberInput
-  label={t.minForwardSpeed}
-  value={config.glide_dive_min_forward_speed}
-  onChange={(v) => updateConfig("glide_dive_min_forward_speed", v)}
-  configKey="glide_dive_min_forward_speed"
-  tooltip={t.tooltips?.glideDiveMinForwardSpeed}
-/>
+                <NumberInput
+                  label={t.minForwardSpeed}
+                  value={config.glide_dive_min_forward_speed}
+                  onChange={(v) => updateConfig("glide_dive_min_forward_speed", v)}
+                  configKey="glide_dive_min_forward_speed"
+                  tooltip={t.tooltips?.glideDiveMinForwardSpeed}
+                />
 
-<NumberInput
-  label={t.maxTime}
-  value={config.glide_dive_max_time}
-  onChange={(v) => updateConfig("glide_dive_max_time", v)}
-  configKey="glide_dive_max_time"
-  tooltip={t.tooltips?.glideDiveMaxTime}
-/>
+                <NumberInput
+                  label={t.maxTime}
+                  value={config.glide_dive_max_time}
+                  onChange={(v) => updateConfig("glide_dive_max_time", v)}
+                  configKey="glide_dive_max_time"
+                  tooltip={t.tooltips?.glideDiveMaxTime}
+                />
 
-<NumberInput
-  label={t.yVelocity}
-  value={config.glide_dive_y_vel}
-  onChange={(v) => updateConfig("glide_dive_y_vel", v)}
-  configKey="glide_dive_y_vel"
-  tooltip={t.tooltips?.glideDiveYVel}
-/>
+                <NumberInput
+                  label={t.yVelocity}
+                  value={config.glide_dive_y_vel}
+                  onChange={(v) => updateConfig("glide_dive_y_vel", v)}
+                  configKey="glide_dive_y_vel"
+                  tooltip={t.tooltips?.glideDiveYVel}
+                />
                 <ToggleOption id="glide_dive_wing_cap" label={t.renderWithWingCap} checked={config.glide_dive_render_with_wing_cap} onCheckedChange={(v) => updateConfig("glide_dive_render_with_wing_cap", v)} tooltip={t.tooltips?.glideDiveWingCap} />
                 <ToggleOption id="glide_dive_disable_spin" label={t.disableSpin} checked={config.glide_dive_disable_spin} onCheckedChange={(v) => updateConfig("glide_dive_disable_spin", v)} tooltip={t.tooltips?.glideDiveDisableSpin} />
               </AbilitySection>
@@ -1436,43 +1436,43 @@ addIfNotDefault("mushroom_allergy")
 
               {/* Ground Pound Jump */}
               <AbilitySection title={t.groundPoundJump} enabled={config.ground_pound_jump_on} onEnabledChange={(v) => updateConfig("ground_pound_jump_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.groundPoundJump}>
-                <NumberInput label={t.strength} value={config.ground_pound_jump_strength} onChange={(v) => updateConfig("ground_pound_jump_strength", v)} 
-                configKey="ground_pound_jump_strength"
-                 />
+                <NumberInput label={t.strength} value={config.ground_pound_jump_strength} onChange={(v) => updateConfig("ground_pound_jump_strength", v)}
+                  configKey="ground_pound_jump_strength"
+                />
                 <NumberInput label={t.forwardVelocity} value={config.ground_pound_jump_forward_vel} onChange={(v) => updateConfig("ground_pound_jump_forward_vel", v)}
-                 configKey="ground_pound_jump_forward_vel"/>
+                  configKey="ground_pound_jump_forward_vel" />
                 <ToggleOption id="gp_jump_dive" label={t.groundPoundJumpDive} checked={config.ground_pound_jump_dive_on} onCheckedChange={(v) => updateConfig("ground_pound_jump_dive_on", v)} />
               </AbilitySection>
 
               {/* Wall Slide */}
               <AbilitySection title={t.wallSlide} enabled={config.wall_slide_on} onEnabledChange={(v) => updateConfig("wall_slide_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.wallSlide}>
-      <NumberInput
-  label={t.gravity}
-  value={config.wall_slide_gravity}
-  onChange={(v) => updateConfig("wall_slide_gravity", v)}
-  configKey="wall_slide_gravity"
-/>
+                <NumberInput
+                  label={t.gravity}
+                  value={config.wall_slide_gravity}
+                  onChange={(v) => updateConfig("wall_slide_gravity", v)}
+                  configKey="wall_slide_gravity"
+                />
 
-<NumberInput
-  label={t.maxGravity}
-  value={config.wall_slide_max_gravity}
-  onChange={(v) => updateConfig("wall_slide_max_gravity", v)}
-  configKey="wall_slide_max_gravity"
-/>
+                <NumberInput
+                  label={t.maxGravity}
+                  value={config.wall_slide_max_gravity}
+                  onChange={(v) => updateConfig("wall_slide_max_gravity", v)}
+                  configKey="wall_slide_max_gravity"
+                />
 
-<NumberInput
-  label={t.jumpForwardVelocity}
-  value={config.wall_slide_jump_forward_vel}
-  onChange={(v) => updateConfig("wall_slide_jump_forward_vel", v)}
-  configKey="wall_slide_jump_forward_vel"
-/>
+                <NumberInput
+                  label={t.jumpForwardVelocity}
+                  value={config.wall_slide_jump_forward_vel}
+                  onChange={(v) => updateConfig("wall_slide_jump_forward_vel", v)}
+                  configKey="wall_slide_jump_forward_vel"
+                />
 
-<NumberInput
-  label={t.jumpStrength}
-  value={config.wall_slide_jump_strength}
-  onChange={(v) => updateConfig("wall_slide_jump_strength", v)}
-  configKey="wall_slide_jump_strength"
-/>
+                <NumberInput
+                  label={t.jumpStrength}
+                  value={config.wall_slide_jump_strength}
+                  onChange={(v) => updateConfig("wall_slide_jump_strength", v)}
+                  configKey="wall_slide_jump_strength"
+                />
                 <ToggleOption id="wall_slide_same_wall" label={t.sameWallJump} checked={config.wall_slide_same_wall} onCheckedChange={(v) => updateConfig("wall_slide_same_wall", v)} />
                 <SegmentedOption
                   label={t.wallSlideJumpType}
@@ -1490,146 +1490,146 @@ addIfNotDefault("mushroom_allergy")
 
               {/* Yoshi Flutter */}
               <AbilitySection title={t.yoshiFlutter} enabled={config.yoshi_flutter_on} onEnabledChange={(v) => updateConfig("yoshi_flutter_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.yoshiFlutter}>
-<NumberInput
-  label={t.angleSpeed}
-  value={config.yoshi_flutter_angle_speed}
-  onChange={(v) => updateConfig("yoshi_flutter_angle_speed", v)}
-  configKey="yoshi_flutter_angle_speed"
-/>
+                <NumberInput
+                  label={t.angleSpeed}
+                  value={config.yoshi_flutter_angle_speed}
+                  onChange={(v) => updateConfig("yoshi_flutter_angle_speed", v)}
+                  configKey="yoshi_flutter_angle_speed"
+                />
 
-<NumberInput
-  label={t.cooldown}
-  value={config.yoshi_flutter_cooldown}
-  onChange={(v) => updateConfig("yoshi_flutter_cooldown", v)}
-  configKey="yoshi_flutter_cooldown"
-/>
+                <NumberInput
+                  label={t.cooldown}
+                  value={config.yoshi_flutter_cooldown}
+                  onChange={(v) => updateConfig("yoshi_flutter_cooldown", v)}
+                  configKey="yoshi_flutter_cooldown"
+                />
 
-<NumberInput
-  label={t.strengthDescending}
-  value={config.yoshi_flutter_stength_descending}
-  onChange={(v) => updateConfig("yoshi_flutter_stength_descending", v)}
-  configKey="yoshi_flutter_stength_descending"
-/>
+                <NumberInput
+                  label={t.strengthDescending}
+                  value={config.yoshi_flutter_stength_descending}
+                  onChange={(v) => updateConfig("yoshi_flutter_stength_descending", v)}
+                  configKey="yoshi_flutter_stength_descending"
+                />
 
-<NumberInput
-  label={t.strengthAscending}
-  value={config.yoshi_flutter_stength_ascending}
-  onChange={(v) => updateConfig("yoshi_flutter_stength_ascending", v)}
-  configKey="yoshi_flutter_stength_ascending"
-/>
+                <NumberInput
+                  label={t.strengthAscending}
+                  value={config.yoshi_flutter_stength_ascending}
+                  onChange={(v) => updateConfig("yoshi_flutter_stength_ascending", v)}
+                  configKey="yoshi_flutter_stength_ascending"
+                />
 
-<NumberInput
-  label={t.maxYVelocity}
-  value={config.yoshi_flutter_max_y_vel}
-  onChange={(v) => updateConfig("yoshi_flutter_max_y_vel", v)}
-  configKey="yoshi_flutter_max_y_vel"
-/>
+                <NumberInput
+                  label={t.maxYVelocity}
+                  value={config.yoshi_flutter_max_y_vel}
+                  onChange={(v) => updateConfig("yoshi_flutter_max_y_vel", v)}
+                  configKey="yoshi_flutter_max_y_vel"
+                />
 
-<NumberInput
-  label={t.reactivations}
-  value={config.yoshi_flutter_reactivations}
-  onChange={(v) => updateConfig("yoshi_flutter_reactivations", v)}
-  configKey="yoshi_flutter_reactivations"
-/>
+                <NumberInput
+                  label={t.reactivations}
+                  value={config.yoshi_flutter_reactivations}
+                  onChange={(v) => updateConfig("yoshi_flutter_reactivations", v)}
+                  configKey="yoshi_flutter_reactivations"
+                />
 
-<NumberInput
-  label={t.speed}
-  value={config.yoshi_flutter_speed}
-  onChange={(v) => updateConfig("yoshi_flutter_speed", v)}
-  configKey="yoshi_flutter_speed"
-/>
+                <NumberInput
+                  label={t.speed}
+                  value={config.yoshi_flutter_speed}
+                  onChange={(v) => updateConfig("yoshi_flutter_speed", v)}
+                  configKey="yoshi_flutter_speed"
+                />
 
-<NumberInput
-  label={t.maxTime}
-  value={config.yoshi_flutter_max_time}
-  onChange={(v) => updateConfig("yoshi_flutter_max_time", v)}
-  configKey="yoshi_flutter_max_time"
-/>
+                <NumberInput
+                  label={t.maxTime}
+                  value={config.yoshi_flutter_max_time}
+                  onChange={(v) => updateConfig("yoshi_flutter_max_time", v)}
+                  configKey="yoshi_flutter_max_time"
+                />
               </AbilitySection>
 
               {/* Mr L Jump */}
               <AbilitySection title={t.mrLJump} enabled={config.mr_l_jump_on} onEnabledChange={(v) => updateConfig("mr_l_jump_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.mrLJump}>
-<NumberInput
-  label={t.jumpStrength}
-  value={config.mr_l_jump_strength}
-  onChange={(v) => updateConfig("mr_l_jump_strength", v)}
-  configKey="mr_l_jump_strength"
-/>
+                <NumberInput
+                  label={t.jumpStrength}
+                  value={config.mr_l_jump_strength}
+                  onChange={(v) => updateConfig("mr_l_jump_strength", v)}
+                  configKey="mr_l_jump_strength"
+                />
 
-<NumberInput
-  label={t.gravity}
-  value={config.mr_l_gravity}
-  onChange={(v) => updateConfig("mr_l_gravity", v)}
-  configKey="mr_l_gravity"
-/>
+                <NumberInput
+                  label={t.gravity}
+                  value={config.mr_l_gravity}
+                  onChange={(v) => updateConfig("mr_l_gravity", v)}
+                  configKey="mr_l_gravity"
+                />
 
-<NumberInput
-  label={t.airSpeed}
-  value={config.mr_l_air_speed}
-  onChange={(v) => updateConfig("mr_l_air_speed", v)}
-  configKey="mr_l_air_speed"
-/>
+                <NumberInput
+                  label={t.airSpeed}
+                  value={config.mr_l_air_speed}
+                  onChange={(v) => updateConfig("mr_l_air_speed", v)}
+                  configKey="mr_l_air_speed"
+                />
                 <ToggleOption id="mr_l_audio" label={t.playAnticipationAudio} checked={config.play_mr_l_anticipation_audio} onCheckedChange={(v) => updateConfig("play_mr_l_anticipation_audio", v)} />
               </AbilitySection>
 
               {/* Super Side Flip */}
               <AbilitySection title={t.superSideFlip} enabled={config.super_side_flip_on} onEnabledChange={(v) => updateConfig("super_side_flip_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.superSideFlip}>
-<NumberInput
-  label={t.strength}
-  value={config.super_side_flip_strength}
-  onChange={(v) => updateConfig("super_side_flip_strength", v)}
-  configKey="super_side_flip_strength"
-/>
+                <NumberInput
+                  label={t.strength}
+                  value={config.super_side_flip_strength}
+                  onChange={(v) => updateConfig("super_side_flip_strength", v)}
+                  configKey="super_side_flip_strength"
+                />
 
-<NumberInput
-  label={t.convertForwardVelocity}
-  value={config.super_side_flip_convert_foward_vel}
-  onChange={(v) => updateConfig("super_side_flip_convert_foward_vel", v)}
-  configKey="super_side_flip_convert_foward_vel"
-/>
+                <NumberInput
+                  label={t.convertForwardVelocity}
+                  value={config.super_side_flip_convert_foward_vel}
+                  onChange={(v) => updateConfig("super_side_flip_convert_foward_vel", v)}
+                  configKey="super_side_flip_convert_foward_vel"
+                />
 
-<NumberInput
-  label={t.addForwardVelocity}
-  value={config.super_side_flip_add_foward_vel}
-  onChange={(v) => updateConfig("super_side_flip_add_foward_vel", v)}
-  configKey="super_side_flip_add_foward_vel"
-/>
+                <NumberInput
+                  label={t.addForwardVelocity}
+                  value={config.super_side_flip_add_foward_vel}
+                  onChange={(v) => updateConfig("super_side_flip_add_foward_vel", v)}
+                  configKey="super_side_flip_add_foward_vel"
+                />
 
-<NumberInput
-  label={t.kickStrength}
-  value={config.super_side_flip_kick_strength}
-  onChange={(v) => updateConfig("super_side_flip_kick_strength", v)}
-  configKey="super_side_flip_kick_strength"
-/>
+                <NumberInput
+                  label={t.kickStrength}
+                  value={config.super_side_flip_kick_strength}
+                  onChange={(v) => updateConfig("super_side_flip_kick_strength", v)}
+                  configKey="super_side_flip_kick_strength"
+                />
 
-<NumberInput
-  label={t.gravity}
-  value={config.super_side_flip_gravity}
-  onChange={(v) => updateConfig("super_side_flip_gravity", v)}
-  configKey="super_side_flip_gravity"
-/>
+                <NumberInput
+                  label={t.gravity}
+                  value={config.super_side_flip_gravity}
+                  onChange={(v) => updateConfig("super_side_flip_gravity", v)}
+                  configKey="super_side_flip_gravity"
+                />
 
-<NumberInput
-  label={t.maxGravity}
-  value={config.super_side_flip_max_gravity}
-  onChange={(v) => updateConfig("super_side_flip_max_gravity", v)}
-  configKey="super_side_flip_max_gravity"
-/>
+                <NumberInput
+                  label={t.maxGravity}
+                  value={config.super_side_flip_max_gravity}
+                  onChange={(v) => updateConfig("super_side_flip_max_gravity", v)}
+                  configKey="super_side_flip_max_gravity"
+                />
 
-<NumberInput
-  label={t.minVelocity}
-  value={config.super_side_flip_min_velocity}
-  onChange={(v) => updateConfig("super_side_flip_min_velocity", v)}
-  configKey="super_side_flip_min_velocity"
-/>
+                <NumberInput
+                  label={t.minVelocity}
+                  value={config.super_side_flip_min_velocity}
+                  onChange={(v) => updateConfig("super_side_flip_min_velocity", v)}
+                  configKey="super_side_flip_min_velocity"
+                />
               </AbilitySection>
 
               {/* In Air Jump */}
               <div className="rounded-lg border-2 border-border overflow-hidden">
                 <div className="bg-secondary/50 p-3">
                   <NumberInput label={t.inAirJumps} value={config.in_air_jump}
-                   onChange={(v) => updateConfig("in_air_jump", v)} 
-                   configKey="in_air_jump" tooltip={t.tooltips?.inAirJump} />
+                    onChange={(v) => updateConfig("in_air_jump", v)}
+                    configKey="in_air_jump" tooltip={t.tooltips?.inAirJump} />
                 </div>
                 {config.in_air_jump > 0 && (
                   <Collapsible>
@@ -1639,33 +1639,33 @@ addIfNotDefault("mushroom_allergy")
                     </CollapsibleTrigger>
                     <CollapsibleContent>
                       <div className="space-y-3 p-3 bg-card/50">
-<NumberInput
-  label={t.jumpStrength}
-  value={config.in_air_jump_strength}
-  onChange={(v) => updateConfig("in_air_jump_strength", v)}
-  configKey="in_air_jump_strength"
-/>
+                        <NumberInput
+                          label={t.jumpStrength}
+                          value={config.in_air_jump_strength}
+                          onChange={(v) => updateConfig("in_air_jump_strength", v)}
+                          configKey="in_air_jump_strength"
+                        />
 
-<NumberInput
-  label={t.forwardVelMultiplier}
-  value={config.in_air_jump_forward_vel_multiplier}
-  onChange={(v) => updateConfig("in_air_jump_forward_vel_multiplier", v)}
-  configKey="in_air_jump_forward_vel_multiplier"
-/>
+                        <NumberInput
+                          label={t.forwardVelMultiplier}
+                          value={config.in_air_jump_forward_vel_multiplier}
+                          onChange={(v) => updateConfig("in_air_jump_forward_vel_multiplier", v)}
+                          configKey="in_air_jump_forward_vel_multiplier"
+                        />
 
-<NumberInput
-  label={t.forwardVelSlowdown}
-  value={config.in_air_jump_forward_vel_slowdown}
-  onChange={(v) => updateConfig("in_air_jump_forward_vel_slowdown", v)}
-  configKey="in_air_jump_forward_vel_slowdown"
-/>
+                        <NumberInput
+                          label={t.forwardVelSlowdown}
+                          value={config.in_air_jump_forward_vel_slowdown}
+                          onChange={(v) => updateConfig("in_air_jump_forward_vel_slowdown", v)}
+                          configKey="in_air_jump_forward_vel_slowdown"
+                        />
 
-<NumberInput
-  label={t.forwardVelocity}
-  value={config.in_air_jump_forward_vel}
-  onChange={(v) => updateConfig("in_air_jump_forward_vel", v)}
-  configKey="in_air_jump_forward_vel"
-/>
+                        <NumberInput
+                          label={t.forwardVelocity}
+                          value={config.in_air_jump_forward_vel}
+                          onChange={(v) => updateConfig("in_air_jump_forward_vel", v)}
+                          configKey="in_air_jump_forward_vel"
+                        />
                       </div>
                     </CollapsibleContent>
                   </Collapsible>
@@ -1674,96 +1674,96 @@ addIfNotDefault("mushroom_allergy")
 
               {/* Waft Fart */}
               <AbilitySection title={t.waftFart} enabled={config.waft_fart_on} onEnabledChange={(v) => updateConfig("waft_fart_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.waftFart}>
-<NumberInput
-  label={t.velocity}
-  value={config.waft_fart_velocity}
-  onChange={(v) => updateConfig("waft_fart_velocity", v)}
-  configKey="waft_fart_velocity"
-/>
+                <NumberInput
+                  label={t.velocity}
+                  value={config.waft_fart_velocity}
+                  onChange={(v) => updateConfig("waft_fart_velocity", v)}
+                  configKey="waft_fart_velocity"
+                />
 
-<NumberInput
-  label={t.strength}
-  value={config.waft_fart_strength}
-  onChange={(v) => updateConfig("waft_fart_strength", v)}
-  configKey="waft_fart_strength"
-/>
+                <NumberInput
+                  label={t.strength}
+                  value={config.waft_fart_strength}
+                  onChange={(v) => updateConfig("waft_fart_strength", v)}
+                  configKey="waft_fart_strength"
+                />
 
-<NumberInput
-  label={t.perLevel}
-  value={config.waft_fart_per_level}
-  onChange={(v) => updateConfig("waft_fart_per_level", v)}
-  configKey="waft_fart_per_level"
-/>
+                <NumberInput
+                  label={t.perLevel}
+                  value={config.waft_fart_per_level}
+                  onChange={(v) => updateConfig("waft_fart_per_level", v)}
+                  configKey="waft_fart_per_level"
+                />
               </AbilitySection>
 
               {/* Long Jump Triple Jump */}
               <AbilitySection title={t.longJumpTripleJump} enabled={config.long_jump_triple_jump_on} onEnabledChange={(v) => updateConfig("long_jump_triple_jump_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.longJumpTripleJump}>
-<NumberInput
-  label={t.strength}
-  value={config.long_jump_triple_jump_strength}
-  onChange={(v) => updateConfig("long_jump_triple_jump_strength", v)}
-  configKey="long_jump_triple_jump_strength"
-/>
+                <NumberInput
+                  label={t.strength}
+                  value={config.long_jump_triple_jump_strength}
+                  onChange={(v) => updateConfig("long_jump_triple_jump_strength", v)}
+                  configKey="long_jump_triple_jump_strength"
+                />
 
-<NumberInput
-  label={t.addForwardVelocity}
-  value={config.long_jump_triple_jump_add_forward_vel}
-  onChange={(v) => updateConfig("long_jump_triple_jump_add_forward_vel", v)}
-  configKey="long_jump_triple_jump_add_forward_vel"
-/>
+                <NumberInput
+                  label={t.addForwardVelocity}
+                  value={config.long_jump_triple_jump_add_forward_vel}
+                  onChange={(v) => updateConfig("long_jump_triple_jump_add_forward_vel", v)}
+                  configKey="long_jump_triple_jump_add_forward_vel"
+                />
               </AbilitySection>
 
               {/* Ground Pound Dive */}
               <AbilitySection title={t.groundPoundDive} enabled={config.ground_pound_dive_on} onEnabledChange={(v) => updateConfig("ground_pound_dive_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.groundPoundDive}>
-                <NumberInput label={t.yVelocity} 
-                value={config.ground_pound_dive_y_vel} 
-                onChange={(v) => updateConfig("ground_pound_dive_y_vel", v)} 
-                configKey="ground_pound_dive_y_vel" />
-                <NumberInput label={t.forwardVelocity} value={config.ground_pound_dive_forward_vel} 
-                onChange={(v) => updateConfig("ground_pound_dive_forward_vel", v)} 
-                configKey="ground_pound_dive_forward_vel" />
+                <NumberInput label={t.yVelocity}
+                  value={config.ground_pound_dive_y_vel}
+                  onChange={(v) => updateConfig("ground_pound_dive_y_vel", v)}
+                  configKey="ground_pound_dive_y_vel" />
+                <NumberInput label={t.forwardVelocity} value={config.ground_pound_dive_forward_vel}
+                  onChange={(v) => updateConfig("ground_pound_dive_forward_vel", v)}
+                  configKey="ground_pound_dive_forward_vel" />
 
 
-<ToggleOption id="ground_pound_dive_change_direction_on" label={t.ground_pound_dive_change_direction_on}  
-checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => updateConfig("ground_pound_dive_change_direction_on", v)}
- tooltip={t.tooltips?.ground_pound_dive_change_direction_on} />
+                <ToggleOption id="ground_pound_dive_change_direction_on" label={t.ground_pound_dive_change_direction_on}
+                  checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => updateConfig("ground_pound_dive_change_direction_on", v)}
+                  tooltip={t.tooltips?.ground_pound_dive_change_direction_on} />
 
               </AbilitySection>
 
               {/* Bowser Fire Ball */}
-              <ToggleOption 
-                id="bowser_fire_ball" 
-                label={t.bowserFireBall ?? "Fire Ball"} 
-                checked={config.bowser_fire_ball} 
+              <ToggleOption
+                id="bowser_fire_ball"
+                label={t.bowserFireBall ?? "Fire Ball"}
+                checked={config.bowser_fire_ball}
                 onCheckedChange={(v) => updateConfig("bowser_fire_ball", v)}
                 tooltip={t.tooltips?.bowserFireBall}
                 isNew
                 credit={{ name: "Wibblus", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
-                requiredMod={{ name: "Bowser Jr Moveset", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
+                requiredMod={{ name: "Bowser Moveset", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
               />
 
               {/* Bowser Punch */}
-              <ToggleOption 
-                id="bowser_punch" 
-                label={t.bowserPunch ?? "Bowser Punch"} 
-                checked={config.bowser_punch} 
+              <ToggleOption
+                id="bowser_punch"
+                label={t.bowserPunch ?? "Bowser Punch"}
+                checked={config.bowser_punch}
                 onCheckedChange={(v) => updateConfig("bowser_punch", v)}
                 tooltip={t.tooltips?.bowserPunch}
                 isNew
                 credit={{ name: "Wibblus", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
-                requiredMod={{ name: "Bowser Jr Moveset", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
+                requiredMod={{ name: "Bowser Moveset", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
               />
 
               {/* Bowser Shell Slide */}
-              <AbilitySection 
-                title={t.bowserShellSlide ?? "Shell Slide"} 
-                enabled={config.bowser_shell_slide} 
-                onEnabledChange={(v) => updateConfig("bowser_shell_slide", v)} 
+              <AbilitySection
+                title={t.bowserShellSlide ?? "Shell Slide"}
+                enabled={config.bowser_shell_slide}
+                onEnabledChange={(v) => updateConfig("bowser_shell_slide", v)}
                 advancedSettingsLabel={t.advancedSettings}
                 tooltip={t.tooltips?.bowserShellSlide}
                 isNew
                 credit={{ name: "Wibblus", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
-                requiredMod={{ name: "Bowser Jr Moveset", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
+                requiredMod={{ name: "Bowser Moveset", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
               >
                 <div className="space-y-2">
                   <Label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -1773,19 +1773,19 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
                     {[
                       { value: "bowser", label: "Bowser", requiresMod: false },
                       { value: "bowserjr", label: "Bowser Jr", requiresMod: false },
-                      { value: "koopakid", label: "Koopa Kid", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopa-kid.1094/", modAuthor: "CometMystic" },
-                      { value: "koopalings_m", label: "Koopalings M", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff" },
-                      { value: "koopalings_s", label: "Koopalings S", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff" },
-                      { value: "koopalings_l", label: "Koopalings L", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff" },
-                      { value: "koopalings_xl", label: "Koopalings XL", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff" },
+                      { value: "koopakid", label: "Koopa Kid", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopa-kid.1094/", modAuthor: "CometMystic", modName: "Koopa Kid" },
+                      { value: "koopalings_s", label: "Koopalings S", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff", modName: "Koopalings" },
+                      { value: "koopalings_m", label: "Koopalings M", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff", modName: "Koopalings" },
+                      { value: "koopalings_l", label: "Koopalings L", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff", modName: "Koopalings" },
+                      { value: "koopalings_xl", label: "Koopalings XL", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff", modName: "Koopalings" },
                       { value: "custom", label: "Custom", requiresMod: false },
                     ].map((option) => (
-                      <div 
+                      <div
                         key={option.value}
                         className={cn(
                           "flex items-center justify-between p-2 rounded-lg border-2 cursor-pointer transition-all",
-                          config.bowser_shell_model === option.value 
-                            ? "border-primary bg-primary/10" 
+                          config.bowser_shell_model === option.value
+                            ? "border-primary bg-primary/10"
                             : "border-border hover:border-primary/50"
                         )}
                         onClick={() => {
@@ -1798,8 +1798,8 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
                         <div className="flex items-center gap-2">
                           <div className={cn(
                             "w-4 h-4 rounded-full border-2 flex items-center justify-center",
-                            config.bowser_shell_model === option.value 
-                              ? "border-primary bg-primary" 
+                            config.bowser_shell_model === option.value
+                              ? "border-primary bg-primary"
                               : "border-muted-foreground"
                           )}>
                             {config.bowser_shell_model === option.value && (
@@ -1816,14 +1816,14 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
                             onClick={(e) => e.stopPropagation()}
                             className="px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter bg-amber-500/10 text-amber-700 border border-amber-500/20 rounded-md hover:underline flex items-center gap-0.5"
                           >
-                            {option.modAuthor}
+                            Requires {option.modAuthor}&apos;s {option.modName} Mod
                             <ExternalLink className="h-2 w-2" />
                           </a>
                         )}
                       </div>
                     ))}
                   </div>
-                  
+
                   {config.bowser_shell_model === "custom" && (
                     <div className="mt-3">
                       <Label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
@@ -1850,80 +1850,80 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
             <CardContent className="space-y-3">
               {/* Peel Out */}
               <AbilitySection title={t.peelOut} enabled={config.peel_out_on} onEnabledChange={(v) => updateConfig("peel_out_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.peelOut}>
-                <NumberInput label={t.maxVelocity} value={config.peel_out_max_vel} 
-                onChange={(v) => updateConfig("peel_out_max_vel", v)} 
-                configKey="peel_out_max_vel"/>
-                <NumberInput label={t.slowdown} value={config.peel_out_slowdown} 
-                onChange={(v) => updateConfig("peel_out_slowdown", v)} 
-                configKey="peel_out_slowdown"/>
+                <NumberInput label={t.maxVelocity} value={config.peel_out_max_vel}
+                  onChange={(v) => updateConfig("peel_out_max_vel", v)}
+                  configKey="peel_out_max_vel" />
+                <NumberInput label={t.slowdown} value={config.peel_out_slowdown}
+                  onChange={(v) => updateConfig("peel_out_slowdown", v)}
+                  configKey="peel_out_slowdown" />
                 <ToggleOption id="peel_out_reset" label={t.jumpResetVelocity} checked={config.peel_out_jump_reset_vel} onCheckedChange={(v) => updateConfig("peel_out_jump_reset_vel", v)} />
               </AbilitySection>
 
               {/* Sonic Jump */}
               <AbilitySection title={t.sonicJump} enabled={config.sonic_jump_on} onEnabledChange={(v) => updateConfig("sonic_jump_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.sonicJump}>
                 <NumberInput label={t.strength} value={config.sonic_jump_strength}
-                 onChange={(v) => updateConfig("sonic_jump_strength", v)}
-                 configKey="sonic_jump_strength" />
+                  onChange={(v) => updateConfig("sonic_jump_strength", v)}
+                  configKey="sonic_jump_strength" />
                 <NumberInput label={t.addForwardVelocity}
-                 value={config.sonic_jump_add_forward_vel} 
-                 onChange={(v) => updateConfig("sonic_jump_add_forward_vel", v)} 
-                 configKey="sonic_jump_add_forward_vel" />
+                  value={config.sonic_jump_add_forward_vel}
+                  onChange={(v) => updateConfig("sonic_jump_add_forward_vel", v)}
+                  configKey="sonic_jump_add_forward_vel" />
               </AbilitySection>
 
               {/* Sonic Dash */}
               <AbilitySection title={t.chargeSonicDash} enabled={config.charge_sonic_dash_on} onEnabledChange={(v) => updateConfig("charge_sonic_dash_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.sonicDash}>
-<NumberInput
-  label={t.maxVelocity}
-  value={config.sonic_dash_max_vel}
-  onChange={(v) => updateConfig("sonic_dash_max_vel", v)}
-  configKey="sonic_dash_max_vel"
-/>
+                <NumberInput
+                  label={t.maxVelocity}
+                  value={config.sonic_dash_max_vel}
+                  onChange={(v) => updateConfig("sonic_dash_max_vel", v)}
+                  configKey="sonic_dash_max_vel"
+                />
 
-<NumberInput
-  label={t.slowdown}
-  value={config.sonic_dash_slowdown}
-  onChange={(v) => updateConfig("sonic_dash_slowdown", v)}
-  configKey="sonic_dash_slowdown"
-/>
+                <NumberInput
+                  label={t.slowdown}
+                  value={config.sonic_dash_slowdown}
+                  onChange={(v) => updateConfig("sonic_dash_slowdown", v)}
+                  configKey="sonic_dash_slowdown"
+                />
 
-<NumberInput
-  label={t.slowdownWater}
-  value={config.sonic_dash_slowdown_water}
-  onChange={(v) => updateConfig("sonic_dash_slowdown_water", v)}
-  configKey="sonic_dash_slowdown_water"
-/>
+                <NumberInput
+                  label={t.slowdownWater}
+                  value={config.sonic_dash_slowdown_water}
+                  onChange={(v) => updateConfig("sonic_dash_slowdown_water", v)}
+                  configKey="sonic_dash_slowdown_water"
+                />
 
-<NumberInput
-  label={t.slowdownLava}
-  value={config.sonic_dash_slowdown_lava}
-  onChange={(v) => updateConfig("sonic_dash_slowdown_lava", v)}
-  configKey="sonic_dash_slowdown_lava"
-/>
+                <NumberInput
+                  label={t.slowdownLava}
+                  value={config.sonic_dash_slowdown_lava}
+                  onChange={(v) => updateConfig("sonic_dash_slowdown_lava", v)}
+                  configKey="sonic_dash_slowdown_lava"
+                />
 
-<NumberInput
-  label={t.angleSpeed}
-  value={config.sonic_dash_angle_speed}
-  onChange={(v) => updateConfig("sonic_dash_angle_speed", v)}
-  configKey="sonic_dash_angle_speed"
-/>
+                <NumberInput
+                  label={t.angleSpeed}
+                  value={config.sonic_dash_angle_speed}
+                  onChange={(v) => updateConfig("sonic_dash_angle_speed", v)}
+                  configKey="sonic_dash_angle_speed"
+                />
               </AbilitySection>
 
               {/* Drop Dash */}
               <AbilitySection title={t.dropDash} enabled={config.drop_dash_on} onEnabledChange={(v) => updateConfig("drop_dash_on", v)} advancedSettingsLabel={t.advancedSettings} tooltip={t.tooltips?.dropDash}>
-                <NumberInput label={t.chargeVelocity} 
-                value={config.drop_dash_charge_vel} 
-                onChange={(v) => updateConfig("drop_dash_charge_vel", v)} 
-                configKey="drop_dash_charge_vel" />
-                <NumberInput label={t.gravity} value={config.drop_dash_gravity} 
-                onChange={(v) => updateConfig("drop_dash_gravity", v)} 
-                configKey="drop_dash_gravity" />
+                <NumberInput label={t.chargeVelocity}
+                  value={config.drop_dash_charge_vel}
+                  onChange={(v) => updateConfig("drop_dash_charge_vel", v)}
+                  configKey="drop_dash_charge_vel" />
+                <NumberInput label={t.gravity} value={config.drop_dash_gravity}
+                  onChange={(v) => updateConfig("drop_dash_gravity", v)}
+                  configKey="drop_dash_gravity" />
               </AbilitySection>
             </CardContent>
           </Card>
 
 
 
-                    {/* Dive */}
+          {/* Dive */}
           <Card className="border-2 border-border">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.dive}</CardTitle>
@@ -1931,52 +1931,52 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
             <CardContent className="space-y-3">
 
               <div className="space-y-4">
-  <NumberInput
-    label={t.dive_y_vel}
-    configKey="dive_y_vel"
-    value={config.dive_y_vel}
-    onChange={(v) => setConfig({ ...config, dive_y_vel: v })}
-    tooltip={t.tooltips?.dive_y_vel}
-    suffix=""
-  />
+                <NumberInput
+                  label={t.dive_y_vel}
+                  configKey="dive_y_vel"
+                  value={config.dive_y_vel}
+                  onChange={(v) => setConfig({ ...config, dive_y_vel: v })}
+                  tooltip={t.tooltips?.dive_y_vel}
+                  suffix=""
+                />
 
-  <NumberInput
-    label={t.dive_velocity}
-    configKey="dive_velocity"
-    value={config.dive_velocity}
-    onChange={(v) => setConfig({ ...config, dive_velocity: v })}
-    tooltip={t.tooltips?.dive_velocity}
-    suffix="%"
-  />
+                <NumberInput
+                  label={t.dive_velocity}
+                  configKey="dive_velocity"
+                  value={config.dive_velocity}
+                  onChange={(v) => setConfig({ ...config, dive_velocity: v })}
+                  tooltip={t.tooltips?.dive_velocity}
+                  suffix="%"
+                />
 
-  <NumberInput
-    label={t.dive_max_velocity}
-    configKey="dive_max_velocity"
-    value={config.dive_max_velocity}
-    onChange={(v) => setConfig({ ...config, dive_max_velocity: v })}
-    tooltip={t.tooltips?.dive_max_velocity}
-    suffix="%"
-  />
-</div>
+                <NumberInput
+                  label={t.dive_max_velocity}
+                  configKey="dive_max_velocity"
+                  value={config.dive_max_velocity}
+                  onChange={(v) => setConfig({ ...config, dive_max_velocity: v })}
+                  tooltip={t.tooltips?.dive_max_velocity}
+                  suffix="%"
+                />
+              </div>
 
-                                                            <NumberInput
-  label={t.dive_angle_speed}
-  value={config.dive_angle_speed}
-  onChange={(v) => setConfig({ ...config, dive_angle_speed: v })}
-   suffix="%"
-   configKey="dive_angle_speed"
-  tooltip={t.tooltips.all_jumps_angle_speed}
-/>
+              <NumberInput
+                label={t.dive_angle_speed}
+                value={config.dive_angle_speed}
+                onChange={(v) => setConfig({ ...config, dive_angle_speed: v })}
+                suffix="%"
+                configKey="dive_angle_speed"
+                tooltip={t.tooltips.all_jumps_angle_speed}
+              />
 
-                                  <ToggleOption id="kick_dive" label={t.kickDive} checked={config.kick_dive_on} onCheckedChange={(v) => updateConfig("kick_dive_on", v)} tooltip={t.tooltips?.kickDive} />
+              <ToggleOption id="kick_dive" label={t.kickDive} checked={config.kick_dive_on} onCheckedChange={(v) => updateConfig("kick_dive_on", v)} tooltip={t.tooltips?.kickDive} />
               <ToggleOption id="dive_kick" label={t.diveKick} checked={config.dive_kick_on} onCheckedChange={(v) => updateConfig("dive_kick_on", v)} tooltip={t.tooltips?.diveKick} />
-           
-                         <ToggleOption id="dive_gp" label={t.diveGroundPound} checked={config.dive_ground_pound_on} onCheckedChange={(v) => updateConfig("dive_ground_pound_on", v)} tooltip={t.tooltips?.diveGroundPound} />
+
+              <ToggleOption id="dive_gp" label={t.diveGroundPound} checked={config.dive_ground_pound_on} onCheckedChange={(v) => updateConfig("dive_ground_pound_on", v)} tooltip={t.tooltips?.diveGroundPound} />
 
               <ToggleOption id="always_dive_first" label={t.alwaysDiveFirst} checked={config.always_dive_first} onCheckedChange={(v) => updateConfig("always_dive_first", v)} tooltip={t.tooltips?.alwaysDiveFirst} />
-        
+
             </CardContent>
-            </Card>
+          </Card>
 
 
 
@@ -1991,104 +1991,104 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
               <ToggleOption id="disable_breath_heal" label={t.disableBreathHeal} checked={config.disable_breath_heal} onCheckedChange={(v) => updateConfig("disable_breath_heal", v)} tooltip={t.tooltips?.disableBreathHeal} />
               <ToggleOption id="disable_fall_damage" label={t.noFallDamage} checked={config.disable_fall_damage} onCheckedChange={(v) => updateConfig("disable_fall_damage", v)} tooltip={t.tooltips?.noFallDamage} />
               <ToggleOption id="one_hit" label={t.oneHitKO} checked={config.one_hit} onCheckedChange={(v) => updateConfig("one_hit", v)} tooltip={t.tooltips?.oneHitKO} />
-            <NumberInput
-  label={t.knockbackResistance}
-  value={config.knockback_resistance}
-  onChange={(v) => updateConfig("knockback_resistance", v)}
-  configKey="knockback_resistance"
-  suffix="%"
-  tooltip={t.tooltips?.knockbackResistance}
-/>
+              <NumberInput
+                label={t.knockbackResistance}
+                value={config.knockback_resistance}
+                onChange={(v) => updateConfig("knockback_resistance", v)}
+                configKey="knockback_resistance"
+                suffix="%"
+                tooltip={t.tooltips?.knockbackResistance}
+              />
 
-<NumberInput
-  label={t.coinHealMultiplier}
-  value={config.coin_heal_multiplier}
-  onChange={(v) => updateConfig("coin_heal_multiplier", v)}
-  configKey="coin_heal_multiplier"
-  suffix="%"
-  tooltip={t.tooltips?.coinHealMultiplier}
-/>
+              <NumberInput
+                label={t.coinHealMultiplier}
+                value={config.coin_heal_multiplier}
+                onChange={(v) => updateConfig("coin_heal_multiplier", v)}
+                configKey="coin_heal_multiplier"
+                suffix="%"
+                tooltip={t.tooltips?.coinHealMultiplier}
+              />
 
-<NumberInput
-  label={t.waterDamage}
-  value={config.water_damage_multiplier}
-  onChange={(v) => updateConfig("water_damage_multiplier", v)}
-  configKey="water_damage_multiplier"
-  suffix="%"
-  tooltip={t.tooltips?.waterDamage}
-/>
+              <NumberInput
+                label={t.waterDamage}
+                value={config.water_damage_multiplier}
+                onChange={(v) => updateConfig("water_damage_multiplier", v)}
+                configKey="water_damage_multiplier"
+                suffix="%"
+                tooltip={t.tooltips?.waterDamage}
+              />
 
-<NumberInput
-  label={t.lavaDamage}
-  value={config.lava_damage_multiplier}
-  onChange={(v) => updateConfig("lava_damage_multiplier", v)}
-  configKey="lava_damage_multiplier"
-  suffix="%"
-  tooltip={t.tooltips?.lavaDamage}
-/>
+              <NumberInput
+                label={t.lavaDamage}
+                value={config.lava_damage_multiplier}
+                onChange={(v) => updateConfig("lava_damage_multiplier", v)}
+                configKey="lava_damage_multiplier"
+                suffix="%"
+                tooltip={t.tooltips?.lavaDamage}
+              />
 
-<NumberInput
-  label={t.burningDamage}
-  value={config.burning_damage_multiplier}
-  onChange={(v) => updateConfig("burning_damage_multiplier", v)}
-  configKey="burning_damage_multiplier"
-  suffix="%"
-  tooltip={t.tooltips?.burningDamage}
-/>
+              <NumberInput
+                label={t.burningDamage}
+                value={config.burning_damage_multiplier}
+                onChange={(v) => updateConfig("burning_damage_multiplier", v)}
+                configKey="burning_damage_multiplier"
+                suffix="%"
+                tooltip={t.tooltips?.burningDamage}
+              />
 
-<NumberInput
-  label={t.badGasDamage}
-  value={config.bad_gas_damage_multiplier}
-  onChange={(v) => updateConfig("bad_gas_damage_multiplier", v)}
-  configKey="bad_gas_damage_multiplier"
-  suffix="%"
-  tooltip={t.tooltips?.badGasDamage}
-/>
+              <NumberInput
+                label={t.badGasDamage}
+                value={config.bad_gas_damage_multiplier}
+                onChange={(v) => updateConfig("bad_gas_damage_multiplier", v)}
+                configKey="bad_gas_damage_multiplier"
+                suffix="%"
+                tooltip={t.tooltips?.badGasDamage}
+              />
 
-<NumberInput
-  label={t.waterEnemyDamage}
-  value={config.water_enemy_damage_multiplier}
-  onChange={(v) => updateConfig("water_enemy_damage_multiplier", v)}
-  configKey="water_enemy_damage_multiplier"
-  suffix="%"
-  tooltip={t.tooltips?.waterEnemyDamage}
-/>
+              <NumberInput
+                label={t.waterEnemyDamage}
+                value={config.water_enemy_damage_multiplier}
+                onChange={(v) => updateConfig("water_enemy_damage_multiplier", v)}
+                configKey="water_enemy_damage_multiplier"
+                suffix="%"
+                tooltip={t.tooltips?.waterEnemyDamage}
+              />
 
-<NumberInput
-  label={t.piranhaPlantDamage}
-  value={config.piranha_plant_damage_multiplier}
-  onChange={(v) => updateConfig("piranha_plant_damage_multiplier", v)}
-  configKey="piranha_plant_damage_multiplier"
-  suffix="%"
-  tooltip={t.tooltips?.piranhaPlantDamage}
-/>
+              <NumberInput
+                label={t.piranhaPlantDamage}
+                value={config.piranha_plant_damage_multiplier}
+                onChange={(v) => updateConfig("piranha_plant_damage_multiplier", v)}
+                configKey="piranha_plant_damage_multiplier"
+                suffix="%"
+                tooltip={t.tooltips?.piranhaPlantDamage}
+              />
 
-<NumberInput
-  label={t.goombaDamage}
-  value={config.goomba_damage_multiplier}
-  onChange={(v) => updateConfig("goomba_damage_multiplier", v)}
-  configKey="goomba_damage_multiplier"
-  suffix="%"
-  tooltip={t.tooltips?.goombaDamage}
-/>
+              <NumberInput
+                label={t.goombaDamage}
+                value={config.goomba_damage_multiplier}
+                onChange={(v) => updateConfig("goomba_damage_multiplier", v)}
+                configKey="goomba_damage_multiplier"
+                suffix="%"
+                tooltip={t.tooltips?.goombaDamage}
+              />
 
-<NumberInput
-  label={t.flyingEnemyDamage}
-  value={config.flying_enemy_damage_multiplier}
-  onChange={(v) => updateConfig("flying_enemy_damage_multiplier", v)}
-  configKey="flying_enemy_damage_multiplier"
-  suffix="%"
-  tooltip={t.tooltips?.flyingEnemyDamage}
-/>
+              <NumberInput
+                label={t.flyingEnemyDamage}
+                value={config.flying_enemy_damage_multiplier}
+                onChange={(v) => updateConfig("flying_enemy_damage_multiplier", v)}
+                configKey="flying_enemy_damage_multiplier"
+                suffix="%"
+                tooltip={t.tooltips?.flyingEnemyDamage}
+              />
 
-<NumberInput
-  label={t.batDamage}
-  value={config.bat_damage_multiplier}
-  onChange={(v) => updateConfig("bat_damage_multiplier", v)}
-  configKey="bat_damage_multiplier"
-  suffix="%"
-  tooltip={t.tooltips?.batDamage}
-/>
+              <NumberInput
+                label={t.batDamage}
+                value={config.bat_damage_multiplier}
+                onChange={(v) => updateConfig("bat_damage_multiplier", v)}
+                configKey="bat_damage_multiplier"
+                suffix="%"
+                tooltip={t.tooltips?.batDamage}
+              />
             </CardContent>
           </Card>
 
@@ -2099,23 +2099,23 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.twirling}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-                            <ToggleOption id="triple_jump_twirling" label={t.tripleJumpTwirling} checked={config.triple_jump_twirling_on} onCheckedChange={(v) => updateConfig("triple_jump_twirling_on", v)} tooltip={t.tooltips?.tripleJumpTwirling} />
+              <ToggleOption id="triple_jump_twirling" label={t.tripleJumpTwirling} checked={config.triple_jump_twirling_on} onCheckedChange={(v) => updateConfig("triple_jump_twirling_on", v)} tooltip={t.tooltips?.tripleJumpTwirling} />
               <ToggleOption id="fast_twirling" label={t.fastTwirling} checked={config.fast_twirling_on} onCheckedChange={(v) => updateConfig("fast_twirling_on", v)} tooltip={t.tooltips?.fastTwirling} />
-                <ToggleOption id="disable_twirling_land" label={t.disableTwirlingLand} checked={config.disable_twirling_land} onCheckedChange={(v) => updateConfig("disable_twirling_land", v)} tooltip={t.tooltips?.disableTwirlingLand} />
-                            <NumberInput label={t.twirlingGravity} value={config.twirling_gravity} onChange={(v) => updateConfig("twirling_gravity", v)} 
-              configKey="twirling_gravity" tooltip={t.tooltips?.twirlingGravity} />
+              <ToggleOption id="disable_twirling_land" label={t.disableTwirlingLand} checked={config.disable_twirling_land} onCheckedChange={(v) => updateConfig("disable_twirling_land", v)} tooltip={t.tooltips?.disableTwirlingLand} />
+              <NumberInput label={t.twirlingGravity} value={config.twirling_gravity} onChange={(v) => updateConfig("twirling_gravity", v)}
+                configKey="twirling_gravity" tooltip={t.tooltips?.twirlingGravity} />
               <NumberInput label={t.twirlingSpeed} value={config.twirling_speed}
-               onChange={(v) => updateConfig("twirling_speed", v)} 
-               configKey="twirling_speed" tooltip={t.tooltips?.twirlingSpeed} />
-                                   <AdvancedCollapsible label={t.advancedSettings || "Advanced Settings"} >
-      <>
-                    <ToggleOption id="back_flip_twirling" label={t.backFlipTwirling} checked={config.back_flip_twirling_on} onCheckedChange={(v) => updateConfig("back_flip_twirling_on", v)} tooltip={t.tooltips?.backFlipTwirling} />
-              <ToggleOption id="side_flip_twirling" label={t.sideFlipTwirling} checked={config.side_flip_twirling_on} onCheckedChange={(v) => updateConfig("side_flip_twirling_on", v)} tooltip={t.tooltips?.sideFlipTwirling} />
-      <ToggleOption id="twirling_dive" label={t.twirlingDive} checked={config.twirling_dive_on} onCheckedChange={(v) => updateConfig("twirling_dive_on", v)} tooltip={t.tooltips?.twirlingDive} />
-                      <ToggleOption id="twirling_gp" label={t.twirlingGroundPound} checked={config.twirling_ground_pound_on} onCheckedChange={(v) => updateConfig("twirling_ground_pound_on", v)} tooltip={t.tooltips?.twirlingGroundPound} />
-      </>
-      </AdvancedCollapsible>
-            
+                onChange={(v) => updateConfig("twirling_speed", v)}
+                configKey="twirling_speed" tooltip={t.tooltips?.twirlingSpeed} />
+              <AdvancedCollapsible label={t.advancedSettings || "Advanced Settings"} >
+                <>
+                  <ToggleOption id="back_flip_twirling" label={t.backFlipTwirling} checked={config.back_flip_twirling_on} onCheckedChange={(v) => updateConfig("back_flip_twirling_on", v)} tooltip={t.tooltips?.backFlipTwirling} />
+                  <ToggleOption id="side_flip_twirling" label={t.sideFlipTwirling} checked={config.side_flip_twirling_on} onCheckedChange={(v) => updateConfig("side_flip_twirling_on", v)} tooltip={t.tooltips?.sideFlipTwirling} />
+                  <ToggleOption id="twirling_dive" label={t.twirlingDive} checked={config.twirling_dive_on} onCheckedChange={(v) => updateConfig("twirling_dive_on", v)} tooltip={t.tooltips?.twirlingDive} />
+                  <ToggleOption id="twirling_gp" label={t.twirlingGroundPound} checked={config.twirling_ground_pound_on} onCheckedChange={(v) => updateConfig("twirling_ground_pound_on", v)} tooltip={t.tooltips?.twirlingGroundPound} />
+                </>
+              </AdvancedCollapsible>
+
             </CardContent>
           </Card>
 
@@ -2127,8 +2127,8 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
             <CardContent className="grid gap-3 lg:grid-cols-2">
               <ToggleOption id="explode_on_death" label={t.explodeOnDeath} checked={config.explode_on_death} onCheckedChange={(v) => updateConfig("explode_on_death", v)} tooltip={t.tooltips?.explodeOnDeath} />
               <ToggleOption id="kill_toad" label={t.killToad} checked={config.kill_toad} onCheckedChange={(v) => updateConfig("kill_toad", v)} tooltip={t.tooltips?.killToad} />
-                                                          <ToggleOption id="kill_pink_bomb" label={t.killPinkBobomb} checked={config.kill_pink_bomb_on} onCheckedChange={(v) => updateConfig("kill_pink_bomb_on", v)} tooltip={t.tooltips?.killPinkBobomb} />
-    <ToggleOption isNew id="mushroom_allergy" label={t.mushroom_allergy} checked={config.mushroom_allergy} onCheckedChange={(v) => updateConfig("mushroom_allergy", v)} tooltip={t.tooltips?.mushroom_allergy} />
+              <ToggleOption id="kill_pink_bomb" label={t.killPinkBobomb} checked={config.kill_pink_bomb_on} onCheckedChange={(v) => updateConfig("kill_pink_bomb_on", v)} tooltip={t.tooltips?.killPinkBobomb} />
+              <ToggleOption isNew id="mushroom_allergy" label={t.mushroom_allergy} checked={config.mushroom_allergy} onCheckedChange={(v) => updateConfig("mushroom_allergy", v)} tooltip={t.tooltips?.mushroom_allergy} />
 
               {/* Hide Barrel */}
               <AbilitySection
@@ -2157,52 +2157,52 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
             </CardContent>
           </Card>
 
-                    <Card className="border-2 border-border">
+          <Card className="border-2 border-border">
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-bold uppercase tracking-wide">{t.animation}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
 
               <SegmentedOption
-  label={t.single_jump_animation}
-  value={config.single_jump_animation}
-  onChange={(val) => setConfig({ ...config, single_jump_animation: val })}
-  t={t} // Pass the function down
+                label={t.single_jump_animation}
+                value={config.single_jump_animation}
+                onChange={(val) => setConfig({ ...config, single_jump_animation: val })}
+                t={t} // Pass the function down
 
-  options={[
-    { value: "default", labelKey: "default",  },
-    { value: "special", labelKey: "special",  },
-    { value: "special_v2", labelKey: "special_V2",  },
-  ]}
-  tooltip={t.tooltips.single_jump_animation}
-/>
+                options={[
+                  { value: "default", labelKey: "default", },
+                  { value: "special", labelKey: "special", },
+                  { value: "special_v2", labelKey: "special_V2", },
+                ]}
+                tooltip={t.tooltips.single_jump_animation}
+              />
 
 
-<SegmentedOption
-  label={t.triple_jump_animation}
-  value={config.triple_jump_animation}
-  onChange={(val) => setConfig({ ...config, triple_jump_animation: val })}
-  t={t} // Pass the function down
-  options={[
-    { value: "default", labelKey: "default",},
-    { value: "special", labelKey: "special", },
-    { value: "special_v2", labelKey: "special_V2", },
-  ]}
-  tooltip={t.tooltips.triple_jump_animation}
-/>
+              <SegmentedOption
+                label={t.triple_jump_animation}
+                value={config.triple_jump_animation}
+                onChange={(val) => setConfig({ ...config, triple_jump_animation: val })}
+                t={t} // Pass the function down
+                options={[
+                  { value: "default", labelKey: "default", },
+                  { value: "special", labelKey: "special", },
+                  { value: "special_v2", labelKey: "special_V2", },
+                ]}
+                tooltip={t.tooltips.triple_jump_animation}
+              />
 
-<AdvancedCollapsible label={t.advancedSettings || "Advanced Settings"}  >
-<NumberInput
-label={t.special_triple_jump_animation_speedup}
-value={config.special_triple_jump_animation_speedup}
-onChange={(v) => updateConfig("special_triple_jump_animation_speedup", v)}
-configKey="special_triple_jump_animation_speedup"
-/>
-  </AdvancedCollapsible>
+              <AdvancedCollapsible label={t.advancedSettings || "Advanced Settings"}  >
+                <NumberInput
+                  label={t.special_triple_jump_animation_speedup}
+                  value={config.special_triple_jump_animation_speedup}
+                  onChange={(v) => updateConfig("special_triple_jump_animation_speedup", v)}
+                  configKey="special_triple_jump_animation_speedup"
+                />
+              </AdvancedCollapsible>
 
 
             </CardContent>
-            </Card>
+          </Card>
 
           {/* Moveset Description */}
           <Card className="border-2 border-border">
