@@ -190,6 +190,12 @@ export interface CharacterConfig {
   chaorrin_umbrella_glide_forward_speed:number
   chaorrin_umbrella_caps_forward_speed:boolean
   chaorrin_umbrella_caps_foward_speed: boolean
+  // Bowser Moveset
+  bowser_shell_slide: boolean
+  bowser_fire_ball: boolean
+  bowser_punch: boolean
+  bowser_shell_model: string
+  bowser_shell_model_custom: string
   // Moveset
   moveset_description: string
 }
@@ -403,6 +409,13 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   chaorrin_umbrella_vertical_speed: { default: 2, min: -40, max: 40, step: 1, isNew: true },
   chaorrin_umbrella_glide_forward_speed: { default: 100, min: 0, max: 500, step: 5, isNew: true },
   chaorrin_umbrella_caps_foward_speed: { default: true, isNew: true },
+
+  // --- Bowser Moveset ---
+  bowser_shell_slide: { default: false, isNew: true },
+  bowser_fire_ball: { default: false, isNew: true },
+  bowser_punch: { default: false, isNew: true },
+  bowser_shell_model: { default: "bowser", options: ["bowser", "bowserjr", "koopakid", "koopalings_m", "koopalings_s", "koopalings_l", "koopalings_xl", "custom"], isNew: true },
+  bowser_shell_model_custom: { default: "", isNew: true },
 };
 
 

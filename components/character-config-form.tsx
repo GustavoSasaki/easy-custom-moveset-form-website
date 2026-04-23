@@ -869,6 +869,21 @@ addIfNotDefault("mushroom_allergy")
       addIfNotDefault("chaorrin_umbrella_caps_foward_speed")
     }
 
+    // Bowser Moveset
+    if (config.bowser_shell_slide) {
+      lines.push(`    bowser_shell_slide = true,`)
+      // Only add shell model if not default "bowser"
+      if (config.bowser_shell_model !== "bowser") {
+        if (config.bowser_shell_model === "custom" && config.bowser_shell_model_custom) {
+          lines.push(`    bowser_shell_model = "${config.bowser_shell_model_custom}",`)
+        } else if (config.bowser_shell_model !== "custom") {
+          lines.push(`    bowser_shell_model = "${config.bowser_shell_model}",`)
+        }
+      }
+    }
+    addIfNotDefault("bowser_fire_ball")
+    addIfNotDefault("bowser_punch")
+
     // Only add moveset_description if not empty, and filter out double quotes to prevent Lua errors
     const sanitizedDesc = movesetDesc.replace(/"/g, "")
     if (sanitizedDesc.trim() !== "") {
@@ -1710,6 +1725,134 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
  tooltip={t.tooltips?.ground_pound_dive_change_direction_on} />
 
               </AbilitySection>
+            </CardContent>
+          </Card>
+
+          {/* Bowser Moveset */}
+          <Card className="border-2 border-border">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg font-bold uppercase tracking-wide flex items-center gap-2">
+                {t.bowserMoveset ?? "Bowser Moveset"}
+                <span className="px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
+                  New
+                </span>
+              </CardTitle>
+              <p className="text-xs text-muted-foreground mt-1">
+                <a 
+                  href="https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-0.5 text-amber-700 hover:underline"
+                >
+                  Requires Bowser Jr Moveset by Wibblus
+                  <ExternalLink className="h-2.5 w-2.5" />
+                </a>
+              </p>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {/* Shell Slide */}
+              <AbilitySection 
+                title={t.bowserShellSlide ?? "Shell Slide"} 
+                enabled={config.bowser_shell_slide} 
+                onEnabledChange={(v) => updateConfig("bowser_shell_slide", v)} 
+                advancedSettingsLabel={t.advancedSettings}
+                tooltip={t.tooltips?.bowserShellSlide}
+                isNew
+              >
+                <div className="space-y-3">
+                  <Label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                    {t.bowserShellModel ?? "Shell Model"}
+                  </Label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { value: "bowser", label: "Bowser", requiresMod: false },
+                      { value: "bowserjr", label: "Bowser Jr", requiresMod: false },
+                      { value: "koopakid", label: "Koopa Kid", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopa-kid.1094/", modAuthor: "CometMystic" },
+                      { value: "koopalings_m", label: "Koopalings M", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff" },
+                      { value: "koopalings_s", label: "Koopalings S", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff" },
+                      { value: "koopalings_l", label: "Koopalings L", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff" },
+                      { value: "koopalings_xl", label: "Koopalings XL", requiresMod: true, modUrl: "https://mods.sm64coopdx.com/mods/cs-koopalings.267/", modAuthor: "Melzinoff" },
+                      { value: "custom", label: "Custom", requiresMod: false },
+                    ].map((option) => (
+                      <div 
+                        key={option.value}
+                        className={cn(
+                          "flex flex-col p-2 rounded-lg border-2 cursor-pointer transition-all",
+                          config.bowser_shell_model === option.value 
+                            ? "border-primary bg-primary/10" 
+                            : "border-border hover:border-primary/50"
+                        )}
+                        onClick={() => {
+                          updateConfig("bowser_shell_model", option.value);
+                          if (option.value !== "custom") {
+                            updateConfig("bowser_shell_model_custom", "");
+                          }
+                        }}
+                      >
+                        <div className="flex items-center gap-2">
+                          <div className={cn(
+                            "w-4 h-4 rounded-full border-2 flex items-center justify-center",
+                            config.bowser_shell_model === option.value 
+                              ? "border-primary bg-primary" 
+                              : "border-muted-foreground"
+                          )}>
+                            {config.bowser_shell_model === option.value && (
+                              <Check className="h-3 w-3 text-primary-foreground" />
+                            )}
+                          </div>
+                          <span className="text-sm font-medium">{option.label}</span>
+                        </div>
+                        {option.requiresMod && (
+                          <a
+                            href={option.modUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="mt-1 ml-6 text-[10px] text-amber-700 hover:underline flex items-center gap-0.5"
+                          >
+                            Requires {option.modAuthor}&apos;s mod
+                            <ExternalLink className="h-2 w-2" />
+                          </a>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {config.bowser_shell_model === "custom" && (
+                    <div className="mt-3">
+                      <Label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                        {t.bowserShellModelCustom ?? "Custom Model Name"}
+                      </Label>
+                      <Input
+                        className="mt-1"
+                        placeholder={t.enterCustomModelName ?? "Enter geo model name"}
+                        value={config.bowser_shell_model_custom}
+                        onChange={(e) => updateConfig("bowser_shell_model_custom", e.target.value)}
+                      />
+                    </div>
+                  )}
+                </div>
+              </AbilitySection>
+
+              {/* Fire Ball */}
+              <ToggleOption 
+                id="bowser_fire_ball" 
+                label={t.bowserFireBall ?? "Fire Ball"} 
+                checked={config.bowser_fire_ball} 
+                onCheckedChange={(v) => updateConfig("bowser_fire_ball", v)}
+                tooltip={t.tooltips?.bowserFireBall}
+                isNew
+              />
+
+              {/* Bowser Punch */}
+              <ToggleOption 
+                id="bowser_punch" 
+                label={t.bowserPunch ?? "Bowser Punch"} 
+                checked={config.bowser_punch} 
+                onCheckedChange={(v) => updateConfig("bowser_punch", v)}
+                tooltip={t.tooltips?.bowserPunch}
+                isNew
+              />
             </CardContent>
           </Card>
 

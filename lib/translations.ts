@@ -246,6 +246,15 @@ ground_pound_dive_change_direction_on: "Ground Pound Dive Control Direction",
     chaorrin_umbrella_glide_forward_speed: "Glide Forward Speed",
     chaorrin_umbrella_caps_foward_speed: "Cap Forward Speed",
 
+    // Bowser Moveset
+    bowserMoveset: "Bowser Moveset",
+    bowserShellSlide: "Shell Slide",
+    bowserFireBall: "Fire Ball",
+    bowserPunch: "Bowser Punch",
+    bowserShellModel: "Shell Model",
+    bowserShellModelCustom: "Custom Model Name",
+    enterCustomModelName: "Enter geo model name",
+
     // Tooltips - Add your descriptions here
     tooltips: {
       special_triple_jump_animation_speedup: "How much faster the animation plays",
@@ -373,7 +382,12 @@ triple_jump_animation: "Animation used for triple jumps. Default, special, or sp
       hideBarrel: "When pressing Z, the character hides inside a barrel creating a platform.",
       hideBarrelType: "The type of object the character hides in: barrel, substitute doll, or box.",
       wallSlideJumpType: "The action type performed when jumping off a wall slide.",
-},
+      bowserShellSlide: "Lets the character slide inside a shell. Execute by crouching while running.",
+      bowserFireBall: "Shoot fire while crouching and not moving.",
+      bowserPunch: "Use custom Bowser punch animation.",
+      bowserShellModel: "Choose which shell model to use for shell slide.",
+      bowserShellModelCustom: "Enter a custom geo model name for the shell.",
+    },
   },
   
   es: {
@@ -598,6 +612,15 @@ sameWallJump: "Salto en Misma Pared",
     chaorrin_umbrella_vertical_speed: "Velocidad de Descenso Vertical",
     chaorrin_umbrella_glide_forward_speed: "Velocidad de Avance al Planear",
     chaorrin_umbrella_caps_foward_speed: "Limitar Velocidad Frontal",
+
+    // Bowser Moveset
+    bowserMoveset: "Moveset de Bowser",
+    bowserShellSlide: "Deslizamiento en Caparazón",
+    bowserFireBall: "Bola de Fuego",
+    bowserPunch: "Puñetazo de Bowser",
+    bowserShellModel: "Modelo de Caparazón",
+    bowserShellModelCustom: "Nombre del Modelo Personalizado",
+    enterCustomModelName: "Ingresa nombre del modelo geo",
     
     // Tooltips
     tooltips: {
@@ -688,6 +711,11 @@ disable_special_triple_jump_bounce: "Evita el rebote después de un triple salto
       umbrellaVerticalSpeed: "Qué tan rápido desciende al planear con el paraguas.",
       umbrellaForwardSpeed: "Velocidad horizontal durante el planeo con paraguas.",
       umbrellaCapsForwardSpeed: "Cuando está activado, limita la velocidad horizontal a 20 durante el planeo.",
+      bowserShellSlide: "Permite al personaje deslizarse dentro de un caparazón. Se activa agachándose mientras corres.",
+      bowserFireBall: "Dispara fuego mientras estás agachado y sin moverte.",
+      bowserPunch: "Usa la animación personalizada de puñetazo de Bowser.",
+      bowserShellModel: "Elige qué modelo de caparazón usar para el deslizamiento.",
+      bowserShellModelCustom: "Ingresa un nombre de modelo geo personalizado para el caparazón.",
     }
   },
   
@@ -914,6 +942,15 @@ sameWallJump: "Pulo na Mesma Parede",
     chaorrin_umbrella_glide_forward_speed: "Velocidade de Avanço ao Planar",
     chaorrin_umbrella_caps_foward_speed: "Limitar Velocidade Frontal",
 
+    // Bowser Moveset
+    bowserMoveset: "Moveset do Bowser",
+    bowserShellSlide: "Deslize no Casco",
+    bowserFireBall: "Bola de Fogo",
+    bowserPunch: "Soco do Bowser",
+    bowserShellModel: "Modelo do Casco",
+    bowserShellModelCustom: "Nome do Modelo Personalizado",
+    enterCustomModelName: "Digite o nome do modelo geo",
+
     // Tooltips
     tooltips: {
       ground_pound_dive_change_direction_on:"Permite mudar o ângulo após o mergulho depois do ground pound",
@@ -1003,6 +1040,11 @@ triple_jump_animation: "Animação usada para pulos triplos. Padrão, especial o
       umbrellaVerticalSpeed: "Quão rápido você desce durante a planagem com guarda-chuva.",
       umbrellaForwardSpeed: "Velocidade horizontal durante a planagem com guarda-chuva.",
       umbrellaCapsForwardSpeed: "Quando ativado, limita a velocidade horizontal a 20 durante a planagem.",
+      bowserShellSlide: "Permite ao personagem deslizar dentro de um casco. Ativa agachando enquanto corre.",
+      bowserFireBall: "Dispara fogo enquanto está agachado e parado.",
+      bowserPunch: "Usa a animação personalizada de soco do Bowser.",
+      bowserShellModel: "Escolha qual modelo de casco usar para o deslizamento.",
+      bowserShellModelCustom: "Digite um nome de modelo geo personalizado para o casco.",
     }
   },
 }
