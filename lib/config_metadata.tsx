@@ -415,7 +415,7 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   bowser_shell_slide: { default: false, isNew: true },
   bowser_fire_ball: { default: false, isNew: true },
   bowser_punch: { default: false, isNew: true },
-  bowser_shell_model: { default: "bowser", options: ["bowser", "bowserjr", "koopakid", "koopalings_m", "koopalings_s", "koopalings_l", "koopalings_xl", "custom"], isNew: true },
+  bowser_shell_model: { default: "bowserjr", options: ["bowser", "bowserjr", "koopakid", "koopalings_m", "koopalings_s", "koopalings_l", "koopalings_xl", "custom"], isNew: true },
   bowser_shell_model_custom: { default: "", isNew: true },
 };
 

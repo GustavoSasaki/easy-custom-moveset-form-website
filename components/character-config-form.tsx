@@ -380,30 +380,34 @@ function ToggleOption({
   onCheckedChange,
   className,
   tooltip,
-  isNew
+  isNew,
+  credit,
+  requiredMod
 }: {
   id: string
   label: string
   checked: boolean
   onCheckedChange: (checked: boolean) => void
   className?: string
-  tooltip?: string,
-    isNew?: boolean
+  tooltip?: string
+  isNew?: boolean
+  credit?: { name: string; url: string }
+  requiredMod?: { name: string; url: string }
 }) {
   return (
     <div className={cn("flex items-center justify-between rounded-lg border-2 border-border bg-secondary/50 p-3 ", className)}>
-      <div className="flex items-center">
+      <div className="flex items-center flex-wrap gap-1">
         <Label htmlFor={id} className="text-sm font-medium cursor-pointer font-bold">
           {label}
         </Label>
-                  {/* THE NEW BADGE */}
-{isNew && (
-  <span className="ml-1 px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
-                   bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
-    New
-  </span>
-)}
-
+        {isNew && (
+          <span className="px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter 
+                           bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
+            New
+          </span>
+        )}
+        {credit && <CreditBadge name={credit.name} url={credit.url} />}
+        {requiredMod && <RequiredModBagde name={requiredMod.name} url={requiredMod.url} />}
         <TooltipIcon tooltip={tooltip} />
       </div>
       <Switch id={id} checked={checked} onCheckedChange={onCheckedChange} />
@@ -872,8 +876,8 @@ addIfNotDefault("mushroom_allergy")
     // Bowser Moveset
     if (config.bowser_shell_slide) {
       lines.push(`    bowser_shell_slide = true,`)
-      // Only add shell model if not default "bowser"
-      if (config.bowser_shell_model !== "bowser") {
+      // Only add shell model if not default "bowserjr"
+      if (config.bowser_shell_model !== "bowserjr") {
         if (config.bowser_shell_model === "custom" && config.bowser_shell_model_custom) {
           lines.push(`    bowser_shell_model = "${config.bowser_shell_model_custom}",`)
         } else if (config.bowser_shell_model !== "custom") {
@@ -1725,32 +1729,32 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
  tooltip={t.tooltips?.ground_pound_dive_change_direction_on} />
 
               </AbilitySection>
-            </CardContent>
-          </Card>
 
-          {/* Bowser Moveset */}
-          <Card className="border-2 border-border">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg font-bold uppercase tracking-wide flex items-center gap-2">
-                {t.bowserMoveset ?? "Bowser Moveset"}
-                <span className="px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter bg-sky-500/10 text-sky-500 border border-sky-500/20 rounded-md">
-                  New
-                </span>
-              </CardTitle>
-              <p className="text-xs text-muted-foreground mt-1">
-                <a 
-                  href="https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-0.5 text-amber-700 hover:underline"
-                >
-                  Requires Bowser Jr Moveset by Wibblus
-                  <ExternalLink className="h-2.5 w-2.5" />
-                </a>
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {/* Shell Slide */}
+              {/* Bowser Fire Ball */}
+              <ToggleOption 
+                id="bowser_fire_ball" 
+                label={t.bowserFireBall ?? "Fire Ball"} 
+                checked={config.bowser_fire_ball} 
+                onCheckedChange={(v) => updateConfig("bowser_fire_ball", v)}
+                tooltip={t.tooltips?.bowserFireBall}
+                isNew
+                credit={{ name: "Wibblus", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
+                requiredMod={{ name: "Bowser Jr Moveset", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
+              />
+
+              {/* Bowser Punch */}
+              <ToggleOption 
+                id="bowser_punch" 
+                label={t.bowserPunch ?? "Bowser Punch"} 
+                checked={config.bowser_punch} 
+                onCheckedChange={(v) => updateConfig("bowser_punch", v)}
+                tooltip={t.tooltips?.bowserPunch}
+                isNew
+                credit={{ name: "Wibblus", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
+                requiredMod={{ name: "Bowser Jr Moveset", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
+              />
+
+              {/* Bowser Shell Slide */}
               <AbilitySection 
                 title={t.bowserShellSlide ?? "Shell Slide"} 
                 enabled={config.bowser_shell_slide} 
@@ -1758,12 +1762,14 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
                 advancedSettingsLabel={t.advancedSettings}
                 tooltip={t.tooltips?.bowserShellSlide}
                 isNew
+                credit={{ name: "Wibblus", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
+                requiredMod={{ name: "Bowser Jr Moveset", url: "https://mods.sm64coopdx.com/mods/cs-bowser-jr-moveset.36/" }}
               >
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <Label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                     {t.bowserShellModel ?? "Shell Model"}
                   </Label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="space-y-2">
                     {[
                       { value: "bowser", label: "Bowser", requiresMod: false },
                       { value: "bowserjr", label: "Bowser Jr", requiresMod: false },
@@ -1777,7 +1783,7 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
                       <div 
                         key={option.value}
                         className={cn(
-                          "flex flex-col p-2 rounded-lg border-2 cursor-pointer transition-all",
+                          "flex items-center justify-between p-2 rounded-lg border-2 cursor-pointer transition-all",
                           config.bowser_shell_model === option.value 
                             ? "border-primary bg-primary/10" 
                             : "border-border hover:border-primary/50"
@@ -1808,9 +1814,9 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="mt-1 ml-6 text-[10px] text-amber-700 hover:underline flex items-center gap-0.5"
+                            className="px-1.5 py-0.5 text-[10px] font-black uppercase tracking-tighter bg-amber-500/10 text-amber-700 border border-amber-500/20 rounded-md hover:underline flex items-center gap-0.5"
                           >
-                            Requires {option.modAuthor}&apos;s mod
+                            {option.modAuthor}
                             <ExternalLink className="h-2 w-2" />
                           </a>
                         )}
@@ -1833,26 +1839,6 @@ checked={config.ground_pound_dive_change_direction_on} onCheckedChange={(v) => u
                   )}
                 </div>
               </AbilitySection>
-
-              {/* Fire Ball */}
-              <ToggleOption 
-                id="bowser_fire_ball" 
-                label={t.bowserFireBall ?? "Fire Ball"} 
-                checked={config.bowser_fire_ball} 
-                onCheckedChange={(v) => updateConfig("bowser_fire_ball", v)}
-                tooltip={t.tooltips?.bowserFireBall}
-                isNew
-              />
-
-              {/* Bowser Punch */}
-              <ToggleOption 
-                id="bowser_punch" 
-                label={t.bowserPunch ?? "Bowser Punch"} 
-                checked={config.bowser_punch} 
-                onCheckedChange={(v) => updateConfig("bowser_punch", v)}
-                tooltip={t.tooltips?.bowserPunch}
-                isNew
-              />
             </CardContent>
           </Card>
 
