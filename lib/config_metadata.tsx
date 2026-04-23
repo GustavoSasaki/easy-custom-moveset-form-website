@@ -408,6 +408,7 @@ export const CONFIG_METADATA: Record<keyof CharacterConfig, Configtype> = {
   chaorrin_umbrella_max_timer: { default: 999, min: 10, max: 999, step: 10, isNew: true },
   chaorrin_umbrella_vertical_speed: { default: 2, min: -40, max: 40, step: 1, isNew: true },
   chaorrin_umbrella_glide_forward_speed: { default: 100, min: 0, max: 500, step: 5, isNew: true },
+  chaorrin_umbrella_caps_forward_speed: { default: true, isNew: true },
   chaorrin_umbrella_caps_foward_speed: { default: true, isNew: true },
 
   // --- Bowser Moveset ---
